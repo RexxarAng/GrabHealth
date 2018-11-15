@@ -9,8 +9,4 @@ export class AppComponent {
   title = 'GrabHealth';
 
   constructor(private _electronService: ElectronService) {}
-
-  launchWindow() {
-    this._electronService.shell.openExternal("www.facebook.com");
-  }
 }
