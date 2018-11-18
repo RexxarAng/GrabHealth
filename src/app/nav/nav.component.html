@@ -1,3 +1,119 @@
-<p>
-  nav works!
-</p>
+<!--<div class="wrapper">-->
+  <!-- Sidebar -->
+ <!-- <nav id="sidebar">
+      <div class="sidebar-header">
+          <h3>Bootstrap Sidebar</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+          <p>Dummy Heading</p>
+          <li class="active">
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <li>
+                      <a href="#">Home 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Home 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Home 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">About</a>
+          </li>
+          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li>
+                      <a href="#">Page 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">Portfolio</a>
+          </li>
+          <li>
+              <a href="#">Contact</a>
+          </li>
+      </ul>
+  </nav>
+
+</div>
+
+<div id="content">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+              <i class="fas fa-align-left"></i>
+              <span>Toggle Sidebar</span>
+          </button>
+
+      </div>
+  </nav>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav> -->
+
+  <div class="container">
+        <ngb-tabset>
+          <ngb-tab title="Simple">
+            <ng-template ngbTabContent>
+              <p>This is the content of the first tab!</p>
+              <ngb-alert [dismissible]="false">
+                <strong>Warning!</strong> This is an alert!
+              </ngb-alert>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
+            <ng-template ngbTabContent>
+              <p>This is the content of the second tab!</p>
+              <p><ngb-progressbar type="success" [value]="25"></ngb-progressbar></p>
+              <p><ngb-progressbar type="info" [value]="50"></ngb-progressbar></p>
+              <p><ngb-progressbar type="warning" [value]="75"></ngb-progressbar></p>
+              <p><ngb-progressbar type="danger" [value]="100"></ngb-progressbar></p>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Disabled" [disabled]="true">
+            <ng-template ngbTabContent>
+              <p>This tab is disabled</p>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
