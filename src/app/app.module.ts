@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from './material-module';
-import { NgbModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { PaymentComponent } from './payment/payment.component';
     BrowserAnimationsModule,
     AngularMaterialModule,
     NgbModule.forRoot(),
-    NgbCollapseModule
+    
 
   ],
   providers: [],
