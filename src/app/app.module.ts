@@ -11,6 +11,8 @@ import { AngularMaterialModule } from './material-module';
 import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     NavComponent,
     RegistrationComponent
+    NavComponent,
+    PaymentComponent  
   ],
   imports: [
     BrowserModule,
@@ -28,8 +32,13 @@ import { HttpClientModule } from '@angular/common/http';
     AngularMaterialModule,
     FormsModule,
     HttpClientModule
+    AngularMaterialModule,
+    NgbModule.forRoot(),
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {}
