@@ -32,5 +32,9 @@ export class NavComponent implements OnInit {
   OnHome() {
     this.router.navigateByUrl("/home");
   }
+
+  OnRegister() {
+    this.router.navigateByUrl("/registration"); 
+  }
   
 }
