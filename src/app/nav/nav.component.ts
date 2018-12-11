@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
     }
   }
   OnLogin() {
-    this.router.navigateByUrl("/");
+    this.router.navigate(['/login']);
   }
   OnHome() {
     this.router.navigateByUrl("/home");

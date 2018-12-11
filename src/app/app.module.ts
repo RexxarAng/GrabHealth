@@ -34,7 +34,6 @@ import { PaymentComponent } from './payment/payment.component';
     HttpClientModule
     AngularMaterialModule,
     NgbModule.forRoot(),
-    
 
   ],
   providers: [],
