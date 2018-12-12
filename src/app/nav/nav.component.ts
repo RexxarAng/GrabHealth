@@ -9,6 +9,9 @@ import * as $ from 'jquery';
 })
 @Injectable()
 export class NavComponent implements OnInit {
+  
+  appTitle = 'GrabHealth';
+  
   menuDisplay: boolean;
   constructor(private router: Router) { }
 
@@ -27,7 +30,7 @@ export class NavComponent implements OnInit {
     }
   }
   OnLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl("/login");
   }
   OnHome() {
     this.router.navigateByUrl("/home");

@@ -20,7 +20,7 @@ import { PaymentComponent } from './payment/payment.component';
     HomeComponent,
     LoginComponent,
     NavComponent,
-    RegistrationComponent
+    RegistrationComponent,
     NavComponent,
     PaymentComponent  
   ],
@@ -31,7 +31,7 @@ import { PaymentComponent } from './payment/payment.component';
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
     AngularMaterialModule,
     NgbModule.forRoot(),
 
