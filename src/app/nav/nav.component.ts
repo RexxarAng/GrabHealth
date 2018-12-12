@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-nav',
