@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { PaymentComponent } from './payment/payment.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', component: LoginComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'admin/clinic/registration', component: RegisterComponent},
   { path: 'receptionist/payment', component: PaymentComponent }

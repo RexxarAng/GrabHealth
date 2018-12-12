@@ -36,7 +36,6 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     AngularMaterialModule,
     NgbModule.forRoot(),
-    
 
   ],
   providers: [],

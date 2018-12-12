@@ -8,6 +8,9 @@ import { Router } from "@angular/router";
 })
 @Injectable()
 export class NavComponent implements OnInit {
+  
+  appTitle = 'GrabHealth';
+  
   menuDisplay: boolean;
   constructor(private router: Router) { }
 
@@ -26,7 +29,7 @@ export class NavComponent implements OnInit {
     }
   }
   OnLogin() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
   }
   OnHome() {
     this.router.navigateByUrl("/home");
