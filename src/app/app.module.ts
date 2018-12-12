@@ -13,6 +13,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentComponent } from './payment/payment.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PaymentComponent } from './payment/payment.component';
     NavComponent,
     RegistrationComponent,
     NavComponent,
-    PaymentComponent  
+    PaymentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
