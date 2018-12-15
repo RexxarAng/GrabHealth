@@ -12,8 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from './recep/payment/payment.component';
 import { RegisterComponent } from './register/register.component';
+import { PatientListComponent } from './recep/patient-list/patient-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
     RegistrationComponent,
     NavComponent,
     PaymentComponent,
-    RegisterComponent
+    RegisterComponent,
+    PatientListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     HttpClientModule,
     AngularMaterialModule,
-    NgbModule.forRoot(),
+    NgbModule.forRoot()
 
   ],
   providers: [],

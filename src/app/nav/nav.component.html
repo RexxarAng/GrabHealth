@@ -1,32 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">GrabHealth</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav">
+    <a class="navbar-brand" routerLink="/"><img src="assets/img/logo.png" id="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="#">Profile <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
+          <a class="nav-link" routerLink="#">Settings</a>
         </li>
         <li class="nav-item dropdown"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Services
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="#">View Clinics</a>
+            <!--<a class="dropdown-item" routerLink="#">View Clinics</a>
             <a class="dropdown-item" routerLink="#">View Patients</a>
-            <div class="dropdown-divider"></div>
+            <div class="dropdown-divider"></div> -->
             <a class="dropdown-item" routerLink="admin/clinic/registration" routerLinkActive="active">Clinic Registration</a>
             <a class="dropdown-item" routerLink="receptionist/payment" routerLinkActive="active">Payments</a>          
         </div>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="receptionist/patient-list">Patient List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="#">View Queue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="#">Payment</a>
+        </li>
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
-            <a class="nav-link" href="#">logout</a>
+            <a class="nav-link" href="#">Logout</a>
         </li>
       </ul>
     </div>
