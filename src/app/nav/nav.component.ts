@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import * as $ from 'jquery';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,8 +9,15 @@ import * as $ from 'jquery';
 })
 @Injectable()
 export class NavComponent implements OnInit {
+  
+  appTitle = 'GrabHealth';
+  
   menuDisplay: boolean;
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+
+    ) { }
 
   ngOnInit() {
     //menu not opened
@@ -26,11 +33,9 @@ export class NavComponent implements OnInit {
       this.menuDisplay = false;
     }
   }
-  OnLogin() {
-    this.router.navigateByUrl("/");
+  logout(){
+    this.router.navigateByUrl('/login');
+    this.authService.deleteToken();
+
   }
-  OnHome() {
-    this.router.navigateByUrl("/home");
-  }
-  
 }
