@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-list.component.css']
 })
 export class PatientListComponent implements OnInit {
+  modalshow: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.modalshow = false;
   }
+
+  addNewPatient() {
+    this.modalshow = true;
+  }
+  
 
 }
