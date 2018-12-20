@@ -1,26 +1,32 @@
-#logo {
+.logo {
     height: 25px;
     width: 25px;
     padding: 0;
   }
 
+.btn-img {
+    background: none;
+    padding: 0;
+}
+
 .btn {
     border: none;
+
 }
 
 .space {
     width: 50px;
 }
 
-#firstName {
+#firstNameId {
     width: 100%;
 }
 
-#lastName {
+#lastNameId {
     width: 100%;
 }
 
-#address {
+#addressId {
     resize: none;
     width: 100%;
 }
