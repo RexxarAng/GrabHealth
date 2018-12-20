@@ -1,10 +1,11 @@
-#row {
-    min-height: 100vh;
+#nav{
+   padding: 0%;
+   padding-left: 0.5%;
 }
 
-#container {
-    margin-right: 0%;
-    padding: 0%; 
-    height: 100vh;
+#logo {
+  height: 50px;
+  width: 50px;
+  padding: 0;
 }
 

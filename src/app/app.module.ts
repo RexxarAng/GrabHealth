@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from './recep/payment/payment.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminService } from './services/admin.service';
@@ -34,7 +34,8 @@ export function tokenGetter() {
     RegistrationComponent,
     NavComponent,
     PaymentComponent,
-    RegisterComponent
+    RegisterComponent,
+    PatientListComponent
   ],
   imports: [
     BrowserModule,
