@@ -22,6 +22,7 @@ import { ValidateService } from './services/validate.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
+import { SearchComponent } from './recep/search/search.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -37,7 +38,8 @@ export function tokenGetter() {
     NavComponent,
     PaymentComponent,
     RegisterComponent,
-    PatientListComponent
+    PatientListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

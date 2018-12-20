@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
+import { SearchComponent } from './recep/search/search.component';
 
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'receptionist/payment', component: PaymentComponent },
   { path: 'receptionist/patient-list', component: PatientListComponent },
   { path: 'clinic/registration', component: RegisterComponent, canActivate:[AuthGuard]},
+  { path: 'receptionist/search', component: SearchComponent },
 ];
 
 @NgModule({
