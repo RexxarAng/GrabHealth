@@ -1,0 +1,30 @@
+#logo {
+    height: 25px;
+    width: 25px;
+    padding: 0;
+  }
+
+.btn {
+    border: none;
+}
+
+.space {
+    width: 50px;
+}
+
+#firstName {
+    width: 100%;
+}
+
+#lastName {
+    width: 100%;
+}
+
+#address {
+    resize: none;
+    width: 100%;
+}
+
+.rowspacing {
+    margin-bottom: 2%;
+}
