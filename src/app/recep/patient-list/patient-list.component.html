@@ -36,14 +36,19 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>Jake</td>
-        <td>Peralta</td>
-        <td>S1234567A</td>
-        <td></td>
+      <tr *ngFor="let patient of patientlist">
+        <td>{{ patient.first_name }}</td>
+        <td>{{ patient.last_name }}</td>
+        <td>{{ patient.nric }}</td>
+        <td>{{ patient.contact }}</td>
         <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal">
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
             <img src="assets/img/view.png" class="logo" id="viewPatientDetail">
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#" (click)="editPatientInfo(patient)">
+            <img src="assets/img/edit.png" class="logo" id="editPatientDetail">
           </button>
         </td>
         <td>
@@ -116,7 +121,15 @@
 
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required="required"/>
+                <fieldset>
+                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required="required"/>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <input type="tel" class="form-control" id="contactId" placeholder="Contact No." required="required"/>
+                </fieldset>
               </div>
             </div>
 
@@ -147,48 +160,43 @@
           <form>
             <div class="row rowspacing">
               <div class="col">
-                <fieldset>
-                  <input type="text" class="form-control" id="firstNameId" readonly="" placeholder="First Name" />
-                </fieldset>
+                <p><b>First Name:</b> {{ patient.first_name }}</p>
               </div>
                       
               <div class="col">
-                <fieldset>
-                  <input type="text" class="form-control" id="lastNameId" readonly="" placeholder="Last Name"/>
-                </fieldset>
+                <p><b>Last Name:</b> {{ patient.last_name }}</p>
               </div>
             </div>
   
             <div class="row rowspacing">
               <div class="col">
-                <fieldset>
-                  <input type="text" class="form-control" id="nricNoId" readonly="" placeholder="NRIC/ Passport No."/>
-                </fieldset>
+                <p><b>NRIC:</b> {{ patient.nric }}</p>
               </div>
   
               <div class="col">
-                <fieldset>
-                  <input type="text" class="form-control" id="genderId" readonly="" placeholder="Gender">
-                </fieldset>
+                <p><b>Gender:</b> {{ patient.gender }}</p>
               </div>
             </div>
   
             <div class="row rowspacing">
               <div class="col">
-                <textarea class="form-control" id="addressId" readonly="" rows="3" placeholder="Address"></textarea>
+                <p><b>Address:</b> {{ patient.address }}</p>
               </div>
             </div> 
                   
             <div class="row rowspacing">
               <div class="col">
-                <input type="date" class="form-control" id="DOBId" readonly=""/>                
-                <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
+                <p><b>D.O.B:</b> {{patient.dob }}</p>
               </div>
             </div>
   
             <div class="row rowspacing">
               <div class="col">
-                <input type="text" class="form-control" id="nationalityId" readonly="" placeholder="Nationality"/>
+                <p><b>Nationality:</b> {{ patient.nationality }}</p>
+              </div>
+
+              <div class="col">
+                <p><b>Contact No:</b> {{ patient.contact }}</p>
               </div>
             </div>
 
