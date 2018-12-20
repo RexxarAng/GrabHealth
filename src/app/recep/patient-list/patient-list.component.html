@@ -1,53 +1,68 @@
 <div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">
-        <h3>Patient List</h3>
-      </th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col">  <button type="button" class="btn" data-toggle="modal" data-target="#addNewPatientModal">
-          <img src="assets/img/addNew.png" id="logo">
-      </button></th>
-      <th scope="col">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </th>
-    </tr>
-  </thead>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          <h3>Patient List</h3>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addNewPatientModal">
+            <img src="assets/img/addNew.png" class="logo" id="addNewPatient">
+          </button>
+        </th>
+        <th scope="col">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </th>
+      </tr>
+    </thead>
 
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">NRIC/Passport No.</th>
-      <th scope="col">Contact</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">NRIC/Passport No.</th>
+        <th scope="col">Contact</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr>
-      <td>Jake</td>
-      <td>Peralta</td>
-      <td>S1234567A</td>
-      <td></td>
-      <td><button class="btn"><img src="assets/img/view.png" id="logo"></button></td>
-      <td><button class="btn"><img src="assets/img/addToQueue.png" id="logo"></button></td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr *ngFor="let patient of patientlist">
+        <td>{{ patient.first_name }}</td>
+        <td>{{ patient.last_name }}</td>
+        <td>{{ patient.nric }}</td>
+        <td>{{ patient.contact }}</td>
+        <td>
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
+            <img src="assets/img/view.png" class="logo" id="viewPatientDetail">
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#" (click)="editPatientInfo(patient)">
+            <img src="assets/img/edit.png" class="logo" id="editPatientDetail">
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-img" data-toggle="modal" data-target="#">
+            <img src="assets/img/addToQueue.png" class="logo" id="addPatientToQueue">
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
+<!--Add New Patient Modal-->
 <div>
-  <!-- Modal -->
   <div class="modal fade" id="addNewPatientModal" tabindex="-1" role="dialog" aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -57,18 +72,19 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <form>
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required="required"/>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" required="required"/>
                 </fieldset>
               </div>
                     
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required="required"/>
+                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" required="required"/>
                 </fieldset>
               </div>
             </div>
@@ -76,13 +92,13 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nricNo" placeholder="NRIC/ Passport No." required="required"/>
+                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." required="required"/>
                 </fieldset>
               </div>
 
               <div class="col">
                 <fieldset>
-                  <select class="form-control" id="gender" placeholder="Gender" required="required">
+                  <select class="form-control" id="genderId" placeholder="Gender" required="required">
                     <option>Male</option>
                     <option>Female</option>
                   </select>
@@ -92,19 +108,28 @@
 
             <div class="row rowspacing">
               <div class="col">
-                <textarea class="form-control" id="address" rows="3" placeholder="Address" required="required"></textarea>
+                <textarea class="form-control" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
               </div>
             </div> 
                 
             <div class="row rowspacing">
               <div class="col">
-                <input type="text" class="form-control" id="date" placeholder="DD/MM/YYYY" required="required"/>                
+                <input type="date" class="form-control" id="DOBId" required="required"/>                
+                <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
               </div>
             </div>
 
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" id="nationality" placeholder="Nationality" required="required"/>
+                <fieldset>
+                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required="required"/>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <input type="tel" class="form-control" id="contactId" placeholder="Contact No." required="required"/>
+                </fieldset>
               </div>
             </div>
 
@@ -112,7 +137,103 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add Patient</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Add Patient</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--View Patient Details Modal-->
+<div>
+  <div class="modal fade" id="viewPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewPatientDetailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewPatientDetailModalLabel">View Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>First Name:</b> {{ patient.first_name }}</p>
+              </div>
+                      
+              <div class="col">
+                <p><b>Last Name:</b> {{ patient.last_name }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>NRIC:</b> {{ patient.nric }}</p>
+              </div>
+  
+              <div class="col">
+                <p><b>Gender:</b> {{ patient.gender }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>Address:</b> {{ patient.address }}</p>
+              </div>
+            </div> 
+                  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>D.O.B:</b> {{patient.dob }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>Nationality:</b> {{ patient.nationality }}</p>
+              </div>
+
+              <div class="col">
+                <p><b>Contact No:</b> {{ patient.contact }}</p>
+              </div>
+            </div>
+
+            <table class="table">
+              <thead>
+                <th>Payment History</th>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Receipt No.</td>
+                  <td>Date</td>
+                  <td>Time</td>
+                  <td>Total Due</td>
+                  <td><img src="assets/img/view.png" class="logo"></td>
+                </tr>
+
+                <tr>
+                  <td>#123</td>
+                  <td>20/12/2018</td>
+                  <td>14:58</td>
+                  <td>$30.50</td>
+                  <td>
+                    <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPaymentDetail">
+                      <img src="assets/img/view.png" class="logo" id="viewPayment">
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              
+            </table>
+  
+          </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
