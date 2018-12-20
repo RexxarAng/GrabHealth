@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     }
    
 
-    this.authService.login(credentials).subscribe(
+    this.authService.loginAdmin(credentials).subscribe(
       res => {
         console.log(res)
         this.authService.setToken(res['token'])
