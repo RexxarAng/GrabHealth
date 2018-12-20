@@ -35,10 +35,10 @@ export class AuthService {
 
     noAuthHeader = { headers: new HttpHeaders({"NoAuth": "true"}) };
 
-    login(credentials){
-        credentials.role = "Admin";
+    //Admin login 
+    loginAdmin(credentials){
         console.log(credentials);;
-        return this.http.post('http://localhost:4560/authenticate', credentials, this.noAuthHeader);
+        return this.http.post('http://localhost:4560/admin/authenticate', credentials, this.noAuthHeader);
     }
     getToken(){
         return sessionStorage.getItem('token');
