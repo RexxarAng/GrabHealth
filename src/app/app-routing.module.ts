@@ -8,7 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
-
+import { TeamComponent } from './manager/team/team.component';
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'receptionist/patient-list', component: PatientListComponent },
   { path: 'clinic/registration', component: RegisterComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/search', component: SearchComponent },
+  { path: 'manager/clinic-team', component: TeamComponent}
 ];
 
 @NgModule({

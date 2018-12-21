@@ -23,6 +23,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
+import { TeamComponent } from './manager/team/team.component';
+import { ManagerService } from './services/manager.service';
+import { DoctorService } from './services/doctor.service';
+import { ReceptionistService } from './services/receptionist.service';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -39,7 +43,8 @@ export function tokenGetter() {
     PaymentComponent,
     RegisterComponent,
     PatientListComponent,
-    SearchComponent
+    SearchComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
@@ -66,8 +71,7 @@ export function tokenGetter() {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },
-    ValidateService, AuthService, AuthGuard, AdminService],
+  }, ValidateService, AuthService, AuthGuard, AdminService, ManagerService, DoctorService, ReceptionistService],
   bootstrap: [AppComponent]
 })
 
