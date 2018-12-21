@@ -24,6 +24,7 @@ import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
 import { SearchListComponent } from './recep/search-list/search-list.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -60,7 +61,8 @@ export function tokenGetter() {
         whitelistedDomains: ['http://localhost:4560/'],
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
-    })
+    }),
+    AngularFontAwesomeModule
 
 
   ],

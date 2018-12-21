@@ -11,7 +11,7 @@
         <th scope="col"></th>
         <th scope="col">
           <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addNewPatientModal">
-            <img src="assets/img/addNew.png" class="logo" id="addNewPatient">
+            <i class="fa fa-plus-circle fa-2x" id="addNewPatient"></i>
           </button>
         </th>
         <th scope="col">
@@ -42,18 +42,20 @@
         <td>{{ patient.nric }}</td>
         <td>{{ patient.contact }}</td>
         <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
-            <img src="assets/img/view.png" class="logo" id="viewPatientDetail">
-          </button>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient Details">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
+              <i class="fa fa-eye fa-2x" id="viewPatientDetail"></i>
+            </button>
+          </span>
         </td>
         <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#" (click)="editPatientInfo(patient)">
-            <img src="assets/img/edit.png" class="logo" id="editPatientDetail">
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editPatientDetailModal" (click)="editPatientInfo(patient)">
+            <i class="fa fa-edit fa-2x" id="editPatientDetail"></i>
           </button>
         </td>
         <td>
           <button class="btn btn-img" data-toggle="modal" data-target="#">
-            <img src="assets/img/addToQueue.png" class="logo" id="addPatientToQueue">
+            <i class="fa fa-plus fa-2x" id="addPatientToQueue"></i>
           </button>
         </td>
       </tr>
@@ -239,3 +241,106 @@
     </div>
   </div>
 </div>
+
+<!--Edit Patient Details Modal--> <!--Not Done-->
+<div>
+  <div class="modal fade" id="editPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="editPatientDetailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPatientDetailModalLabel">Edit Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>First Name:</b> {{ patient.first_name }}</p>
+              </div>
+                      
+              <div class="col">
+                <p><b>Last Name:</b> {{ patient.last_name }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>NRIC:</b> {{ patient.nric }}</p>
+              </div>
+  
+              <div class="col">
+                <p><b>Gender:</b> {{ patient.gender }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>Address:</b> {{ patient.address }}</p>
+              </div>
+            </div> 
+                  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>D.O.B:</b> {{patient.dob }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>Nationality:</b> {{ patient.nationality }}</p>
+              </div>
+
+              <div class="col">
+                <p><b>Contact No:</b> {{ patient.contact }}</p>
+              </div>
+            </div>
+
+            <table class="table">
+              <thead>
+                <th>Payment History</th>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Receipt No.</td>
+                  <td>Date</td>
+                  <td>Time</td>
+                  <td>Total Due</td>
+                  <td><img src="assets/img/view.png" class="logo"></td>
+                </tr>
+
+                <tr>
+                  <td>#123</td>
+                  <td>20/12/2018</td>
+                  <td>14:58</td>
+                  <td>$30.50</td>
+                  <td>
+                    <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPaymentDetail">
+                      <img src="assets/img/view.png" class="logo" id="viewPayment">
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              
+            </table>
+  
+          </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add to queue dialog
+<div>
+  <div class="alertdialog alert-success" role="alertdialog" id="addToQueueSuccessAlert">
+    <h4>Successfully added</h4><b>{{ patient.first_name }} </b><b>{{ patient.last_name }}</b> to queue!</h4>
+  </div>
+</div>-->
