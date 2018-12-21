@@ -27,6 +27,8 @@ import { TeamComponent } from './manager/team/team.component';
 import { ManagerService } from './services/manager.service';
 import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
+import { SearchListComponent } from './recep/search-list/search-list.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -45,6 +47,8 @@ export function tokenGetter() {
     PatientListComponent,
     SearchComponent,
     TeamComponent
+    SearchComponent,
+    SearchListComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ export function tokenGetter() {
         whitelistedDomains: ['http://localhost:4560/'],
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
-    })
+    }),
+    AngularFontAwesomeModule
 
 
   ],

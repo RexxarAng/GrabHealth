@@ -8,7 +8,7 @@ import $ from 'jquery';
 })
 
 export class PatientListComponent implements OnInit {
-  
+  patient:any;
 
   constructor() {
 
@@ -29,8 +29,33 @@ export class PatientListComponent implements OnInit {
 
   }
 
+patientlist = [ {
+  first_name: "Jake",
+  last_name: "Peralta",
+  nric: "S1234567A",
+  gender: "Male",
+  address: "Blk 123 Happy Street #06-132 S(321123)",
+  dob: "01/04/1997",
+  nationality: "Singaporean",
+  contact: "91234567"
+
+}, {
+  first_name: "Amy",
+  last_name: "Santiago",
+  nric: "S9812345J",
+  gender: "Female",
+  address: "Blk 124 Waterfall Street #02-100 S(321124)",
+  dob: "04/01/1998",
+  nationality: "Singaporean",
+  contact: "98765432"
+
+}]
+
   ngOnInit() {}
 
+  viewPatientInfo(patient){
+    this.patient = patient;
+  }
 
 
 }
