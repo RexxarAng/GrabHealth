@@ -25,6 +25,7 @@ import { PatientListComponent } from './recep/patient-list/patient-list.componen
 import { SearchComponent } from './recep/search/search.component';
 import { SearchListComponent } from './recep/search-list/search-list.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -43,6 +44,7 @@ export function tokenGetter() {
     PatientListComponent,
     SearchComponent,
     SearchListComponent,
+    ViewQueueComponent,
   ],
   imports: [
     BrowserModule,

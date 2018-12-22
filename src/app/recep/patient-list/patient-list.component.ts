@@ -37,7 +37,7 @@ patientlist = [ {
   address: "Blk 123 Happy Street #06-132 S(321123)",
   dob: "01/04/1997",
   nationality: "Singaporean",
-  contact: "91234567"
+  contact: "91234567",
 
 }, {
   first_name: "Amy",
@@ -57,5 +57,13 @@ patientlist = [ {
     this.patient = patient;
   }
 
+  editPatientInfo(patient){
+    this.patient = patient;
+  }
+
+  addPatientToQueue(patient){
+    this.patient = patient;
+    $("#addToQueueSuccessAlert").hide().show('medium');
+  }
 
 }
