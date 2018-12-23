@@ -9,6 +9,7 @@ import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
 import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
+import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'receptionist/patient-list', component: PatientListComponent },
   { path: 'clinic/registration', component: RegisterComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/search', component: SearchComponent },
-  { path: 'receptionist/view-queue', component: ViewQueueComponent }
+  { path: 'receptionist/view-queue', component: ViewQueueComponent },
+  { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent }
 ];
 
 @NgModule({

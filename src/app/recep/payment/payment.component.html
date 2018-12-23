@@ -1,3 +1,33 @@
-<p>
-  {{ appTitle }} works!
-</p>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <h3>Payment</h3>
+        </th>
+      </tr>
+    </thead>
+
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="colspacing">Queue No.</th>
+        <th scope="col" class="colspacing">Name</th>
+        <th scope="col" class="colspacing">NRIC</th>
+        <th scope="col" class="colspacing">Complete Transaction</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="colspacing">001</td>
+        <td class="colspacing">Jake Peralta</td>
+        <td class="colspacing">S1234567A</td>
+        <td class="colspacing">
+          <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt">
+            Complete Transaction
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
