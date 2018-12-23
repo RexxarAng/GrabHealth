@@ -24,8 +24,9 @@ import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
 import { SearchListComponent } from './recep/search-list/search-list.component';
-import { DoctorLoginComponent } from './doctor-login/doctor-login.component';
 import { MainLoginComponent } from './main-login/main-login.component';
+import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
+import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -44,8 +45,9 @@ export function tokenGetter() {
     PatientListComponent,
     SearchComponent,
     SearchListComponent,
-    DoctorLoginComponent,
     MainLoginComponent,
+    DoctorMainComponent,
+    NextPatientComponent,
   ],
   imports: [
     BrowserModule,

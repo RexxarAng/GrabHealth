@@ -1,92 +1,80 @@
-<head>
-  <script>
-
-    function onClickClinic() {
-        $('#logins').hide();
-        $('#ReceptionistLoginForm').hide();
-        $('#DoctorLoginForm').hide();
-        $('#ClinicManagerLoginForm').show();
-   
-    }
-  </script>
-</head>
-
-<nav id="logins">
-  <button onclick="onClickClinic">Button</button>
-</nav>
 
 
-<!--CLINICMANAGER LOGIN-->
-<div id="ClinicManagerLoginForm">
-  <div class="container">
-    <h1 class="form-heading">Clinic Manager Login Form</h1>
-    <div class="login-form">
-      <div class="main-div">
-        <div class="panel">
-          <h2>Clinic Manager Login</h2>
-          <p>Please enter your email and password</p>
+
+<body ng-app="">
+  <form>
+    <input type="radio" name="login" id="clinicManager" value="clinicmanager" ng-model="clinicmanager" ng-init="clinicmanager = true">clinic manager
+    <input type="radio" name="login" id="receptionist" value="receptionist" ng-model="login">receptionist
+    <input type="radio" name="login" id="doctor" value="doctor" ng-model="login">doctor
+
+
+    <!--CLINICMANAGER LOGIN-->
+    <div ng-if="clinicmanager" id="ClinicManagerLoginForm">
+      <h1 class="form-heading">Clinic Manager Login Form</h1>
+      <div class="login-form">
+        <div class="main-div">
+          <div class="panel">
+            <h2>Clinic Manager Login</h2>
+            <p>Please enter your email and password</p>
+          </div>
+          <form id="ClinicManagerLogin" (submit)="onClinicManagerLogin()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
         </div>
-        <form id="ClinicManagerLogin" (submit)="onClinicManagerLogin()">
-          <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
-              placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
       </div>
     </div>
-  </div>
-</div>
 
-<!--RECEPTIONIST LOGIN-->
-<div id="ReceptionistLoginForm">
-  <div class="container">
-    <h1 class="form-heading">Receptionist Login Form</h1>
-    <div class="login-form">
-      <div class="main-div">
-        <div class="panel">
-          <h2>Receptionist Login</h2>
-          <p>Please enter your email and password</p>
+    <!--RECEPTIONIST LOGIN-->
+    <div ng-show="login === 'receptionist'" id="ReceptionistLoginForm">
+      <h1 class="form-heading">Receptionist Login Form</h1>
+      <div class="login-form">
+        <div class="main-div">
+          <div class="panel">
+            <h2>Receptionist Login</h2>
+            <p>Please enter your email and password</p>
+          </div>
+          <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
         </div>
-        <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
-          <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
-              placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
       </div>
     </div>
-  </div>
-</div>
 
-<!--DOCTOR LOGIN-->
-<div id="DoctorLoginForm">
-  <div class="container">
-    <h1 class="form-heading">Doctor Login Form</h1>
-    <div class="login-form">
-      <div class="main-div">
-        <div class="panel">
-          <h2>Doctor Login</h2>
-          <p>Please enter your email and password</p>
+    <!--DOCTOR LOGIN-->
+    <div ng-show="login === 'doctor'" id="DoctorLoginForm">
+      <h1 class="form-heading">Doctor Login Form</h1>
+      <div class="login-form">
+        <div class="main-div">
+          <div class="panel">
+            <h2>Doctor Login</h2>
+            <p>Please enter your email and password</p>
+          </div>
+          <form id="DoctorLogin" (submit)="onDoctorLogin()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
         </div>
-        <form id="DoctorLogin" (submit)="onDoctorLogin()">
-          <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" placeholder="Email Address">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
-              placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
       </div>
     </div>
-  </div>
-</div>
+  </form>
+</body>

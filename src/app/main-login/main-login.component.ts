@@ -57,4 +57,72 @@ export class MainLoginComponent implements OnInit {
     );
   }
 
+  // public clinicManager: boolean = false;
+  // public receptionist: boolean = false;
+  // public doctor: boolean = false;
+  // public clinicManagerButton: any = 'Show';
+  // public receptionistButton: any = 'Show';
+  // public doctorButton: any = 'Show';
+
+ 
+  // onClinicManager() {
+  //   this.clinicManager = !this.clinicManager;
+  //   console.log ("True or false : " +this.clinicManager);
+  //   console.log("True or false : " + this.receptionist);
+  //   console.log ("True or false : " +this.doctor);
+  //   // CHANGE THE NAME OF THE BUTTON.
+  //   if(this.clinicManager){
+  //     this.clinicManagerButton = "Hide";
+      
+  //   }  
+  //   else{
+  //     this.clinicManagerButton = "Show";
+  //     // if (this.receptionist == true)
+  //     //   this.buttonName = "Hide";
+  //     // if (this.doctor == true)
+  //     //   this.buttonName = "Hide";
+  //   }
+  // }
+  
+
+  // onReceptionist() {
+  //   this.receptionist = !this.receptionist;
+  //   console.log("True or false : " + this.clinicManager);
+  //   console.log("True or false : " + this.receptionist);
+  //   console.log("True or false : " + this.doctor);
+  //   // CHANGE THE NAME OF THE BUTTON.
+  //   if (this.receptionist){
+  //     console.log (this.receptionist);
+  //     this.receptionistButton = "Hide";
+  //   }
+  //   else{
+  //     console.log(this.receptionist);
+  //     this.receptionistButton = "Show";
+      
+
+  //     // if (this.clinicManager == true)
+  //     //   this.buttonName = "Hide";
+  //     // if (!this.doctor == true)
+  //     //   this.buttonName = "Hide";
+  //   }
+  // }
+
+  // onDoctor() {
+  //   this.doctor = !this.doctor;
+
+  //   // CHANGE THE NAME OF THE BUTTON.
+  //   if (this.doctor)
+  //     this.doctorButton = "Hide";
+  //     // if (this.receptionist == true)
+  //     //   this.buttonName = "Hide";
+  //     // if (!this.clinicManager == true)
+  //     //   this.buttonName = "Hide";
+  //   else
+  //     this.doctorButton = "Show";
+  //     // if (this.receptionist == true)
+  //     //   this.buttonName = "Hide";
+  //     // if (!this.clinicManager == true)
+  //     //   this.buttonName = "Hide";
+  // }
+
 }
