@@ -1,4 +1,4 @@
-<div class="container text-center" style="margin-top: 4%;">
+<div class="container text-center" id="print-to-pdf" style="margin-top: 4%;">
   <div class="row text-center" style="margin-bottom: 2%;">
 
     <div class="col text-left" id="clinicDetails" style="margin-right: 20%;">
@@ -114,9 +114,11 @@
       </tbody>
     </table>
   </div>
-
-  <div class="row text-center" id="wrapper">
-    <button type="reset" class="btn btn-secondary" routerLink="/receptionist/payment">Cancel</button>
-    <button type="submit" class="btn btn-primary" routerLink="#" style="margin-left: 4%;">Confirm</button>
-  </div>
 </div>
+
+<div class="row text-center" id="wrapper">
+  <button type="reset" class="btn btn-secondary" routerLink="/receptionist/payment">Cancel</button>
+  <label id="pdf-path"></label>
+  <button id="print-pdf" class="btn btn-primary" style="margin-left: 4%;">Confirm</button>
+</div>
+
