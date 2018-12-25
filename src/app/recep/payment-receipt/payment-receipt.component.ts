@@ -1,18 +1,24 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as jspdf from 'jspdf';
+import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-payment-receipt',
   templateUrl: './payment-receipt.component.html',
   styleUrls: ['./payment-receipt.component.css']
 })
+
 export class PaymentReceiptComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  
+  downloadPDF() {
+    const doc = new jsPDF();
+    doc.text('Same text here', 10, 10);
+    doc.save('test.pdf');
   }
 
 }

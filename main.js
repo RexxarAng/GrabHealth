@@ -1,10 +1,8 @@
 const { app, BrowserWindow } = require('electron');
 
 /////////////////////////////////////////////////
+const pdfshift = require('pdfshift')('574debcdfbac4217886e89d8f1224970');
 const fs = require('fs');
-const os = require('os');
-const ipc = require('electron').ipcMain;
-const shell = require('electron').shell;
 
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -56,17 +54,4 @@ const shell = require('electron').shell;
   // code. You can also put them in separate files and require them here.
 
   //for pdf
-  ipc.on('print-to-pdf', function(event) {
-    const pdfPath = path.join(os.tmpdir(), 'print.pdf');
-    const win = BrowserWindow.fromWebContents(event.sender);
-
-    win.webContents.printToPDF({}, function(error, data) {
-      if(error) return console.log(error.message);
-
-      fs.writeFile(pdfPath, data, function(err) {
-        if (err) return console.log(err.message);
-        shell.openExternal('file://' + pdfPath);
-        event.sender.send('wrote-pdf', pdfPath);
-      })
-    })
-  });
+  
