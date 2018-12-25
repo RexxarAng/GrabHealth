@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor-main.component.css']
 })
 export class DoctorMainComponent implements OnInit {
+  show: boolean = true;
 
-  constructor() { }
+  constructor() {
+
+    
+   }
 
   ngOnInit() {
   }

@@ -3,13 +3,13 @@
 
 <body ng-app="">
   <form>
-    <input type="radio" name="login" id="clinicManager" value="clinicmanager" ng-model="clinicmanager" ng-init="clinicmanager = true">clinic manager
+    <input type="radio" name="login" id="clinicManager" value="clinicmanager" ng-model="clinicmanager" ng-init="clinicmanager = true" >clinic manager
     <input type="radio" name="login" id="receptionist" value="receptionist" ng-model="login">receptionist
     <input type="radio" name="login" id="doctor" value="doctor" ng-model="login">doctor
 
 
     <!--CLINICMANAGER LOGIN-->
-    <div ng-if="clinicmanager" id="ClinicManagerLoginForm">
+    <div *ngIf="show" id="ClinicManagerLoginForm">
       <h1 class="form-heading">Clinic Manager Login Form</h1>
       <div class="login-form">
         <div class="main-div">
