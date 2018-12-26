@@ -16,6 +16,7 @@
           Services
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/manager/clinic-team" routerLinkActive="active">View Clinic Team</a>
           <a class="dropdown-item" *ngIf="authService.loggedIn()" routerLink="/clinicList" routerLinkActive="active">View Clinics</a>
           <a class="dropdown-item" *ngIf="authService.loggedIn()" routerLink="#" routerLinkActive="active">View Patients</a>
           <div class="dropdown-divider"></div>

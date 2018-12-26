@@ -68,14 +68,6 @@ export class ValidateService {
       }
   }
 
-  validateLogin(credentials){
-    if(credentials.email == undefined || credentials.email.trim().length == 0 || credentials.password == undefined || credentials.password.trim().length == 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
 
   validatePasswordStrength(password) {
       var hasUpperCase = /[A-Z]/ // at least 1 uppercase

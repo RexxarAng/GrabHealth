@@ -11,6 +11,7 @@ import { SearchComponent } from './recep/search/search.component';
 import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
 import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 
+import { TeamComponent } from './manager/team/team.component';
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'receptionist/search', component: SearchComponent },
   { path: 'receptionist/view-queue', component: ViewQueueComponent },
   { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent }
+  { path: 'manager/clinic-team', component: TeamComponent}
 ];
 
 @NgModule({
