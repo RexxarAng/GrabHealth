@@ -1,0 +1,16 @@
+#clinicLogo {
+    height: 50%;
+    width: 30%;
+    padding: 4%;
+}
+
+.colspacing {
+    padding-left: 4%;
+}
+
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2%; 
+}

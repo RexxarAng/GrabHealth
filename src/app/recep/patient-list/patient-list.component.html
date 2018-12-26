@@ -25,43 +25,48 @@
 
     <thead class="thead-light">
       <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">NRIC/Passport No.</th>
-        <th scope="col">Contact</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col" class="colspacing">First Name</th>
+        <th scope="col" class="colspacing">Last Name</th>
+        <th scope="col" class="colspacing">NRIC/Passport No.</th>
+        <th scope="col" class="colspacing">Contact</th>
+        <th scope="col" class="colspacing"></th>
+        <th scope="col" class="colspacing"></th>
+        <th scope="col" class="colspacing"></th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let patient of patientlist">
-        <td>{{ patient.first_name }}</td>
-        <td>{{ patient.last_name }}</td>
-        <td>{{ patient.nric }}</td>
-        <td>{{ patient.contact }}</td>
-        <td>
+        <td class="colspacing">{{ patient.first_name }}</td>
+        <td class="colspacing">{{ patient.last_name }}</td>
+        <td class="colspacing">{{ patient.nric }}</td>
+        <td class="colspacing">{{ patient.contact }}</td>
+        <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient Details">
             <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
               <i class="fa fa-eye fa-2x" id="viewPatientDetail"></i>
             </button>
           </span>
         </td>
-        <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editPatientDetailModal" (click)="editPatientInfo(patient)">
-            <i class="fa fa-edit fa-2x" id="editPatientDetail"></i>
-          </button>
+        <td class="colspacing">
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Edit Patient Details">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editPatientDetailModal" (click)="editPatientInfo(patient)">
+              <i class="fa fa-edit fa-2x" id="editPatientDetail"></i>
+            </button>
+          </span>
         </td>
-        <td>
-          <button class="btn btn-img" data-toggle="modal" data-target="#">
-            <i class="fa fa-plus fa-2x" id="addPatientToQueue"></i>
-          </button>
+        <td class="colspacing">
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add patient to queue">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueSuccessModal" (click)="addPatientToQueue(patient)">
+              <i class="fa fa-plus fa-2x" id="addPatientToQueue"></i>
+            </button>
+          </span>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
 
 <!--Add New Patient Modal-->
 <div>
@@ -145,6 +150,7 @@
     </div>
   </div>
 </div>
+
 
 <!--View Patient Details Modal-->
 <div>
@@ -242,6 +248,7 @@
   </div>
 </div>
 
+
 <!--Edit Patient Details Modal--> <!--Not Done-->
 <div>
   <div class="modal fade" id="editPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="editPatientDetailModal" aria-hidden="true">
@@ -338,9 +345,40 @@
   </div>
 </div>
 
-<!--Add to queue dialog
+
+<!--Add Patient To Queue Modal-->
 <div>
-  <div class="alertdialog alert-success" role="alertdialog" id="addToQueueSuccessAlert">
-    <h4>Successfully added</h4><b>{{ patient.first_name }} </b><b>{{ patient.last_name }}</b> to queue!</h4>
+  <div class="modal fade" id="addToQueueSuccessModal" tabindex="-1" role="dialog" aria-labelledby="addToQueueSuccessModal" aria-hidden="true">    
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Successfully Added To Queue</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <div class="row" style="padding-left: 4%;">
+              <p>
+                <b>{{ patient.first_name }} </b>
+                <b>{{ patient.last_name }} </b>
+                has been successfully added to queue.
+              </p>
+            </div>
+
+            <div class="row" style="padding-left: 4%;">
+              <p><strong>Queue Number:</strong> 001</p>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>-->
+</div>

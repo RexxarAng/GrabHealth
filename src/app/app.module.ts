@@ -29,6 +29,8 @@ import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
 import { SearchListComponent } from './recep/search-list/search-list.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
+import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -49,6 +51,8 @@ export function tokenGetter() {
     TeamComponent,
     SearchComponent,
     SearchListComponent,
+    ViewQueueComponent,
+    PaymentReceiptComponent,
   ],
   imports: [
     BrowserModule,

@@ -34,3 +34,11 @@
 .rowspacing {
     margin-bottom: 2%;
 }
+
+.alert {
+    display: none;
+}
+
+.colspacing {
+    padding-left: 4%;
+}
