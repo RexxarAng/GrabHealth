@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit {
       },
       err => {
         this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
-        console.log(err);
       }
     );
   }

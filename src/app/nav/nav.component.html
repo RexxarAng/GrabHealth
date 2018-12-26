@@ -27,13 +27,13 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="receptionist/patient-list" routerLinkActive="active">Patient List</a>
+        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/patient-list" routerLinkActive="active">Patient List</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
+          <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
         </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
+          <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
         </li>
 
       <li class="nav-item">
