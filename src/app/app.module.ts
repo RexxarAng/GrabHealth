@@ -46,7 +46,7 @@ export function tokenGetter() {
     RegisterComponent,
     PatientListComponent,
     SearchComponent,
-    TeamComponent
+    TeamComponent,
     SearchComponent,
     SearchListComponent,
   ],

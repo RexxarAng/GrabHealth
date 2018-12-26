@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
   
   appTitle = 'GrabHealth';
-  
+  role = '';
   menuDisplay: boolean;
   constructor(
     private router: Router,
@@ -24,15 +24,6 @@ export class NavComponent implements OnInit {
     this.menuDisplay = false;
   }
   
-  toggleMenu() {
-    //if menu is closed, open it
-    if(this.menuDisplay == false) {
-      this.menuDisplay = true;
-    } else {
-      //if menu is opened, close it
-      this.menuDisplay = false;
-    }
-  }
   logout(){
     this.router.navigateByUrl('/login');
     this.authService.deleteToken();

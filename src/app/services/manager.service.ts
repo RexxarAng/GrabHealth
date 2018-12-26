@@ -14,7 +14,7 @@ export class ManagerService {
     }
   
     registerDoctor(doctor) {
-        return this.http.post('http://localhost:4560/manager/register/receptionist', doctor);                     
+        return this.http.post('http://localhost:4560/manager/register/doctor', doctor);                     
     }
 
     getClinicTeam(){
