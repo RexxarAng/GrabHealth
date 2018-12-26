@@ -16,6 +16,14 @@ export class TeamComponent implements OnInit {
   rContactNo = '';
   rEmail = '';
 
+  dFirstName = '';
+  dLastName = '';
+  dNric = '';
+  dAddress ='';
+  dContactNo = '';
+  dEmail = '';
+  dDoctorLicenseNo = '';
+
   receptionists:Array<any>;
   doctors:Array<any>;
   receptionist:any;
@@ -75,7 +83,52 @@ export class TeamComponent implements OnInit {
     }
     this.managerService.registerReceptionist(receptionist).subscribe(
       res=> {
-        this.flashMessagesService.show('You have successfully registered the clinic', { cssClass: 'alert-success', timeout: 3000});
+        if(res['success']) {
+          this.flashMessagesService.show('You have successfully registered the receptionist', { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          this.flashMessagesService.show("Receptionist is already registered", { cssClass: 'alert-danger', timeout: 3000});
+        }
+        this.getClinicTeam(); 
+      },
+      err => {
+        this.flashMessagesService.show('Something happened!', { cssClass: 'alert-success', timeout: 3000});
+    })
+  }
+
+  onAddDoctor(){
+    let doctor = {
+      "firstName": this.dFirstName,
+      "lastName": this.dLastName,
+      "email": this.dEmail,
+      "nric": this.dNric,
+      "address": this.dAddress,
+      "contactNo": this.dContactNo,
+      "doctorLicenseNo": this.dDoctorLicenseNo
+    }
+    if(!this.validateService.validateRegistration(doctor)){
+      this.flashMessagesService.show('Please fill all the fields', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    if(!this.validateService.validateEmail(doctor.email)){
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if(!this.validateService.validateContactNo(doctor.contactNo)) {
+      this.flashMessagesService.show('Please enter a valid contact number', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    if(!this.validateService.validateNric(doctor.nric)){
+      this.flashMessagesService.show('Please enter a valid nric', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    this.managerService.registerDoctor(doctor).subscribe(
+      res=> {
+        if(res['success']) {
+          this.flashMessagesService.show('You have successfully registered the doctor', { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          this.flashMessagesService.show("Doctor is already registered", { cssClass: 'alert-danger', timeout: 3000});
+        }
         this.getClinicTeam(); 
       },
       err => {

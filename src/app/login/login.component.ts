@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
     this.authService.loginClinic(credentials, "Manager").subscribe(
       res => {
         console.log(res)
-        this.authService.setToken(res['token'])
+        var user = res['user'];
+        this.authService.setToken(res['token'], user.role);
         this.router.navigateByUrl('/manager/clinic-team');
       },
       err => {

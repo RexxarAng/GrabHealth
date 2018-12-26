@@ -26,16 +26,16 @@ export class ValidateService {
     var st = Array("J", "Z", "I", "H", "G", "F", "E", "D", "C", "B", "A");
     var fg = Array("X", "W", "U", "T", "R", "Q", "P", "N", "M", "L", "K");
     var theAlpha;
-    if (icArray[0] == "S" || icArray[0] == "T") {
+    if (icArray[0] === "S" || icArray[0] === "T") {
       theAlpha = st[temp];
-    } else if (icArray[0] == "F" || icArray[0] == "G") {
+    } else if (icArray[0] === "F" || icArray[0] === "G") {
       theAlpha = fg[temp];
     }
-    return (icArray[8] == theAlpha);
+    return (icArray[8] === theAlpha);
   }
 
   validateRegistration(user) {
-      if (user.firstname == "" || user.lastname == "" || user.email == "" || user.address == "" || user.nric == "" || user.contactNo == "") {
+      if (user.firstname === "" || user.lastname === "" || user.email === "" || user.address === "" || user.nric === "" || user.contactNo === "") {
           return false;
         } else {
           return true;
@@ -43,7 +43,7 @@ export class ValidateService {
   }
 
   validateClinicRegistration(user, clinic) {
-    if (user.firstName.length == 0 || user.lastName.length == 0 || user.email.length == 0 || user.nric.length == 0 || user.contactNo.length == 0 || user.doctorLicenseNo.length == 0 || clinic.name.trim().length == 0 || clinic.address.length == 0 || clinic.location.length == 0 || clinic.contactNo.length == 0 || clinic.clinicLicenseNo.length == 0 || clinic.clinicPhoto.length == 0 ) {
+    if (user.firstName.length === 0 || user.lastName.length === 0 || user.email.length === 0 || user.nric.length === 0 || user.contactNo.length === 0 || user.doctorLicenseNo.length === 0 || clinic.name.trim().length === 0 || clinic.address.length === 0 || clinic.location.length === 0 || clinic.contactNo.length === 0 || clinic.clinicLicenseNo.length === 0 || clinic.clinicPhoto.length === 0 ) {
       return false;
     } else {
       return true;
@@ -77,21 +77,18 @@ export class ValidateService {
         return false;
       }
       else if (password.length >= 8) {
-        if (password.search(hasUpperCase) == -1) {
+        if (password.search(hasUpperCase) === -1) {
           return false;
         }
-        else if (password.search(hasNumbers) == -1) {
+        else if (password.search(hasNumbers) === -1) {
           return false;
         }
-        else if (password.search(hasLowerCase) == -1) {
+        else if (password.search(hasLowerCase) === -1) {
           return false;
         }
         else if (password.search(hasLowerCase) >= 0 && password.search(hasUpperCase) >= 0 && password.search(hasNumbers) >= 0) {
           return true;
         }
       }
-
   }
-
-  
 }
