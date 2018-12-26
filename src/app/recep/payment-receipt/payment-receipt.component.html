@@ -1,4 +1,4 @@
-<div class="container text-center" id="print-to-pdf" style="margin-top: 4%;">
+<div class="container text-center" id="printToPDF" style="margin-top: 4%;">
   <div class="row text-center" style="margin-bottom: 2%;">
 
     <div class="col text-left" id="clinicDetails" style="margin-right: 20%;">
@@ -67,6 +67,7 @@
         </tr>
       </thead>
 
+      <!--Prescription/Consultation-->
       <tbody>
         <tr>
           <td class="colspacing text-left" id="consultation">Consultation</td>
@@ -84,8 +85,15 @@
           <td class="colspacing" id="medQty">1</td>
           <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;">$6.00</td>
         </tr>
+
+        <tr>
+          <td class="colspacing text-left" id="medName">Cough (10 tabs)</td>
+          <td class="colspacing" id="medQty">1</td>
+          <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;">$6.00</td>
+        </tr>
       </tbody>
 
+      <!--Payment Calculation-->
       <tbody>
         <tr class="table-active">
           <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
@@ -115,6 +123,7 @@
     </table>
   </div>
 </div>
+
 
 <div class="row text-center" id="wrapper">
   <button type="reset" class="btn btn-secondary" routerLink="/receptionist/payment">Cancel</button>
