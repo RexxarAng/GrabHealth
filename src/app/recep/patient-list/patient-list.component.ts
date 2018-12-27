@@ -11,13 +11,17 @@ import { Router } from '@angular/router';
 })
 
 export class PatientListComponent implements OnInit {
-  patient:any;
+  patient: any;
   patientlist: Array<any>;
   firstName: '';
   lastName: '';
   address: '';
   contactNo: '';
-  nric: ''
+  nric: '';
+  dob: '';
+  nationality: '';
+
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
@@ -101,7 +105,9 @@ export class PatientListComponent implements OnInit {
       lastName: this.lastName,
       address: this.address,
       nric: this.nric,
-      contactNo: this.contactNo
+      contactNo: this.contactNo,
+      nationality: this.nationality,
+      dob: this.dob
     }
 
     this.receptionistService.createPatient(patient).subscribe(

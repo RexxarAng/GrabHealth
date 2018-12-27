@@ -37,13 +37,13 @@
       </li>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-        <p style="padding-top: 11%; padding-left: 1%; color: white;">
-          <b>{{ currentDate | date }} <span style="padding-left: 2%;">{{ currentDate | date: 'shortTime' }}</span></b>
-        </p>
-    </form>
 
     <ul class="navbar-nav my-2 my-lg-0">
+      <li class="nav-item">
+        <p style="margin: 0; color: white; padding-top: 5%;">
+          {{ currentDate | date: 'dd/MM/yyyy' }} <span style="padding-left: 1%;">{{ currentDate | date: 'hh:mm a' }}</span>
+        </p>
+      </li>
       <li class="nav-item form-inline">
           <a class="nav-link" *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
           <a class="nav-link" *ngIf="authService.loggedIn()" (click)="logout()">Logout</a>

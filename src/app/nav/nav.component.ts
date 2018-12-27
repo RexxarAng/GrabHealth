@@ -14,6 +14,7 @@ export class NavComponent implements OnInit {
   role = '';
   menuDisplay: boolean;
   currentDate = Date.now();
+  datePolling: any;
 
   constructor(
     private router: Router,
@@ -24,6 +25,12 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     //menu not opened
     this.menuDisplay = false;
+    this.datePolling = setInterval(() =>
+      this.loadDate(),2000);
+  }
+
+  loadDate(){
+    this.currentDate = Date.now();
   }
   
   logout(){
