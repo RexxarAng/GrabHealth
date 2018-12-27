@@ -1,12 +1,18 @@
 const { app, BrowserWindow } = require('electron');
 
+/////////////////////////////////////////////////
+const pdfshift = require('pdfshift')('574debcdfbac4217886e89d8f1224970');
+const fs = require('fs');
+
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let win;
 
   function createWindow () {
     // Create the browser window.
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({ show: false });
+    win.maximize();
+    win.show();
     // and load the index.html of the app.
     win.loadFile('dist/GrabHealth/index.html');
 
@@ -46,3 +52,6 @@ const { app, BrowserWindow } = require('electron');
   
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
+
+  //for pdf
+  

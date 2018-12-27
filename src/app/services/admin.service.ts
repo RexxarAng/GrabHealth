@@ -7,7 +7,6 @@ export class AdminService {
 
   // private url = "/routes/comment";
   constructor(private http: HttpClient) {
-    console.log('Comment Service Initialized...');
   }
 
   registerClinic(manager, clinic) {

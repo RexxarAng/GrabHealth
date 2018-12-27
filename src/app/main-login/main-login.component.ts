@@ -11,9 +11,16 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./main-login.component.css']
 })
 export class MainLoginComponent implements OnInit {
+  login: string;
+  mEmail: '';
+  mPassword: '';
+  rEmail: '';
+  rPassword: '';
+  dEmail: '';
+  dPassword: '';
+  aEmail: '';
+  aPassword: '';
 
-  email: string;
-  password: string;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,34 +28,46 @@ export class MainLoginComponent implements OnInit {
     private flashMessagesService: FlashMessagesService
   ) { }
 
-  ngOnInit() {
-    this.email = '';
-    this.password = '';
-    
+  ngOnInit() { }
+
+  onManager(){
+    this.login = "Manager";
+  }
+  onDoctor(){
+    this.login = "Doctor";
+  }
+  onReceptionist(){
+    this.login = "Receptionist";
+  }
+  onAdmin(){
+    this.login = "Admin";
   }
 
   onDoctorLogin() {
     const credentials = {
-      email: this.email,
-      password: this.password
+      email: this.dEmail,
+      password: this.dPassword
     };
 
-    if (!this.validateService.validateEmail(this.email)) {
+    if (!this.validateService.validateEmail(credentials.email)) {
       this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
 
-    if (this.password == '') {
+    if (credentials.password == '') {
       this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
 
-
-    this.authService.login(credentials).subscribe(
+    this.authService.loginClinic(credentials, 'Doctor').subscribe(
       res => {
-        console.log(res)
-        this.authService.setToken(res['token'])
-        this.router.navigateByUrl('/clinic/registration');
+        if(res['success']){
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/doctor/doctor-main');
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } 
       },
       err => {
         this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
@@ -57,72 +76,102 @@ export class MainLoginComponent implements OnInit {
     );
   }
 
-  // public clinicManager: boolean = false;
-  // public receptionist: boolean = false;
-  // public doctor: boolean = false;
-  // public clinicManagerButton: any = 'Show';
-  // public receptionistButton: any = 'Show';
-  // public doctorButton: any = 'Show';
+  onReceptionistLogin() {
+    const credentials = {
+      email: this.rEmail,
+      password: this.rPassword
+    };
 
- 
-  // onClinicManager() {
-  //   this.clinicManager = !this.clinicManager;
-  //   console.log ("True or false : " +this.clinicManager);
-  //   console.log("True or false : " + this.receptionist);
-  //   console.log ("True or false : " +this.doctor);
-  //   // CHANGE THE NAME OF THE BUTTON.
-  //   if(this.clinicManager){
-  //     this.clinicManagerButton = "Hide";
-      
-  //   }  
-  //   else{
-  //     this.clinicManagerButton = "Show";
-  //     // if (this.receptionist == true)
-  //     //   this.buttonName = "Hide";
-  //     // if (this.doctor == true)
-  //     //   this.buttonName = "Hide";
-  //   }
-  // }
-  
+    if (!this.validateService.validateEmail(credentials.email)) {
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
 
-  // onReceptionist() {
-  //   this.receptionist = !this.receptionist;
-  //   console.log("True or false : " + this.clinicManager);
-  //   console.log("True or false : " + this.receptionist);
-  //   console.log("True or false : " + this.doctor);
-  //   // CHANGE THE NAME OF THE BUTTON.
-  //   if (this.receptionist){
-  //     console.log (this.receptionist);
-  //     this.receptionistButton = "Hide";
-  //   }
-  //   else{
-  //     console.log(this.receptionist);
-  //     this.receptionistButton = "Show";
-      
+    if (credentials.password == '') {
+      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
 
-  //     // if (this.clinicManager == true)
-  //     //   this.buttonName = "Hide";
-  //     // if (!this.doctor == true)
-  //     //   this.buttonName = "Hide";
-  //   }
-  // }
+    this.authService.loginClinic(credentials, 'Receptionist').subscribe(
+      res => {
+        if(res['success']){
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/receptionist/patient-list');
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } 
+      },
+      err => {
+        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
+        console.log(err);
+      }
+    );
+  }
 
-  // onDoctor() {
-  //   this.doctor = !this.doctor;
+  onClinicManagerLogin() {
+    const credentials = {
+      email: this.mEmail,
+      password: this.mPassword
+    };
 
-  //   // CHANGE THE NAME OF THE BUTTON.
-  //   if (this.doctor)
-  //     this.doctorButton = "Hide";
-  //     // if (this.receptionist == true)
-  //     //   this.buttonName = "Hide";
-  //     // if (!this.clinicManager == true)
-  //     //   this.buttonName = "Hide";
-  //   else
-  //     this.doctorButton = "Show";
-  //     // if (this.receptionist == true)
-  //     //   this.buttonName = "Hide";
-  //     // if (!this.clinicManager == true)
-  //     //   this.buttonName = "Hide";
-  // }
+    if (!this.validateService.validateEmail(credentials.email)) {
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
 
+    if (credentials.password == '') {
+      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    this.authService.loginClinic(credentials, 'Manager').subscribe(
+      res => {
+        if(res['success']){
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/manager/clinic-team');
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } 
+      },
+      err => {
+        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
+        console.log(err);
+      }
+    );
+  }
+
+  onAdminLogin() {
+    const credentials = {
+      email: this.aEmail,
+      password: this.aPassword
+    };
+
+    if (!this.validateService.validateEmail(credentials.email)) {
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    if (credentials.password == '') {
+      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    this.authService.loginAdmin(credentials).subscribe(
+      res => {
+        if(res['success']){
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/clinic/registration');
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } 
+      },
+      err => {
+        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
+        console.log(err);
+      }
+    );
+  }
 }

@@ -42,16 +42,45 @@ export class LoginComponent implements OnInit {
       return false;
     }
    
+    //Admin login
+    // this.authService.loginAdmin(credentials).subscribe(
+    //   res => {
+    //     console.log(res)
+    //     this.authService.setToken(res['token'])
+    //     this.router.navigateByUrl('/clinic/registration');
+    //   },
+    //   err => {
+    //     this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
+    //     console.log(err);
+    //   }
+    // );
 
-    this.authService.login(credentials).subscribe(
+    //Manager login
+    // this.authService.loginClinic(credentials, "Manager").subscribe(
+    //   res => {
+    //     console.log(res)
+    //     var user = res['user'];
+    //     this.authService.setToken(res['token'], user.role);
+    //     this.router.navigateByUrl('/manager/clinic-team');
+    //   },
+    //   err => {
+    //     this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
+    //     console.log(err);
+    //   }
+    // );
+
+    //Receptionist login
+    this.authService.loginClinic(credentials, "Receptionist").subscribe(
       res => {
         console.log(res)
-        this.authService.setToken(res['token'])
-        this.router.navigateByUrl('/clinic/registration');
+        if(res['success']) {
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/receptionist/patient-list');
+        }
       },
       err => {
         this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
-        console.log(err);
       }
     );
   }

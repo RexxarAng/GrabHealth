@@ -1,0 +1,343 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          <h3>Receptionist</h3>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">
+          <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addNewReceptionistModal">
+            <i class="fa fa-plus-circle fa-2x" id="addNewReceptionist"></i>
+          </button>
+        </th>
+        <th scope="col">
+        </th>
+      </tr>
+    </thead>
+
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">NRIC</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let receptionist of receptionists">
+        <td>{{ receptionist.firstName }}</td>
+        <td>{{ receptionist.lastName }}</td>
+        <td>{{ receptionist.address }}</td>
+        <td>{{ receptionist.contactNo }}</td>
+        <td>{{ receptionist.nric }}</td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient Details">
+              <button type="button" class="btn btn-img"  data-toggle="modal" data-target="#viewReceptionistDetailModal" (click)="viewReceptionistInfo(receptionist)">
+                <i class="fa fa-eye fa-2x" id="viewReceptionistDetail"></i>
+              </button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          <h3>Doctors</h3>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">
+          <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addNewDoctorModal">
+            <i class="fa fa-plus-circle fa-2x" id="addNewDoctor"></i>
+          </button>
+        </th>
+        <th scope="col">
+        </th>
+      </tr>
+    </thead>
+
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">NRIC</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctors">
+        <td>{{ doctor.firstName }}</td>
+        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.address }}</td>
+        <td>{{ doctor.contactNo }}</td>
+        <td>{{ doctor.nric }}</td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Doctor Details">
+              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewDoctorDetailModal" (click)="viewDoctorInfo(doctor)">
+                <i class="fa fa-eye fa-2x" id="viewDoctorDetail"></i>
+              </button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!--Add New Receptionist Modal-->
+<div>
+    <div class="modal fade" id="addNewReceptionistModal" tabindex="-1" role="dialog" aria-labelledby="addNewReceptionistModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addNewReceptionistModalLabel">New Receptionist</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  
+          <div class="modal-body">
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="firstName"  [(ngModel)]="rFirstName" id="firstNameId" placeholder="First Name" required="required"/>
+                </fieldset>
+              </div>
+                    
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="lastName"  [(ngModel)]="rLastName" id="lastNameId" placeholder="Last Name" required="required"/>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="nric"  [(ngModel)]="rNric" id="nricNoId" placeholder="NRIC/ Passport No." required="required"/>
+                </fieldset>
+              </div>
+              <div class="col">
+                  <fieldset>
+                    <input type="text" class="form-control" name="contactNo"  [(ngModel)]="rContactNo" id="contactNoId" placeholder="Contact No." required="required"/>
+                  </fieldset>
+              </div>
+              <!-- <div class="col">
+                <fieldset>
+                  <select class="form-control" id="genderId" placeholder="Gender" required="required">
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </fieldset>
+              </div> -->
+            </div>
+            <div class ="row rowspacing">
+                <div class="col">
+                    <input type="text" class="form-control" name="email"  [(ngModel)]="rEmail" id="emailId" placeholder="Email" required="required"/>
+                </div>
+            </div>
+            <div class="row rowspacing">
+              <div class="col">
+                <textarea class="form-control"  name="address"  [(ngModel)]="rAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" (click)="onAddReceptionist()" data-dismiss="modal">Add Receptionist</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!--View Receptionist Details Modal-->
+<div>
+  <div class="modal fade" id="viewReceptionistDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewReceptionistDetailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewReceptionistDetailModalLabel">View Receptionist Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="row rowspacing">
+              <div class="col">
+                <p *ngIf="receptionist"><b>First Name:</b> {{ receptionist.firstName }}</p>
+
+              </div>
+                      
+              <div class="col">
+                <p *ngIf="receptionist"><b>Last Name:</b> {{ receptionist.lastName }}</p>
+              </div>
+            </div>
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                    <p *ngIf="receptionist"><b>Contact No:</b> {{ receptionist.contactNo }}</p>
+                  </fieldset>
+              </div>
+  
+              <div class="col">
+                <p *ngIf="receptionist"><b>NRIC:</b> {{ receptionist.nric }}</p>
+              </div>
+            </div>
+  
+            <div class="row rowspacing">
+              <div class="col">
+                <p *ngIf="receptionist"><b>Address:</b> {{ receptionist.address }}</p>
+              </div>
+            </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add New Doctor Modal-->
+<div>
+  <div class="modal fade" id="addNewDoctorModal" tabindex="-1" role="dialog" aria-labelledby="addNewDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewDoctorModalLabel">New Doctor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row rowspacing">
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="firstName"  [(ngModel)]="dFirstName" id="firstNameId" placeholder="First Name" required="required"/>
+              </fieldset>
+            </div>
+                  
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="lastName"  [(ngModel)]="dLastName" id="lastNameId" placeholder="Last Name" required="required"/>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="row rowspacing">
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="nric"  [(ngModel)]="dNric" id="nricNoId" placeholder="NRIC/ Passport No." required="required"/>
+              </fieldset>
+            </div>
+            <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="contactNo"  [(ngModel)]="dContactNo" id="contactNoId" placeholder="Contact No." required="required"/>
+                </fieldset>
+            </div>
+            <!-- <div class="col">
+              <fieldset>
+                <select class="form-control" id="genderId" placeholder="Gender" required="required">
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </fieldset>
+            </div> -->
+          </div>
+          <div class ="row rowspacing">
+              <div class="col">
+                  <input type="text" class="form-control" name="email"  [(ngModel)]="dEmail" id="emailId" placeholder="Email" required="required"/>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" name="doctorLicenseNo"  [(ngModel)]="dDoctorLicenseNo" id="doctorLicenseNoId" placeholder="Doctor License Number" required="required"/>
+            </div>
+          </div>
+          <div class="row rowspacing">
+            <div class="col">
+              <textarea class="form-control"  name="address"  [(ngModel)]="dAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onAddDoctor()" data-dismiss="modal">Add Doctor</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--View Doctor Details Modal-->
+<div>
+  <div class="modal fade" id="viewDoctorDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewDoctorDetailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewDoctorDetailModalLabel">View Doctor Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="row rowspacing">
+              <div class="col">
+                <p *ngIf="doctor"><b>First Name:</b> {{ doctor.firstName }}</p>
+
+              </div>
+                      
+              <div class="col">
+                <p *ngIf="doctor"><b>Last Name:</b> {{ doctor.lastName }}</p>
+              </div>
+            </div>
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                    <p *ngIf="doctor"><b>Contact No:</b> {{ doctor.contactNo }}</p>
+                  </fieldset>
+              </div>
+  
+              <div class="col">
+                <p *ngIf="doctor"><b>NRIC:</b> {{ doctor.nric }}</p>
+              </div>
+            </div>
+            <div class="row rowspacing">
+                <div class="col">
+                  <fieldset>
+                      <p *ngIf="doctor"><b>Email:</b> {{ doctor.email }}</p>
+                    </fieldset>
+                </div>
+    
+                <div class="col">
+                  <p *ngIf="doctor"><b>Doctor License No:</b> {{ doctor.doctorLicenseNo }}</p>
+                </div>
+              </div>
+    
+            <div class="row rowspacing">
+              <div class="col">
+                <p *ngIf="doctor"><b>Address:</b> {{ doctor.address }}</p>
+              </div>
+            </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

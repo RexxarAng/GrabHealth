@@ -24,7 +24,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 import { SearchComponent } from './recep/search/search.component';
+import { TeamComponent } from './manager/team/team.component';
+import { ManagerService } from './services/manager.service';
+import { DoctorService } from './services/doctor.service';
+import { ReceptionistService } from './services/receptionist.service';
 import { SearchListComponent } from './recep/search-list/search-list.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
+import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 import { MainLoginComponent } from './main-login/main-login.component';
 import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
 import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
@@ -48,7 +55,11 @@ export function tokenGetter() {
     RegisterComponent,
     PatientListComponent,
     SearchComponent,
+    TeamComponent,
+    SearchComponent,
     SearchListComponent,
+    ViewQueueComponent,
+    PaymentReceiptComponent,
     MainLoginComponent,
     DoctorMainComponent,
     NextPatientComponent,
@@ -74,7 +85,8 @@ export function tokenGetter() {
         whitelistedDomains: ['http://localhost:4560/'],
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
-    })
+    }),
+    AngularFontAwesomeModule
 
 
   ],
@@ -82,8 +94,7 @@ export function tokenGetter() {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },
-    ValidateService, AuthService, AuthGuard, AdminService],
+  }, ValidateService, AuthService, AuthGuard, AdminService, ManagerService, DoctorService, ReceptionistService],
   bootstrap: [AppComponent]
 })
 
