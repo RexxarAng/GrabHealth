@@ -13,6 +13,8 @@ export class NavComponent implements OnInit {
   appTitle = 'GrabHealth';
   role = '';
   menuDisplay: boolean;
+  currentDate = Date.now();
+
   constructor(
     private router: Router,
     private authService: AuthService,

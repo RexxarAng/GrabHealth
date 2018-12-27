@@ -30,14 +30,21 @@
         <a class="nav-link" routerLink="receptionist/patient-list" routerLinkActive="active">Patient List</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
-        </li>
+        <a class="nav-link" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
+      </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
-        </li>
+        <a class="nav-link" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
+      </li>
     </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+        <p style="padding-top: 11%; padding-left: 1%; color: white;">
+          <b>{{ currentDate | date }} <span style="padding-left: 2%;">{{ currentDate | date: 'shortTime' }}</span></b>
+        </p>
+    </form>
+
     <ul class="navbar-nav my-2 my-lg-0">
-      <li class="nav-item">
+      <li class="nav-item form-inline">
           <a class="nav-link" *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
           <a class="nav-link" *ngIf="authService.loggedIn()" (click)="logout()">Logout</a>
       </li>
