@@ -4,6 +4,7 @@ import { ReceptionistService } from '../../services/receptionist.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
@@ -20,6 +21,7 @@ export class PatientListComponent implements OnInit {
   nric: '';
   dob: '';
   nationality: '';
+  gender: '';
 
 
   constructor(
@@ -89,7 +91,7 @@ export class PatientListComponent implements OnInit {
     this.receptionistService.getPatients().subscribe(
       res=>{
         if(!['success']){
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
         }
         this.patientlist = res['patients'];
       },
@@ -107,16 +109,18 @@ export class PatientListComponent implements OnInit {
       nric: this.nric,
       contactNo: this.contactNo,
       nationality: this.nationality,
-      dob: this.dob
+      dob: this.dob,
+      gender: this.gender
     }
 
     this.receptionistService.createPatient(patient).subscribe(
       res=>{
         if(res['success']){
           this.getPatients();
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 5000});
+          
         } else {
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
         }
         // if(res['unauthenticated']){
         //   this.authService.logout();
@@ -126,6 +130,7 @@ export class PatientListComponent implements OnInit {
 
       }
     )
+
   }
 
 }
