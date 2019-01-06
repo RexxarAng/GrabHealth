@@ -92,8 +92,9 @@ export class ValidateService {
       }
   }
 
+  //Validate patient registration
   validatePatientRegistration(user) {
-    if (user.firstName.length === '' || user.lastName.length === '' || user.nric.length === '' || user.gender.length === '' || user.address.length === '' || user.dob.length === '' || user.nationality.length === '' || user.contactNo.length === '' ) {
+    if (user.firstName.length === '' || user.lastName.length === '' || user.nric.length === '' || user.gender.select === '' || user.address.length === '' || user.dob.length === '' || user.nationality.length === '' || user.contactNo.length === '' ) {
       return false;
     } else {
       return true;
@@ -101,8 +102,32 @@ export class ValidateService {
   }
 
   validateFirstName(firstName) {
-    if (firstName.length < 8 || firstName === '' ) {
+    if (firstName.length <2 || firstName.length === '') {
         return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateLastName(lastName) {
+    if (lastName.length <2 || lastName.length === '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateGender(gender) {
+    if (gender.length === 0 || gender.length === '' || gender.select ==='') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateAddress(address) {
+    if (address.length === 0 || address.length === '') {
+      return false;
     } else {
       return true;
     }

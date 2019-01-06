@@ -123,14 +123,48 @@ export class PatientListComponent implements OnInit {
 
     // Validate First Name
     if(!this.validateService.validateFirstName(patient.firstName)){
-      this.flashMessagesService.show('Please enter a valid first name', { cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessagesService.show('Please enter valid first name!', { cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
 
-    if (this.firstName == ''){
-      this.flashMessagesService.show('Please enter first name', { cssClass: 'alert-danger', timeout: 3000});
+    if (this.firstName === '' || this.firstName === 0){
+      this.flashMessagesService.show('Please enter first name!', { cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
+
+    // Validate Last Name
+    if(!this.validateService.validateLastName(patient.lastName)){
+      this.flashMessagesService.show('Please enter valid last name!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.lastName === '' || this.lastName === 0){
+      this.flashMessagesService.show('Please enter last name!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate Gender
+    if(!this.validateService.validateGender(patient.gender)){
+      this.flashMessagesService.show('Please select gender!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.gender === '' || this.gender === 0){
+      this.flashMessagesService.show('Please select gender!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate Address
+    if(!this.validateService.validateAddress(patient.address)){
+      this.flashMessagesService.show('Please enter valid address!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.address === '' || this.address === 0){
+      this.flashMessagesService.show('Please enter address!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
 
 
     this.receptionistService.createPatient(patient).subscribe(
