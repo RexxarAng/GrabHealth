@@ -1,0 +1,98 @@
+<form>
+  <input type="radio" name="login" id="clinicManager" value="clinicmanager" (click)="onManager()" >clinic manager
+  <input type="radio" name="login" id="receptionist" value="receptionist" (click)="onReceptionist()">receptionist
+  <input type="radio" name="login" id="doctor" value="doctor" (click)="onDoctor()">Doctor
+  <input type="radio" name="login" id="admin" value="Admin" (click)="onAdmin()">Admin
+
+  <!--CLINICMANAGER LOGIN-->
+  <div *ngIf="login === 'Manager'" id="ClinicManagerLoginForm">
+    <h1 class="form-heading">Clinic Manager Login Form</h1>
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+          <h2>Clinic Manager Login</h2>
+          <p>Please enter your email and password</p>
+        </div>
+        <form id="ClinicManagerLogin" (submit)="onClinicManagerLogin()">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="mEmail" placeholder="Email Address">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="mPassword"
+              placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--RECEPTIONIST LOGIN-->
+  <div *ngIf="login === 'Receptionist'" id="ReceptionistLoginForm">
+    <h1 class="form-heading">Receptionist Login Form</h1>
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+          <h2>Receptionist Login</h2>
+          <p>Please enter your email and password</p>
+        </div>
+        <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="rEmail" placeholder="Email Address">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
+              placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--DOCTOR LOGIN-->
+  <div *ngIf="login === 'Doctor'" id="DoctorLoginForm">
+    <h1 class="form-heading">Doctor Login Form</h1>
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+          <h2>Doctor Login</h2>
+          <p>Please enter your email and password</p>
+        </div>
+        <form id="DoctorLogin" (submit)="onDoctorLogin()">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="dEmail" placeholder="Email Address">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="dPassword"
+              placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--Admin LOGIN-->
+  <div *ngIf="login === 'Admin'" id="AdminLoginForm">
+    <h1 class="form-heading">Receptionist Login Form</h1>
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+          <h2>Admin Login</h2>
+          <p>Please enter your email and password</p>
+        </div>
+        <form id="AdminLogin" (submit)="onAdminLogin()">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="aEmail" placeholder="Email Address">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="aPassword"
+              placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
