@@ -4,6 +4,7 @@ import { ReceptionistService } from '../../services/receptionist.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ValidateService } from '../../services/validate.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -28,7 +29,8 @@ export class PatientListComponent implements OnInit {
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private validateService: ValidateService,
   ) {
 
     $(function(){
@@ -113,12 +115,30 @@ export class PatientListComponent implements OnInit {
       gender: this.gender
     }
 
+    // Required fields
+    if(!this.validateService.validatePatientRegistration(patient)) {
+      this.flashMessagesService.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate First Name
+    if(!this.validateService.validateFirstName(patient.firstName)){
+      this.flashMessagesService.show('Please enter a valid first name', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.firstName == ''){
+      this.flashMessagesService.show('Please enter first name', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+
     this.receptionistService.createPatient(patient).subscribe(
       res=>{
         if(res['success']){
           this.getPatients();
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 5000});
-          
+                  
         } else {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
         }
@@ -129,8 +149,9 @@ export class PatientListComponent implements OnInit {
       err => {
 
       }
-    )
+    )    
 
   }
+
 
 }

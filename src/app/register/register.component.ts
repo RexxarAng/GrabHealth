@@ -4,6 +4,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -75,7 +76,7 @@ export class RegisterComponent implements OnInit {
 
         // Required fields
         if(!this.validateService.validateClinicRegistration(manager, clinic)) {
-            this.flashMessagesService.show('Please enter all fills', { cssClass: 'alert-danger', timeout: 3000});
+            this.flashMessagesService.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000});
             return false;
         }
 

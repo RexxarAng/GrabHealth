@@ -86,11 +86,11 @@
         </div>
 
         <div class="modal-body">
-          <form>
+          <form name="newPatientForm">
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" required name="firstName" [(ngModel)]="firstName"/>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" name="firstName" [(ngModel)]="firstName" required/>               
                 </fieldset>
               </div>
                     
@@ -139,11 +139,9 @@
               </div>
 
               <div class="col">
-                <form>
                 <fieldset>
                   <input type="tel" class="form-control" id="contactId" pattern="[8|9][0-9]{7}" size="8" placeholder="Contact No." required name="contactNo" [(ngModel)]="contactNo"/>
                 </fieldset>
-              </form>
               </div>
             </div>
 
@@ -151,7 +149,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="createPatient()" id="createPatientModal">Add Patient</button>
+          <button type="submit" class="btn btn-primary" (click)="createPatient()" id="createPatientBtn">Add Patient</button>
         </div>
       </div>
     </div>
