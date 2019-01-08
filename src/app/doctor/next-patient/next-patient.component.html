@@ -1,3 +1,61 @@
-<p>
-  next-patient works!
-</p>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <h3>Current Patient Data</h3>
+        </th>
+      </tr>
+    </thead>
+
+    <thead>
+      
+        <th scope="col">
+          <form class="form-inline my-2 my-lg-0">
+            Name: Chloe<br/>
+            DOB: 07/12/1998<br />
+            NRIC: S9812345A<br />
+            Medical History: N/A<br />
+            Allergies: N/A<br />
+          </form>
+        </th>  
+        <th scope="col">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </th>
+    </thead>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="colspacing">Medicine Name</th>
+        <th scope="col" class="colspacing">Frequency</th>
+        <th scope="col" class="colspacing">Instructions</th>
+        <th scope="col" class="colspacing">Dosage</th>
+        <th scope="col" class="colspacing">Use</th>
+        <th scope="col" class="colspacing">MC (Days)</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="colspacing">Aspirin</td>
+        <td class="colspacing">1/day</td>
+        <td class="colspacing">Take after food. Stop if feeling drowsy.</td>
+        <td class="colspacing">325 mg</td>
+        <td class="colspacing">For headache</td>
+        <td class="colspacing">20days</td>
+       
+      </tr>
+    </tbody>
+
+
+          <button type="submit" class="btn btn-primary" routerLink="/doctor/doctor-main">
+      Save and back to Home
+    </button>
+    <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment">
+      Proceed to payment
+    </button>
+  </table>
+</div>
