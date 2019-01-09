@@ -169,7 +169,7 @@
           </button>
         </div>
         
-        <div class="modal-body">
+        <div class="modal-body" *ngIf="patient">
           <form>
             <div class="row rowspacing">
               <div class="col">
@@ -266,7 +266,7 @@
           </button>
         </div>
         
-        <div class="modal-body">
+        <div class="modal-body" *ngIf="patient">
           <form>
             <div class="row rowspacing">
               <div class="col">
@@ -309,36 +309,6 @@
                 <p><b>Contact No:</b> {{ patient.contactNo }}</p>
               </div>
             </div>
-
-            <table class="table">
-              <thead>
-                <th>Payment History</th>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>Receipt No.</td>
-                  <td>Date</td>
-                  <td>Time</td>
-                  <td>Total Due</td>
-                  <td><img src="assets/img/view.png" class="logo"></td>
-                </tr>
-
-                <tr>
-                  <td>#123</td>
-                  <td>20/12/2018</td>
-                  <td>14:58</td>
-                  <td>$30.50</td>
-                  <td>
-                    <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPaymentDetail">
-                      <img src="assets/img/view.png" class="logo" id="viewPayment">
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-              
-            </table>
-  
           </form>
         </div>
         
@@ -363,7 +333,7 @@
           </button>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" *ngIf="patient">
           <form>
             <div class="row" style="padding-left: 4%;">
               <p>
