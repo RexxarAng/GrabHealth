@@ -17,7 +17,8 @@ export class AuthService {
     noAuthHeader = { headers: new HttpHeaders({"NoAuth": "true"}) };
 
     //Admin login 
-    loginAdmin(credentials){
+    loginAdmin(credentials, role){
+        credentials.role = role;
         return this.http.post('http://localhost:4560/admin/authenticate', credentials, this.noAuthHeader);
     }
     //Doctor/Receptionist/Manager login
@@ -39,7 +40,7 @@ export class AuthService {
         sessionStorage.clear();
     }
     unAuthenticated(msg){
-        this.flashMessagesService.show(msg, { cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessagesService.show('unauthenticated access', { cssClass: 'alert-danger', timeout: 3000});
         this.router.navigateByUrl('/login');
         this.deleteToken();
     }
