@@ -9,5 +9,12 @@ export class ReceptionistService {
     constructor(private http: HttpClient) {
     }
 
+    createPatient(patient){
+      return this.http.post('http://localhost:4560/receptionist/createPatient', patient);
+    }
+
+    getPatients(){
+      return this.http.get('http://localhost:4560/receptionist/patient-list');
+    }
 
 }

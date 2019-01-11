@@ -1,0 +1,45 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <h3>View Patient Details</h3>
+        </th>
+        <th scope="col">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </th>
+      </tr>
+    </thead>
+
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="colspacing">NRIC/Passport No.</th>
+        <th scope="col" class="colspacing">Address</th>
+        <th scope="col" class="colspacing">Contact No.</th>
+        <th scope="col" class="colspacing">Allergies</th>
+        <th scope="col" class="colspacing">Medical History</th>
+        <th scope="col" class="colspacing">Edit</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="colspacing">S1234567A</td>
+        <td class="colspacing">614 Moon Street 93</td>
+        <td class="colspacing">987654325</td>
+        <td class="colspacing">Penicillin</td>
+        <td class="colspacing">N/A</td>
+
+        <td class="colspacing">
+          <button type="submit" class="btn btn-primary" routerLink="/doctor/edit-details">
+            Edit Patient Details
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

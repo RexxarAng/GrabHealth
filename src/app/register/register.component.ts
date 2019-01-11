@@ -4,6 +4,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -31,7 +32,8 @@ export class RegisterComponent implements OnInit {
         private validateService: ValidateService,
         private flashMessagesService: FlashMessagesService,
         private adminService: AdminService,
-        private router: Router 
+        private router: Router ,
+        private authService: AuthService
         ){ }
 
     ngOnInit() {
@@ -74,7 +76,7 @@ export class RegisterComponent implements OnInit {
 
         // Required fields
         if(!this.validateService.validateClinicRegistration(manager, clinic)) {
-            this.flashMessagesService.show('Please enter all fills', { cssClass: 'alert-danger', timeout: 3000});
+            this.flashMessagesService.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000});
             return false;
         }
 
@@ -89,18 +91,24 @@ export class RegisterComponent implements OnInit {
             return false;
         }
         if(!this.validateService.validateNric(manager.nric)){
-            this.flashMessagesService.show('Please enter a valid nric', { cssClass: 'alert-danger', timeout: 3000});
+            this.flashMessagesService.show('Please enter a valid nric capitalized', { cssClass: 'alert-danger', timeout: 3000});
             return false;
         }
         
         this.adminService.registerClinic(manager, clinic).subscribe(
             res => {
-                console.log(res);
-                this.flashMessagesService.show('You have successfully registered the clinic', { cssClass: 'alert-success', timeout: 3000});
+                if(res['success']){
+                    this.flashMessagesService.show('You have successfully registered the clinic', { cssClass: 'alert-success', timeout: 3000});
+                } else {
+                    if(!res['authenticated']){
+                        this.authService.unAuthenticated(res['msg']);
+                        return false;
+                    }
+                    this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+                }
                 //this.router.navigateByUrl('/clinicList');
             },
             err => {
-                console.log(err);
                 this.flashMessagesService.show("Something happened", { cssClass: 'alert-danger', timeout: 3000});
                 //this.router.navigateByUrl('/clinic/register');
             }     

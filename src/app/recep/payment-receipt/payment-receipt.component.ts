@@ -12,9 +12,19 @@ import $ from 'jquery';
 
 export class PaymentReceiptComponent implements OnInit {
 
+  currentDate = Date.now();
+  datePolling: any;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.datePolling = setInterval(() =>
+    this.loadDate(),2000);
+  }
+  
+  loadDate(){
+    this.currentDate = Date.now();
+  }
   
   /*downloadPDF() {
     const doc = new jsPDF();

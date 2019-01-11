@@ -28,7 +28,7 @@
         <th scope="col" class="colspacing">First Name</th>
         <th scope="col" class="colspacing">Last Name</th>
         <th scope="col" class="colspacing">NRIC/Passport No.</th>
-        <th scope="col" class="colspacing">Contact</th>
+        <th scope="col" class="colspacing">Contact No.</th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
@@ -37,10 +37,10 @@
 
     <tbody>
       <tr *ngFor="let patient of patientlist">
-        <td class="colspacing">{{ patient.first_name }}</td>
-        <td class="colspacing">{{ patient.last_name }}</td>
+        <td class="colspacing">{{ patient.firstName }}</td>
+        <td class="colspacing">{{ patient.lastName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>
-        <td class="colspacing">{{ patient.contact }}</td>
+        <td class="colspacing">{{ patient.contactNo }}</td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient Details">
             <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">
@@ -65,6 +65,11 @@
       </tr>
     </tbody>
   </table>
+
+  <div>
+   
+  </div>
+
 </div>
 
 
@@ -81,17 +86,17 @@
         </div>
 
         <div class="modal-body">
-          <form>
+          <form name="newPatientForm">
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" required="required"/>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" name="firstName" [(ngModel)]="firstName" required/>               
                 </fieldset>
               </div>
                     
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" required="required"/>
+                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" required name="lastName" [(ngModel)]="lastName"/>
                 </fieldset>
               </div>
             </div>
@@ -99,13 +104,13 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." required="required"/>
+                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." required name="nric" [(ngModel)]="nric"/>
                 </fieldset>
               </div>
 
               <div class="col">
                 <fieldset>
-                  <select class="form-control" id="genderId" placeholder="Gender" required="required">
+                  <select class="form-control" id="genderId" placeholder="Gender" required name="gender" [(ngModel)]="gender">
                     <option>Male</option>
                     <option>Female</option>
                   </select>
@@ -115,13 +120,13 @@
 
             <div class="row rowspacing">
               <div class="col">
-                <textarea class="form-control" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+                <textarea class="form-control" id="addressId" rows="3" placeholder="Address" required name="address" [(ngModel)]="address"></textarea>
               </div>
             </div> 
                 
             <div class="row rowspacing">
               <div class="col">
-                <input type="date" class="form-control" id="DOBId" required="required"/>                
+                <input type="date" class="form-control" id="DOBId" required name="dob" [(ngModel)]="dob"/>                
                 <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
               </div>
             </div>
@@ -129,13 +134,13 @@
             <div class="row">
               <div class="col">
                 <fieldset>
-                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required="required"/>
+                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required name="nationality" [(ngModel)]="nationality"/>
                 </fieldset>
               </div>
 
               <div class="col">
                 <fieldset>
-                  <input type="tel" class="form-control" id="contactId" placeholder="Contact No." required="required"/>
+                  <input type="tel" class="form-control" id="contactId" pattern="[8|9][0-9]{7}" size="8" placeholder="Contact No." required name="contactNo" [(ngModel)]="contactNo"/>
                 </fieldset>
               </div>
             </div>
@@ -144,7 +149,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Add Patient</button>
+          <button type="submit" class="btn btn-primary" (click)="createPatient()" id="createPatientBtn">Add Patient</button>
         </div>
       </div>
     </div>
@@ -168,11 +173,11 @@
           <form>
             <div class="row rowspacing">
               <div class="col">
-                <p><b>First Name:</b> {{ patient.first_name }}</p>
+                <p><b>First Name:</b> {{ patient.firstName }}</p>
               </div>
                       
               <div class="col">
-                <p><b>Last Name:</b> {{ patient.last_name }}</p>
+                <p><b>Last Name:</b> {{ patient.lastName }}</p>
               </div>
             </div>
   
@@ -194,7 +199,7 @@
                   
             <div class="row rowspacing">
               <div class="col">
-                <p><b>D.O.B:</b> {{patient.dob }}</p>
+                <p><b>D.O.B:</b> {{ patient.dob | date: 'dd/MM/yyyy' }}</p>
               </div>
             </div>
   
@@ -204,7 +209,7 @@
               </div>
 
               <div class="col">
-                <p><b>Contact No:</b> {{ patient.contact }}</p>
+                <p><b>Contact No:</b> {{ patient.contactNo }}</p>
               </div>
             </div>
 
@@ -265,11 +270,11 @@
           <form>
             <div class="row rowspacing">
               <div class="col">
-                <p><b>First Name:</b> {{ patient.first_name }}</p>
+                <p><b>First Name:</b> {{ patient.firstName }}</p>
               </div>
                       
               <div class="col">
-                <p><b>Last Name:</b> {{ patient.last_name }}</p>
+                <p><b>Last Name:</b> {{ patient.lastName }}</p>
               </div>
             </div>
   
@@ -291,7 +296,7 @@
                   
             <div class="row rowspacing">
               <div class="col">
-                <p><b>D.O.B:</b> {{patient.dob }}</p>
+                <p><b>D.O.B:</b> {{ patient.dob | date: 'dd/MM/yyyy' }}</p>
               </div>
             </div>
   
@@ -301,7 +306,7 @@
               </div>
 
               <div class="col">
-                <p><b>Contact No:</b> {{ patient.contact }}</p>
+                <p><b>Contact No:</b> {{ patient.contactNo }}</p>
               </div>
             </div>
 
@@ -362,8 +367,8 @@
           <form>
             <div class="row" style="padding-left: 4%;">
               <p>
-                <b>{{ patient.first_name }} </b>
-                <b>{{ patient.last_name }} </b>
+                <b>{{ patient.firstName }} </b>
+                <b>{{ patient.lastName }} </b>
                 has been successfully added to queue.
               </p>
             </div>

@@ -56,15 +56,31 @@ export class LoginComponent implements OnInit {
     // );
 
     //Manager login
-    this.authService.loginClinic(credentials, "Manager").subscribe(
+    // this.authService.loginClinic(credentials, "Manager").subscribe(
+    //   res => {
+    //     console.log(res)
+    //     var user = res['user'];
+    //     this.authService.setToken(res['token'], user.role);
+    //     this.router.navigateByUrl('/manager/clinic-team');
+    //   },
+    //   err => {
+    //     this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
+    //     console.log(err);
+    //   }
+    // );
+
+    //Receptionist login
+    this.authService.loginClinic(credentials, "Receptionist").subscribe(
       res => {
         console.log(res)
-        this.authService.setToken(res['token'])
-        this.router.navigateByUrl('/manager/clinic-team');
+        if(res['success']) {
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/receptionist/patient-list');
+        }
       },
       err => {
         this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000});
-        console.log(err);
       }
     );
   }
