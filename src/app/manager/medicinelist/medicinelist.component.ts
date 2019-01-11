@@ -3,18 +3,25 @@ import { Router } from '@angular/router';
 import { ManagerService } from '../../services/manager.service';
 import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+
+
 @Component({
   selector: 'app-medicinelist',
   templateUrl: './medicinelist.component.html',
   styleUrls: ['./medicinelist.component.css']
 })
+
+
+
 export class MedicinelistComponent implements OnInit {
+  public searchText: string;
   medicineList:Array<any>;
   medicine: any;
   effects: '';
   name: '';
   category: '';
   price: Number;
+  
   constructor(
     private router: Router,
     private managerService: ManagerService,
