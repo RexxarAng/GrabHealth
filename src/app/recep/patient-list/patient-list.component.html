@@ -65,6 +65,11 @@
       </tr>
     </tbody>
   </table>
+
+  <div>
+   
+  </div>
+
 </div>
 
 
@@ -81,17 +86,17 @@
         </div>
 
         <div class="modal-body">
-          <form>
+          <form name="newPatientForm">
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" required="required" name="firstName" [(ngModel)]="firstName"/>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" name="firstName" [(ngModel)]="firstName" required/>               
                 </fieldset>
               </div>
                     
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" required="required" name="lastName" [(ngModel)]="lastName"/>
+                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" required name="lastName" [(ngModel)]="lastName"/>
                 </fieldset>
               </div>
             </div>
@@ -99,13 +104,13 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." required="required" name="nric" [(ngModel)]="nric"/>
+                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." required name="nric" [(ngModel)]="nric"/>
                 </fieldset>
               </div>
 
               <div class="col">
                 <fieldset>
-                  <select class="form-control" id="genderId" placeholder="Gender" required="required">
+                  <select class="form-control" id="genderId" placeholder="Gender" required name="gender" [(ngModel)]="gender">
                     <option>Male</option>
                     <option>Female</option>
                   </select>
@@ -115,13 +120,13 @@
 
             <div class="row rowspacing">
               <div class="col">
-                <textarea class="form-control" id="addressId" rows="3" placeholder="Address" required="required" name="address" [(ngModel)]="address"></textarea>
+                <textarea class="form-control" id="addressId" rows="3" placeholder="Address" required name="address" [(ngModel)]="address"></textarea>
               </div>
             </div> 
                 
             <div class="row rowspacing">
               <div class="col">
-                <input type="date" class="form-control" id="DOBId" required="required"/>                
+                <input type="date" class="form-control" id="DOBId" required name="dob" [(ngModel)]="dob"/>                
                 <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
               </div>
             </div>
@@ -129,13 +134,13 @@
             <div class="row">
               <div class="col">
                 <fieldset>
-                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required="required"/>
+                 <input type="text" class="form-control" id="nationalityId" placeholder="Nationality" required name="nationality" [(ngModel)]="nationality"/>
                 </fieldset>
               </div>
 
               <div class="col">
                 <fieldset>
-                  <input type="tel" class="form-control" id="contactId" placeholder="Contact No." required="required" name="contactNo" [(ngModel)]="contactNo"/>
+                  <input type="tel" class="form-control" id="contactId" pattern="[8|9][0-9]{7}" size="8" placeholder="Contact No." required name="contactNo" [(ngModel)]="contactNo"/>
                 </fieldset>
               </div>
             </div>
@@ -144,7 +149,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="createPatient()" data-dismiss="modal">Add Patient</button>
+          <button type="submit" class="btn btn-primary" (click)="createPatient()" id="createPatientBtn">Add Patient</button>
         </div>
       </div>
     </div>
@@ -181,9 +186,9 @@
                 <p><b>NRIC:</b> {{ patient.nric }}</p>
               </div>
   
-              <!-- <div class="col">
+              <div class="col">
                 <p><b>Gender:</b> {{ patient.gender }}</p>
-              </div> -->
+              </div>
             </div>
   
             <div class="row rowspacing">
@@ -192,16 +197,16 @@
               </div>
             </div> 
                   
-            <!-- <div class="row rowspacing">
+            <div class="row rowspacing">
               <div class="col">
-                <p><b>D.O.B:</b> {{patient.dob }}</p>
+                <p><b>D.O.B:</b> {{ patient.dob | date: 'dd/MM/yyyy' }}</p>
               </div>
-            </div> -->
+            </div>
   
             <div class="row rowspacing">
-              <!-- <div class="col">
+              <div class="col">
                 <p><b>Nationality:</b> {{ patient.nationality }}</p>
-              </div> -->
+              </div>
 
               <div class="col">
                 <p><b>Contact No:</b> {{ patient.contactNo }}</p>
@@ -278,9 +283,9 @@
                 <p><b>NRIC:</b> {{ patient.nric }}</p>
               </div>
   
-              <!-- <div class="col">
+              <div class="col">
                 <p><b>Gender:</b> {{ patient.gender }}</p>
-              </div> -->
+              </div>
             </div>
   
             <div class="row rowspacing">
@@ -289,16 +294,16 @@
               </div>
             </div> 
                   
-            <!-- <div class="row rowspacing">
+            <div class="row rowspacing">
               <div class="col">
-                <p><b>D.O.B:</b> {{patient.dob }}</p>
+                <p><b>D.O.B:</b> {{ patient.dob | date: 'dd/MM/yyyy' }}</p>
               </div>
-            </div> -->
+            </div>
   
             <div class="row rowspacing">
-              <!-- <div class="col">
+              <div class="col">
                 <p><b>Nationality:</b> {{ patient.nationality }}</p>
-              </div> -->
+              </div>
 
               <div class="col">
                 <p><b>Contact No:</b> {{ patient.contactNo }}</p>

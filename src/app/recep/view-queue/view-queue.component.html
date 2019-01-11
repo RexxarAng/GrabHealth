@@ -6,7 +6,7 @@
   <div class="row" style="margin-bottom: 4%;">
     <div class="col displayCol" id="currentQueueNo" style="margin-right: 6%;">
       <h4><b>Current No.</b></h4>
-      <button type="button" class="btn" data-toggle="modal" data-target="#viewQueuePatientDetailModal">
+      <button type="button" class="btn" data-toggle="modal" data-target="#viewCurrentQueueDetailModal">
         <p style="font-size: 18px; margin: 0;">001</p>
       </button>
     </div>
@@ -48,12 +48,13 @@
 </div>
 
 
-<!--View Queue (Patient Details Modal)-->
+<!--View Current Queue (Patient Details Modal)-->
 <div>
-  <div class="modal fade" id="viewQueuePatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewQueuePatientDetailModal" aria-hidden="true">
+  <div class="modal fade" id="viewCurrentQueueDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewCurrentQueueDetailModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
+          <h5 class="modal-title" id="viewCurrentQueueDetailModalLabel">Current Number</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -72,8 +73,8 @@
             <tbody>
               <tr>
                 <td>001</td>
-                <td>Jake Peralta</td>
-                <td>91234567</td>
+                <td>{{ patient.firstName }} <span>{{ patient.lastName }}</span></td>
+                <td>{{ patient.contactNo }}</td>
               </tr>
             </tbody>
           </table>
@@ -82,3 +83,40 @@
     </div>
   </div>
 </div>
+
+
+<!--View Waiting Queue (Patient Details Modal)-->
+<div>
+    <div class="modal fade" id="viewWaitingQueueDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewWaitingQueueDetailModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewWaitingQueueDetailModalLabel">Current Number</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Queue No.</th>
+                  <th>Patient Name</th>
+                  <th>Contact No.</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr>
+                  <td>001</td>
+                  <td>{{ patient.firstName }} <span>{{ patient.lastName }}</span></td>
+                  <td>{{ patient.contactNo }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

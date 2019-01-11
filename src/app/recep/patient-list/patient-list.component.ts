@@ -4,6 +4,8 @@ import { ReceptionistService } from '../../services/receptionist.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ValidateService } from '../../services/validate.service';
+
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
@@ -11,18 +13,24 @@ import { Router } from '@angular/router';
 })
 
 export class PatientListComponent implements OnInit {
-  patient:any;
+  patient: any;
   patientlist: Array<any>;
   firstName: '';
   lastName: '';
   address: '';
   contactNo: '';
-  nric: ''
+  nric: '';
+  dob: '';
+  nationality: '';
+  gender: '';
+
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private validateService: ValidateService,
   ) {
 
     $(function(){
@@ -85,7 +93,7 @@ export class PatientListComponent implements OnInit {
     this.receptionistService.getPatients().subscribe(
       res=>{
         if(!['success']){
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
         }
         this.patientlist = res['patients'];
       },
@@ -101,16 +109,38 @@ export class PatientListComponent implements OnInit {
       lastName: this.lastName,
       address: this.address,
       nric: this.nric,
-      contactNo: this.contactNo
+      contactNo: this.contactNo,
+      nationality: this.nationality,
+      dob: this.dob,
+      gender: this.gender
     }
+
+    // Required fields
+    if(!this.validateService.validatePatientRegistration(patient)) {
+      this.flashMessagesService.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate First Name
+    if(!this.validateService.validateFirstName(patient.firstName)){
+      this.flashMessagesService.show('Please enter a valid first name', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.firstName == ''){
+      this.flashMessagesService.show('Please enter first name', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
 
     this.receptionistService.createPatient(patient).subscribe(
       res=>{
         if(res['success']){
           this.getPatients();
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 5000});
+                  
         } else {
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
         }
         // if(res['unauthenticated']){
         //   this.authService.logout();
@@ -119,7 +149,9 @@ export class PatientListComponent implements OnInit {
       err => {
 
       }
-    )
+    )    
+
   }
+
 
 }

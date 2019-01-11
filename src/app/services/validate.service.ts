@@ -91,4 +91,21 @@ export class ValidateService {
         }
       }
   }
+
+  validatePatientRegistration(user) {
+    if (user.firstName.length === '' || user.lastName.length === '' || user.nric.length === '' || user.gender.length === '' || user.address.length === '' || user.dob.length === '' || user.nationality.length === '' || user.contactNo.length === '' ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateFirstName(firstName) {
+    if (firstName.length < 8 || firstName === '' ) {
+        return false;
+    } else {
+      return true;
+    }
+  }
+
 }
