@@ -17,8 +17,7 @@ export class AuthService {
     noAuthHeader = { headers: new HttpHeaders({"NoAuth": "true"}) };
 
     //Admin login 
-    loginAdmin(credentials, role){
-        credentials.role = role;
+    loginAdmin(credentials){
         return this.http.post('http://localhost:4560/admin/authenticate', credentials, this.noAuthHeader);
     }
     //Doctor/Receptionist/Manager login
