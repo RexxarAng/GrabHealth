@@ -158,7 +158,7 @@ export class MainLoginComponent implements OnInit {
       return false;
     }
 
-    this.authService.loginAdmin(credentials).subscribe(
+    this.authService.loginAdmin(credentials, 'Admin').subscribe(
       res => {
         if(res['success']){
           var user = res['user'];

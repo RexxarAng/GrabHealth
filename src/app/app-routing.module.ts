@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'receptionist/search', component: SearchComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/view-queue', component: ViewQueueComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent, canActivate:[AuthGuard]},
-  { path: 'manager/clinic-team', component: TeamComponent},
+  { path: 'manager/clinic-team', component: TeamComponent, canActivate:[AuthGuard]},
   { path: 'doctor/doctor-main', component: DoctorMainComponent },
   { path: 'doctor/next-patient', component: NextPatientComponent },
   { path: 'doctor/view-patient-details', component: ViewPatientDetailsComponent },
