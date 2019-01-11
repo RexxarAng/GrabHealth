@@ -34,5 +34,16 @@ export class ManagerService {
 
     }
 
+    addMedicine(medicine){
+        return this.http.post('http://localhost:4560/manager/add/medicine', medicine);
+    }
+
+    removeMedicine(medicine){
+        return this.http.post('http://localhost:4560/manager/remove/medicine', medicine);
+    }
+    getMedicineList(){
+        return this.http.get('http://localhost:4560/manager/medicineList');
+    }
+
 
 }
