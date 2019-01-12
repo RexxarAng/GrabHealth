@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
                     this.flashMessagesService.show('You have successfully registered the clinic', { cssClass: 'alert-success', timeout: 3000});
                 } else {
                     if(!res['authenticated']){
-                        this.authService.unAuthenticated(res['msg']);
+                        this.authService.unAuthenticated();
                         return false;
                     }
                     this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});

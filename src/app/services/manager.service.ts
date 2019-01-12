@@ -21,5 +21,29 @@ export class ManagerService {
         return this.http.get('http://localhost:4560/manager/clinic/team');
     }
 
+    editReceptionist(receptionist) {
+        return this.http.post('http://localhost:4560/manager/edit/receptionist', receptionist);
+    }
+
+    editDoctor(doctor) {
+        return this.http.post('http://localhost:4560/manager/edit/doctor', doctor);
+    }
+
+    removeReceptionist(nric) {
+        return this.http.post('http://localhost:4560/manager/remove/receptionist', nric);
+
+    }
+
+    addMedicine(medicine){
+        return this.http.post('http://localhost:4560/manager/add/medicine', medicine);
+    }
+
+    removeMedicine(medicine){
+        return this.http.post('http://localhost:4560/manager/remove/medicine', medicine);
+    }
+    getMedicineList(){
+        return this.http.get('http://localhost:4560/manager/medicineList');
+    }
+
 
 }

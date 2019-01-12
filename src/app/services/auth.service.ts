@@ -38,8 +38,8 @@ export class AuthService {
     deleteToken(){
         sessionStorage.clear();
     }
-    unAuthenticated(msg){
-        this.flashMessagesService.show(msg, { cssClass: 'alert-danger', timeout: 3000});
+    unAuthenticated(){
+        this.flashMessagesService.show('unauthenticated access', { cssClass: 'alert-danger', timeout: 3000});
         this.router.navigateByUrl('/login');
         this.deleteToken();
     }
