@@ -92,8 +92,23 @@ export class PatientListComponent implements OnInit {
 
   addPatientToQueue(patient){
     this.patient = patient;
-    $("#addToQueueSuccessAlert").hide().show('medium');
+
+    this.receptionistService.addPatientToQueue(patient).subscribe(
+      res=>{
+        if(res['success']){
+          this.getPatients();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 5000});
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-success', timeout: 3000});
+      }
+    )    
   }
+
+  
   
   getPatients(){
     this.receptionistService.getPatients().subscribe(
@@ -122,6 +137,7 @@ export class PatientListComponent implements OnInit {
       gender: this.gender
     }
     console.log(patient);
+
 
     // Required fields
     if(!this.validateService.validatePatientRegistration(patient)) {
@@ -211,6 +227,7 @@ export class PatientListComponent implements OnInit {
     )    
 
   }
+
 
 
 }
