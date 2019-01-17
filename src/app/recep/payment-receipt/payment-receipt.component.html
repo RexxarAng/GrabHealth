@@ -4,11 +4,11 @@
     <div class="col text-left" id="clinicDetails" style="margin-right: 20%; padding-top: 2%; margin-top: 4%;">
       <!--<img id="clinicLogo" src="./assets/img/clinicLogo.png"/>-->
       <div>
-        <p>Clinic Name</p>
+        <p id="clinicName"> {{ clinic.clinicName }}</p>
       </div>
 
       <div>
-        <p>Clinic Address</p>
+        <p id="clinicAddress">{{ clinic.clinicAddress }}</p>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
         <h4>Receipt</h4>
       </div>
       <div class="text-left" style="padding-top: 1%;">
-        <p><b>Number:</b> 0001</p>
+        <p><b>Number:</b> {{ payment.receiptNo }}</p>
       </div>
       <div class="text-left">
         <p><b>Date:</b> {{ currentDate | date: 'dd MMMM yyyy' }}</p>
@@ -30,17 +30,17 @@
       <form>
         <div class="row text-left">
           <div class="col">
-            <p><b>Patient Name:</b> Jake Peralta</p>
+            <p><b>Patient Name:</b>  patient.firstName  <span> patient.lastName </span></p>
           </div>
 
           <div class="col">
-            <p><b>Doctor:</b> Dr Oreo</p>
+            <p><b>Doctor:</b> Dr. doctor.doctorName</p>
           </div>
         </div>
 
         <div class="row text-left">
           <div class="col">
-            <p><b>Address:</b> Blk 123 Happy Street #321123</p>
+            <p><b>Address:</b>  patient.address </p>
           </div>
 
           <div class="col">
@@ -75,21 +75,15 @@
           <td>
             <div class="form-group form-inline" style="float: right; padding-right: 2%;">
               <label for="consultationAmt" style="padding-right: 5px;">$ </label>
-              <input type="number" class="form-control" id="consultationAmt" style="width: 100px;">
+              <input type="number" class="form-control" id="consultationAmt" style="width: 100px;" [(ngModel)]="consultationAmt" name="consultationAmt">
             </div>
           </td>
         </tr>
 
         <tr>
-          <td class="colspacing text-left" id="medName">Paracetamol (10 tabs)</td>
-          <td class="colspacing" id="medQty">1</td>
-          <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;">$6.00</td>
-        </tr>
-
-        <tr>
-          <td class="colspacing text-left" id="medName">Cough (10 tabs)</td>
-          <td class="colspacing" id="medQty">1</td>
-          <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;">$6.00</td>
+          <td class="colspacing text-left" id="medName"> med.medName </td>
+          <td class="colspacing" id="medQty"> med.medQty </td>
+          <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> med.medAmt </td>
         </tr>
       </tbody>
 
@@ -97,12 +91,12 @@
       <tbody>
         <tr class="table-active">
           <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
-          <td class="colspacing text-right" id="subTtl" style="padding-right: 2%;">$36.00</td>
+          <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> payment.subTtl </td>
         </tr>
 
         <tr class="table-active">
           <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
-          <td class="colspacing text-right" id="gst" style="padding-right: 2%;">$2.52</td>
+          <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> payment.gst </td>
         </tr>
 
         <tr class="table-active">
@@ -110,14 +104,14 @@
           <td>
             <div class="form-group form-inline" style="float: right; padding-right: 2%;">
               <label for="disc" style="padding-right: 5px;">$ </label>
-              <input type="number" class="form-control" id="disc" style="width: 100px;">
+              <input type="number" class="form-control" id="disc" style="width: 100px;" [(ngModel)]="disc" name="disc">
             </div>
           </td>
         </tr>
 
         <tr class="table-active">
           <td colspan="2" class="colspacing text-left"><b>Total Due</b></td>
-          <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;">$38.52</td>
+          <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> payment.totalDue </td>
         </tr>
       </tbody>
     </table>
