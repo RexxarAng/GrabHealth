@@ -17,6 +17,10 @@ export class ReceptionistService {
       return this.http.get('http://localhost:4560/receptionist/patient-list');
     }
 
+    editPatientInfo(patient){
+      return this.http.post('http://localhost:4560/receptionist/editPatientInfo', patient);
+    }
+
     addPatientToQueue(patient){
       return this.http.post('http://localhost:4000/GrabHealthWeb/addPatientToQueue', patient);
     }
