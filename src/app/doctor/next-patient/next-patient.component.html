@@ -8,24 +8,51 @@
       </tr>
     </thead>
 
-    <thead>
-      
+ 
+        <!-- <th scope="col"> -->
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="colspacing">Name</th>
+              <th scope="col" class="colspacing">DOB</th>
+              <th scope="col" class="colspacing">NRIC</th>
+              <th scope="col" class="colspacing">Medical History</th>
+              <th scope="col" class="colspacing">Allergies</th>
+              <th scope="col" class="colspacing">Reason for visit</th>
+              <th scope="col" class="colspacing">View</th>
+
+            </tr>
+          </thead>
+         
+          <tbody>
+            <tr>
+              <td>Chloe</td>
+              <td>1/1/12</td>
+              <td>S12345678B</td>
+              <td>NIL</td>
+              <td>NIL</td>
+              <td>
+                <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add Patient's Reason For Visit">
+                  <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal">
+                    <i class="fa fa-plus-circle fa-2x" id="addReasonForVisit"></i>
+                  </button>
+                </span>
+              </td>
+              <td>
+                <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient's Details">
+                  <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewNextPatientDetailModal" (click)="viewNextPatientDetail(patient)">
+                    <i class="fa fa-eye fa-2x" id="viewNextPatientDetail"></i>
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+         
         <th scope="col">
-          <form class="form-inline my-2 my-lg-0">
-            Name: Chloe<br/>
-            DOB: 07/12/1998<br />
-            NRIC: S9812345A<br />
-            Medical History: N/A<br />
-            Allergies: N/A<br />
-          </form>
-        </th>  
-        <th scope="col">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#dispenseMedicineModal">
+            <i class="fa fa-plus-circle fa-2x" id="dispenseMedicine"></i>
+          </button>
         </th>
-    </thead>
+  
     <thead class="thead-light">
       <tr>
         <th scope="col" class="colspacing">Medicine Name</th>
@@ -39,8 +66,8 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td class="colspacing">Aspirin</td>
+      <tr *ngFor="let medicine of medicineList">
+        <td class="colspacing">{{ medicine.name }}</td>
         <td class="colspacing">1/day</td>
         <td class="colspacing">Take after food. Stop if feeling drowsy.</td>
         <td class="colspacing">325 mg</td>
@@ -59,3 +86,117 @@
     </button>
   </table>
 </div>
+
+<!-- Add Patient's Reason For Visit Modal -->
+<div>
+  <div class="modal fade" id="addReasonForVisitModal" tabindex="-1" role="dialog" aria-labelledby="addReasonForVisitModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReasonForVisitModalLabel">Add Reason for Visit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <div class="modal-body">
+        <div class="row rowspacing">
+          <div class="col">
+            <fieldset>
+              <input type="text" class="form-control" name="reasonForVisit" [(ngModel)]="reasonForVisit" id="reasonForVisitId" placeholder="Reason For Visit"
+                required="required" />
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="onAddReasonForVisit()" data-dismiss="modal">Add Reason For Visit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- View Patient Details -->
+<div>
+  <div class="modal fade" id="viewNextPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewNextPatientDetailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewNextPatientDetailModalLabel">View Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+  <div class="modal-body">
+    <div class="row rowspacing">
+      <div class="col">
+        <p *ngIf="patient"><b>Reason for Visit:</b> {{ patient.reasonForVisit }}</p>
+
+      </div>
+    </div>
+  </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Dispense Medicine Modal-->
+<div>
+  <div class="modal fade" id="dispenseMedicineModal" tabindex="-1" role="dialog" aria-labelledby="dispenseMedicineModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title" id="dispenseMedicineModalLabel">Dispense Medicine</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngFor="let medicine of medicineList">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <p><b>Medicine Name:</b> {{ medicine.name }}</p>
+              </div>
+
+              <div class="col">
+                <p><b>Price:</b> {{ medicine.price }}</p>
+              </div>
+            
+
+            <div class="col">
+              <p><b>Category:</b> {{ medicine.category }}</p>
+            </div>
+            
+            <div class="col">
+              <p><b>Effect:</b> {{ medicine.effects }}</p>
+            </div>
+          </div> 
+          </form>
+        </div> 
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+
