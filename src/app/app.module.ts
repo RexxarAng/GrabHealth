@@ -38,6 +38,7 @@ import { NextPatientComponent } from './doctor/next-patient/next-patient.compone
 import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-patient-details.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
+import { GrdFilterPipe } from './grd-filter.pipe';
 
 
 export function tokenGetter() {
@@ -67,6 +68,7 @@ export function tokenGetter() {
     ViewPatientDetailsComponent,
     FileSelectDirective,
     MedicinelistComponent,
+    GrdFilterPipe
 
   ],
   imports: [
