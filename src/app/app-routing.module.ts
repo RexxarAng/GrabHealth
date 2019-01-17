@@ -14,7 +14,7 @@ import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component'
 import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
 import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-patient-details.component';
 import { RegistrationComponent } from './doctor/registration/registration.component';
-
+import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
 import { TeamComponent } from './manager/team/team.component';
 
 const routes: Routes = [
@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'receptionist/view-queue', component: ViewQueueComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent, canActivate:[AuthGuard]},
   { path: 'manager/clinic-team', component: TeamComponent, canActivate:[AuthGuard]},
+  { path: 'manager/medicine-list', component: MedicinelistComponent, canActivate:[AuthGuard]},
   { path: 'doctor/doctor-main', component: DoctorMainComponent },
   { path: 'doctor/next-patient', component: NextPatientComponent },
   { path: 'doctor/view-patient-details', component: ViewPatientDetailsComponent },

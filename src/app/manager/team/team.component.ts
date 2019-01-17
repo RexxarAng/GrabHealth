@@ -59,7 +59,7 @@ export class TeamComponent implements OnInit {
           this.doctors = res['doctors'];
         } else {
           if(!res['authenticated']){
-            this.authService.unAuthenticated(res['msg']);
+            this.authService.unAuthenticated();
             return false;
           }
         }
@@ -106,7 +106,7 @@ export class TeamComponent implements OnInit {
           this.flashMessagesService.show('You have successfully registered the receptionist', { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(!res['authenticated']){
-            this.authService.unAuthenticated(res['msg']);
+            this.authService.unAuthenticated();
             return false;
           }
           this.flashMessagesService.show("Receptionist is already registered", { cssClass: 'alert-danger', timeout: 3000});
@@ -146,7 +146,7 @@ export class TeamComponent implements OnInit {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(!res['authenticated']){
-            this.authService.unAuthenticated(res['msg']);
+            this.authService.unAuthenticated();
             return false;
           }
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
@@ -173,7 +173,7 @@ export class TeamComponent implements OnInit {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(!res['authenticated']){
-            this.authService.unAuthenticated(res['msg']);
+            this.authService.unAuthenticated();
             return false;
           }
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
@@ -214,7 +214,7 @@ export class TeamComponent implements OnInit {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(!res['authenticated']){
-            this.authService.unAuthenticated(res['msg']);
+            this.authService.unAuthenticated();
             return false;
           }
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
