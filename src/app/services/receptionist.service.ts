@@ -22,7 +22,7 @@ export class ReceptionistService {
     }
 
     addPatientToQueue(patient){
-      return this.http.post('http://localhost:4000/GrabHealthWeb/addPatientToQueue', patient);
+      return this.http.post('http://localhost:4560/receptionist/addPatientToQueue', patient);
     }
 
 }

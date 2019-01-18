@@ -15,6 +15,7 @@ import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-
 import { RegistrationComponent } from './doctor/registration/registration.component';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
 import { TeamComponent } from './manager/team/team.component';
+import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
@@ -31,9 +32,8 @@ const routes: Routes = [
   { path: 'doctor/doctor-main', component: DoctorMainComponent },
   { path: 'doctor/next-patient', component: NextPatientComponent },
   { path: 'doctor/view-patient-details', component: ViewPatientDetailsComponent },
-  { path: 'doctor/registration', component: RegistrationComponent }
-
-
+  { path: 'doctor/registration', component: RegistrationComponent },
+  { path: 'receptionist/pending-approval', component: PendingApprovalComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
