@@ -286,8 +286,8 @@ export class PatientListComponent implements OnInit {
     this.receptionistService.createPatient(patient).subscribe(
       res=>{
         if(res['success']){
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
           this.getPatients();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(res['unauthenticated']){
             this.authService.unAuthenticated();
