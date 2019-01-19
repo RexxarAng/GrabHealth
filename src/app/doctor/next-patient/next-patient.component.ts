@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from 'src/app/services/doctor.service';
+import { ValidateService } from 'src/app/services/validate.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-next-patient',
@@ -6,10 +11,95 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./next-patient.component.css']
 })
 export class NextPatientComponent implements OnInit {
+  // Medicine List 
+  medicineList: Array<any>;
+  medicine: any;
+  effects: '';
+  name: '';
+  category: '';
+  price: Number;
 
-  constructor() { }
+  // Patient Information 
+  patient:any; 
+  reasonForVisit = ''; 
+
+
+  constructor(
+    private DoctorService: DoctorService,
+    private validateService: ValidateService,
+    private flashMessagesService: FlashMessagesService,
+    private authService: AuthService
+
+
+  ) {
+    
+   }
 
   ngOnInit() {
+    this.getDispensedMedicine();
   }
 
-}
+  getDispensedMedicine() {
+    this.DoctorService.getMedicineList().subscribe(
+      res => {
+        let medicineList = res['medicineList'];
+        this.medicineList = medicineList.list;
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  viewDispensedMedicine(medicine) {
+    this.medicine = medicine; 
+  }
+
+  viewNextPatientDetail(patient) {
+    this.patient = patient; 
+  }
+
+  editReasonOfVisitDetail(patient) {
+    this.reasonForVisit = patient.reasonForVisit; 
+  }
+
+  getReasonForVisit() {
+    this.DoctorService.addReasonForVisit(this.reasonForVisit).subscribe(
+      res => {
+        let reasonForVisit = res['reasonForVisit'];
+        this.reasonForVisit = reasonForVisit.list;
+      },
+      err => {
+        console.log(err);
+      });
+  }
+  
+
+  onAddReasonForVisit() {
+    if (this.reasonForVisit === '') {
+      this.flashMessagesService.show('Please fill in all the fields', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+    let patient = {
+      "reasonForVisit": this.reasonForVisit
+    }
+
+    this.DoctorService.addReasonForVisit(patient).subscribe(res => {
+      if (res['success']) {
+        this.getReasonForVisit();
+        this.flashMessagesService.show('Reason for Visit added', { cssClass: 'alert-success', timeout: 3000 });
+      } else {
+        if (res['unauthenticated']) {
+          this.authService.unAuthenticated();
+        }
+        this.flashMessagesService.show(res["msg"], { cssClass: 'alert-danger', timeout: 3000 });
+      }
+    },
+      err => {
+
+      });
+
+  }
+  }
+
+
+
