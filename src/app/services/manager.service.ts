@@ -31,6 +31,10 @@ export class ManagerService {
 
     removeReceptionist(nric) {
         return this.http.post('http://localhost:4560/manager/remove/receptionist', nric);
+    }
+
+    removeDoctor(nric) {
+        return this.http.post('http://localhost:4560/manager/remove/doctor', nric);
 
     }
 

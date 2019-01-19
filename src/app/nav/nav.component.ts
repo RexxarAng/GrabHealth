@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
   currentDate = Date.now();
   datePolling: any;
 
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -27,6 +28,7 @@ export class NavComponent implements OnInit {
     this.menuDisplay = false;
     this.datePolling = setInterval(() =>
       this.loadDate(),2000);
+
   }
 
   loadDate(){
@@ -34,8 +36,6 @@ export class NavComponent implements OnInit {
   }
   
   logout(){
-    this.router.navigateByUrl('/login');
-    this.authService.deleteToken();
-
+    this.authService.logout();
   }
 }
