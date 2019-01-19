@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchListComponent } from './search-list.component';
+import { PendingApprovalComponent } from './pending-approval.component';
 
-describe('SearchListComponent', () => {
-  let component: SearchListComponent;
-  let fixture: ComponentFixture<SearchListComponent>;
+describe('PendingApprovalComponent', () => {
+  let component: PendingApprovalComponent;
+  let fixture: ComponentFixture<PendingApprovalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchListComponent ]
+      declarations: [ PendingApprovalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchListComponent);
+    fixture = TestBed.createComponent(PendingApprovalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

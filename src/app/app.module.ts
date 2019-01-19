@@ -23,12 +23,10 @@ import { ValidateService } from './services/validate.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
-import { SearchComponent } from './recep/search/search.component';
 import { TeamComponent } from './manager/team/team.component';
 import { ManagerService } from './services/manager.service';
 import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
-import { SearchListComponent } from './recep/search-list/search-list.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
 import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
@@ -39,6 +37,7 @@ import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-
 import { FileSelectDirective } from 'ng2-file-upload';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
 import { GrdFilterPipe } from './grd-filter.pipe';
+import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 
 
 export function tokenGetter() {
@@ -56,10 +55,7 @@ export function tokenGetter() {
     PaymentComponent,
     RegisterComponent,
     PatientListComponent,
-    SearchComponent,
     TeamComponent,
-    SearchComponent,
-    SearchListComponent,
     ViewQueueComponent,
     PaymentReceiptComponent,
     MainLoginComponent,
@@ -69,6 +65,7 @@ export function tokenGetter() {
     FileSelectDirective,
     MedicinelistComponent,
     GrdFilterPipe
+    PendingApprovalComponent,
 
   ],
   imports: [

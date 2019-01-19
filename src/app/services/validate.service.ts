@@ -139,8 +139,11 @@ export class ValidateService {
   }
 
   validateNationality(nationality) {
-    var re = /[A-Z||a-z]{4,30}/;
-    return re.test(nationality);
+    if (nationality.length === 0 || nationality.length === '' || nationality.select === '') {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }
