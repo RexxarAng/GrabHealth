@@ -32,7 +32,7 @@ export class PatientListComponent implements OnInit {
   editPNationality: '';
   editPContactNo: '';
   
-  nricSearch: any;
+
   queuelist: Array<any>;
 
   constructor(
@@ -369,13 +369,13 @@ export class PatientListComponent implements OnInit {
   }
 
 
-  removeFromQueue(patient) {
+  /*removeFromQueue(patient) {
     this.patient = patient;
   }
 
   onRemoveFromQueue(){
 
-  }
+  }*/
 
 
 }
