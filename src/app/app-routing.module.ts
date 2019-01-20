@@ -2,7 +2,6 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: 'main-login', component: MainLoginComponent},
   { path: 'receptionist/payment', component: PaymentComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/patient-list', component: PatientListComponent, canActivate:[AuthGuard]},
-  { path: 'clinic/registration', component: RegisterComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/view-queue', component: ViewQueueComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent, canActivate:[AuthGuard]},
   { path: 'manager/clinic-team', component: TeamComponent, canActivate:[AuthGuard]},

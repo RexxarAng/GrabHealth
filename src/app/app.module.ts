@@ -14,7 +14,6 @@ import { RegistrationComponent } from './doctor/registration/registration.compon
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentComponent } from './recep/payment/payment.component';
-import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminService } from './services/admin.service';
 import { AuthService } from './services/auth.service';
@@ -36,6 +35,7 @@ import { NextPatientComponent } from './doctor/next-patient/next-patient.compone
 import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-patient-details.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
+import { GrdFilterPipe } from './grd-filter.pipe';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 
 
@@ -52,7 +52,6 @@ export function tokenGetter() {
     RegistrationComponent,
     NavComponent,
     PaymentComponent,
-    RegisterComponent,
     PatientListComponent,
     TeamComponent,
     ViewQueueComponent,
@@ -63,6 +62,7 @@ export function tokenGetter() {
     ViewPatientDetailsComponent,
     FileSelectDirective,
     MedicinelistComponent,
+    GrdFilterPipe,
     PendingApprovalComponent,
 
   ],

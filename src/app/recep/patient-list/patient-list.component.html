@@ -16,10 +16,10 @@
           </button>
         </th>
         <th scope="col">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <!-- <form class="form-inline my-2 my-lg-0"> -->
+            <input [(ngModel)]="nricSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form>
+            <!-- </form> -->
         </th>
       </tr>
     </thead>
@@ -38,7 +38,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of patientlist">
+      <tr *ngFor="let patient of patientlist | grdFilter: {nric: nricSearch}">
         <td class="colspacing">{{ patient.firstName }}</td>
         <td class="colspacing">{{ patient.lastName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>

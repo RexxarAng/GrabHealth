@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPatientDetailsComponent implements OnInit {
 
-  constructor() { }
+  patient: any;
+  patientlist: Array<any>;
+  firstName: '';
+  lastName: '';
+  nric: '';
+  dob: '';
+  medicalHistory: '';
+  allergies: '';
+  medicineName: '';
+  frequency: '';
+  instructions: '';
+  dosage:'';
+  use: '';
+  mc: '';
+
+
+  constructor(
+
+  ) { }
 
   ngOnInit() {
+   
   }
 
 }
