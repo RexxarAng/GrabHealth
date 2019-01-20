@@ -32,12 +32,12 @@ export class PendingApprovalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPatients();
+    //this.getPatients();
   }
 
 
   // View patient info
-  viewPatientInfo() {
+  /*viewPatientInfo() {
     let patient = {
       firstName: this.firstName,
       lastName: this.lastName,
@@ -87,10 +87,10 @@ export class PendingApprovalComponent implements OnInit {
       
       }
     )
-  }
+  }*/
 
   // Approve Appointment
-  onApproveAppointment(){
+  /*onApproveAppointment(){
 
   }
 
@@ -98,6 +98,6 @@ export class PendingApprovalComponent implements OnInit {
   // Reject Appointment
   onRejectAppointment(){
 
-  }
+  }*/
 
 }
