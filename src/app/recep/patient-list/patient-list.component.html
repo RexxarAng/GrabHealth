@@ -9,6 +9,7 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
         <th scope="col">
           <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addNewPatientModal">
             <i class="fa fa-plus-circle fa-2x" id="addNewPatient"></i>
@@ -29,6 +30,7 @@
         <th scope="col" class="colspacing">Last Name</th>
         <th scope="col" class="colspacing">NRIC/Passport No.</th>
         <th scope="col" class="colspacing">Contact No.</th>
+        <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
@@ -57,8 +59,15 @@
         </td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add patient to queue">
-            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueSuccessModal" (click)="addPatientToQueue(patient)">
-              <i class="fa fa-plus fa-2x" id="addPatientToQueue"></i>
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueModal" (click)="addToQueue(patient)">
+              <i class="fa fa-plus fa-2x" id="addToQueue"></i>
+            </button>
+          </span>
+        </td>
+        <td class="colspacing">
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove patient from queue">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeFromQueueModal" (click)="removeFromQueue(patient)">
+              <i class="fa fa-minus fa-2x" id="removeFromQueue"></i>
             </button>
           </span>
         </td>
@@ -772,7 +781,7 @@
 
 <!--Add Patient To Queue Modal-->
 <div>
-  <div class="modal fade" id="addToQueueSuccessModal" tabindex="-1" role="dialog" aria-labelledby="addToQueueSuccessModal" aria-hidden="true">    
+  <div class="modal fade" id="addToQueueModal" tabindex="-1" role="dialog" aria-labelledby="addToQueueModal" aria-hidden="true">    
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -793,7 +802,7 @@
             </div>
 
             <div class="row" style="padding-left: 4%;">
-              <p><strong>Queue Number:</strong>  clinic.queueNo </p>
+              <p><strong>Queue Number:</strong> {{ patient.queueNo }}</p>
             </div>
 
           </form>
@@ -806,3 +815,38 @@
     </div>
   </div>
 </div>
+
+
+<!--Remove Patient From Queue Modal-->
+<div>
+    <div class="modal fade" id="removeFromQueueModal" tabindex="-1" role="dialog" aria-labelledby="removeFromQueueModal" aria-hidden="true">    
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="removeFromQueueTitle">Remove Patient From Queue</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  
+          <div class="modal-body">
+            <form>
+              <div class="row" style="padding-left: 4%;">
+                <p>Are you sure you want to remove
+                  <b> {{ patient.firstName }} </b>
+                  <b>{{ patient.lastName }} </b>
+                  from the queue?
+                </p>
+              </div>
+  
+            </form>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" (click)="onRemoveFromQueue()" data-dismiss="modal">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

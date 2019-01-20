@@ -23,8 +23,19 @@ export class ReceptionistService {
       return this.http.post(this.url + '/receptionist/editPatientInfo', patient);
     }
 
-    addPatientToQueue(patient){
+    onAddToQueue(patient){
       return this.http.post(this.url + '/receptionist/addPatientToQueue', patient);
     }
 
+    getQueue(){
+        return this.http.get('http://localhost:4560/receptionist/queue-list');
+    }  
+
+    onRemoveFromQueue(nric){
+      return this.http.post('http://localhost:4560/receptionist/', nric);
+    }
+
+    viewPatientInfo(patient){
+      return this.http.post('http://localhost:4560/receptionist/viewPendingApproval', patient);
+    }
 }

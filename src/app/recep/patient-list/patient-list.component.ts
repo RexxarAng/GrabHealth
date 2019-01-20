@@ -31,7 +31,9 @@ export class PatientListComponent implements OnInit {
   editPDOB: '';
   editPNationality: '';
   editPContactNo: '';
+  
 
+  patientQueue: Array<any>;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -82,6 +84,7 @@ export class PatientListComponent implements OnInit {
 
   ngOnInit() {
     this.getPatients();
+    this.getQueue();
   }
 
   viewPatientInfo(patient){
@@ -179,8 +182,7 @@ export class PatientListComponent implements OnInit {
         console.log(res);
         if(!res['success']){
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        }
-         
+        }        
         this.patientlist = res['patients'];
       },
       err=>{
@@ -308,13 +310,41 @@ export class PatientListComponent implements OnInit {
   }
 
 
-  addPatientToQueue(patient){
-    this.patient = patient;
+  // Display patients in queue <TBC>
+  getQueue(){
+    this.receptionistService.getQueue().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        }    
+        this.patientQueue = res['patients'];
+      },
+      err=>{
+      
+      }
+    )
+  }
 
-    this.receptionistService.addPatientToQueue(patient).subscribe(
+  // Add patient to queue
+  onAddToQueue(){
+    let patient = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      address: this.address,
+      nric: this.nric,
+      contactNo: this.contactNo,
+      nationality: this.nationality,
+      dob: this.dob,
+      gender: this.gender,
+      email: this.email
+    }
+
+    this.receptionistService.onAddToQueue(patient).subscribe(
       res=>{
         if(res['success']){
-          this.getPatients();
+          console.log(res);
+          this.getQueue();
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(res['unauthenticated']){
@@ -322,12 +352,25 @@ export class PatientListComponent implements OnInit {
             return false;
           }
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getQueue();
         }
       },
       err => {
         this.flashMessagesService.show('Somewhere broke while attempting to add patient to queue!', { cssClass: 'alert-danger', timeout: 3000});
       }
     )    
+  }
+
+  addToQueue(patient) {
+    this.patient = patient;
+  }
+
+  removeFromQueue(patient) {
+    this.patient = patient;
+  }
+
+  onRemoveFromQueue(){
+
   }
 
 
