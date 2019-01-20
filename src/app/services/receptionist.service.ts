@@ -9,7 +9,7 @@ export class ReceptionistService {
   // private url = "/routes/comment";
     constructor(private http: HttpClient) {
     }
-    url = environment.url;
+    url = environment.clinicserverurl;
 
     createPatient(patient){
       return this.http.post(this.url + '/receptionist/createPatient', patient);

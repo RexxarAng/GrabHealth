@@ -164,37 +164,4 @@ export class MainLoginComponent implements OnInit {
   onScriptError() {
     console.log('Something went long when loading the Google reCAPTCHA')
   }
-
-  onAdminLogin() {
-    const credentials = {
-      email: this.aEmail,
-      password: this.aPassword
-    };
-
-    if (!this.validateService.validateEmail(credentials.email)) {
-      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
-    }
-
-    if (credentials.password == '') {
-      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
-    }
-
-    this.authService.loginAdmin(credentials).subscribe(
-      res => {
-        if(res['success']){
-          var user = res['user'];
-          this.authService.setToken(res['token'], user.role);
-          this.router.navigateByUrl('/clinic/registration');
-        } else {
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        } 
-      },
-      err => {
-        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
-        console.log(err);
-      }
-    );
-  }
 }

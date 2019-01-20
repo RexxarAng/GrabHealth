@@ -1,7 +1,6 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';

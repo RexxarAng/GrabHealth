@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  url: "http://localhost:4560"
+  clinicserverurl: "http://localhost:4560",
+  webserverurl:"http://localhost:4000"
+
 };
 
 /*
