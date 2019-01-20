@@ -14,7 +14,6 @@ import { RegistrationComponent } from './doctor/registration/registration.compon
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentComponent } from './recep/payment/payment.component';
-import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminService } from './services/admin.service';
 import { AuthService } from './services/auth.service';
@@ -53,7 +52,6 @@ export function tokenGetter() {
     RegistrationComponent,
     NavComponent,
     PaymentComponent,
-    RegisterComponent,
     PatientListComponent,
     TeamComponent,
     ViewQueueComponent,
