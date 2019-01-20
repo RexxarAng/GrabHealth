@@ -33,7 +33,7 @@ export class PatientListComponent implements OnInit {
   editPContactNo: '';
   
 
-  patientQueue: Array<any>;
+  queuelist: Array<any>;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -310,22 +310,6 @@ export class PatientListComponent implements OnInit {
   }
 
 
-  // Display patients in queue <TBC>
-  getQueue(){
-    this.receptionistService.getQueue().subscribe(
-      res=>{
-        console.log(res);
-        if(!res['success']){
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        }    
-        this.patientQueue = res['patients'];
-      },
-      err=>{
-      
-      }
-    )
-  }
-
   // Add patient to queue
   onAddToQueue(){
     let patient = {
@@ -351,6 +335,7 @@ export class PatientListComponent implements OnInit {
             this.authService.unAuthenticated();
             return false;
           }
+          console.log(res);
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
           this.getQueue();
         }
@@ -361,17 +346,36 @@ export class PatientListComponent implements OnInit {
     )    
   }
 
+
   addToQueue(patient) {
     this.patient = patient;
   }
+  
 
-  removeFromQueue(patient) {
+  // Display patients in queue <TBC>
+  getQueue(){
+    this.receptionistService.getQueue().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        }    
+        this.queuelist = res['queuelist'];
+      },
+      err=>{
+      
+      }
+    )
+  }
+
+
+  /*removeFromQueue(patient) {
     this.patient = patient;
   }
 
   onRemoveFromQueue(){
 
-  }
+  }*/
 
 
 }
