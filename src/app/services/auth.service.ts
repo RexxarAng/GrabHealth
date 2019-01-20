@@ -14,7 +14,7 @@ export class AuthService {
         private router: Router,
         private flashMessagesService: FlashMessagesService
         ) {}
-    url = environment.url;
+    url = environment.clinicserverurl;
 
     noAuthHeader = { headers: new HttpHeaders({"NoAuth": "true"}) };
 

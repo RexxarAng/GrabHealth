@@ -32,10 +32,11 @@ import { MainLoginComponent } from './main-login/main-login.component';
 import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
 import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
 import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-patient-details.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
 import { GrdFilterPipe } from './grd-filter.pipe';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
+import { RecaptchaModule } from 'angular-google-recaptcha';
 
 
 export function tokenGetter() {
@@ -58,7 +59,6 @@ export function tokenGetter() {
     DoctorMainComponent,
     NextPatientComponent,
     ViewPatientDetailsComponent,
-    FileSelectDirective,
     MedicinelistComponent,
     GrdFilterPipe,
     PendingApprovalComponent,
@@ -74,6 +74,7 @@ export function tokenGetter() {
     HttpModule,
     HttpClientModule,
     AngularMaterialModule,
+    FileUploadModule,
     NgbModule.forRoot(),
     FlashMessagesModule.forRoot(),
     JwtModule.forRoot({
@@ -83,7 +84,11 @@ export function tokenGetter() {
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
     }),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    RecaptchaModule.forRoot({
+      siteKey: '6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT',
+    }),
+    
 
 
   ],

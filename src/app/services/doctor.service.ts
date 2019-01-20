@@ -10,7 +10,7 @@ export class DoctorService {
   constructor(private http: HttpClient) {
     
   }
-  url = environment.url;
+  url = environment.clinicserverurl;
 
  getMedicineList(){
         return this.http.get(this.url + '/doctor/medicineList');
@@ -20,4 +20,9 @@ export class DoctorService {
   addReasonForVisit(patient) {
     return this.http.get(this.url + '/doctor/reasonForVisit', patient);
   }
+
+  getReasonForVisit() {
+    return this.http.get('http://localhost:4560/doctor/reasonForVisit');
+  }
+
 }

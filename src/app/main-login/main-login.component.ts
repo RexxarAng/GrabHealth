@@ -5,12 +5,14 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ValidateService } from '../services/validate.service';
 import 'rxjs/add/operator/map';
 
+
 @Component({
   selector: 'app-main-login',
   templateUrl: './main-login.component.html',
   styleUrls: ['./main-login.component.css']
 })
 export class MainLoginComponent implements OnInit {
+  myRecaptcha: boolean;
   login: string;
   mEmail: '';
   mPassword: '';
@@ -153,5 +155,13 @@ export class MainLoginComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!')
+  }
+
+  onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
   }
 }
