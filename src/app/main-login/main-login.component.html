@@ -1,9 +1,9 @@
 <form>
-  <div class="tab">
-      <button class="tablinks" (click)="onManager()" [ngClass]="{'active': managerLogin}">Clinic Manager</button>
-      <button class="tablinks" (click)="onReceptionist()" [ngClass]="{'active': receptionistLogin}" >Receptionist</button>
-      <button class="tablinks" (click)="onDoctor()" [ngClass]="{'active': doctorLogin}">Doctor</button>
-  </div>
+<div class="tab">
+  <button class="tablinks" (click)="onManager()" [ngClass]="{'active': managerLogin}">Clinic Manager</button>
+  <button class="tablinks" (click)="onReceptionist()" [ngClass]="{'active': receptionistLogin}">Receptionist</button>
+  <button class="tablinks" (click)="onDoctor()" [ngClass]="{'active': doctorLogin}">Doctor</button>
+</div>
 
   <!--CLINICMANAGER LOGIN-->
   <div id="ClinicManagerLoginForm" *ngIf="login === 'Manager'">
@@ -33,63 +33,56 @@
   </div>
 
   <!--RECEPTIONIST LOGIN-->
-  <div id="ReceptionistLoginForm" *ngIf="login === 'Receptionist'">
-    <div class="container">
-      <div>
-        <h1 class="form-heading">Receptionist Login Form</h1>
-        <div class="login-form">
-          <div class="main-div">
-            <div class="panel">
-              <h2>Receptionist Login</h2>
-              <p>Please enter your email and password</p>
+<div id="ReceptionistLoginForm" *ngIf="login === 'Receptionist'">
+  <div class="container">
+    <div>
+      <h1 class="form-heading">Receptionist Login Form</h1>
+      <div class="login-form">
+        <div class="main-div">
+          <div class="panel">
+            <h2>Receptionist Login</h2>
+            <p>Please enter your email and password</p>
+          </div>
+          <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="rEmail" placeholder="Email Address">
             </div>
-            <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
-              <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="rEmail" placeholder="Email Address">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
-                  placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
-              placeholder="Password">
-          </div>
-          <recaptcha [ngModel]="myRecaptcha" name="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
-          <div class="g-recaptcha" data-sitekey="6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT"></div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!--DOCTOR LOGIN-->
-  <div id="DoctorLoginForm" *ngIf="login === 'Doctor'">
-    <div class="container">
-      <div>
-        <h1 class="form-heading">Doctor Login Form</h1>
-        <div class="login-form">
-          <div class="main-div">
-            <div class="panel">
-              <h2>Doctor Login</h2>
-              <p>Please enter your email and password</p>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
+                placeholder="Password">
             </div>
-            <form id="DoctorLogin" (submit)="onDoctorLogin()">
-              <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="dEmail" placeholder="Email Address">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="dPassword"
-                  placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-          </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+  <!--DOCTOR LOGIN-->
+<div id="DoctorLoginForm" *ngIf="login === 'Doctor'">
+  <div class="container">
+    <div>
+      <h1 class="form-heading">Doctor Login Form</h1>
+      <div class="login-form">
+        <div class="main-div">
+          <div class="panel">
+            <h2>Doctor Login</h2>
+            <p>Please enter your email and password</p>
+          </div>
+          <form id="DoctorLogin" (submit)="onDoctorLogin()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="dEmail" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="dPassword"
+                placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </form>

@@ -66,6 +66,7 @@ export class NextPatientComponent implements OnInit {
   getReasonForVisit() {
     this.DoctorService.getReasonForVisit().subscribe(
       res => {
+        console.log(res); 
         this.reasonForVisit = res['reasonForVisit'];
       },
       err => {
@@ -90,11 +91,15 @@ export class NextPatientComponent implements OnInit {
       } else {
         if (res['unauthenticated']) {
           this.authService.unAuthenticated();
+          return false; 
         }
         this.flashMessagesService.show(res["msg"], { cssClass: 'alert-danger', timeout: 3000 });
       }
+     // this.getReasonForVisit(); 
+
     },
       err => {
+        this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-danger', timeout: 3000 });
 
       });
 

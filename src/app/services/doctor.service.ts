@@ -16,13 +16,12 @@ export class DoctorService {
         return this.http.get(this.url + '/doctor/medicineList');
     }
 
-
-  addReasonForVisit(patient) {
-    return this.http.get(this.url + '/doctor/reasonForVisit', patient);
+  addReasonForVisit(reasonForVisit) {
+    return this.http.post(this.url + '/doctor/add/reasonForVisit', reasonForVisit);
   }
 
   getReasonForVisit() {
-    return this.http.get('http://localhost:4560/doctor/reasonForVisit');
+    return this.http.get(this.url + '/doctor/reasonForVisit');
   }
 
 }
