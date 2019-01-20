@@ -58,7 +58,7 @@ export class TeamComponent implements OnInit {
           this.receptionists = res['receptionists'];
           this.doctors = res['doctors'];
         } else {
-          if(!res['authenticated']){
+          if(res['unauthenticated']){
             this.authService.unAuthenticated();
             return false;
           }
@@ -266,4 +266,35 @@ export class TeamComponent implements OnInit {
         this.flashMessagesService.show('Something happened!', { cssClass: 'alert-success', timeout: 3000});
     })
   }
+
+
+  deleteDoctorInfo(doctor){
+    this.doctor = doctor;
+  }
+
+  onRemoveDoctor(){
+    let nric = {
+      nric: this.doctor.nric
+    }
+    this.managerService.removeDoctor(nric).subscribe(
+      res => {
+        if(res['success']){
+          this.getClinicTeam();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          if(!res['authenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Something happened', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    )
+  }
+  
 }
+
+

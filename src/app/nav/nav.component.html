@@ -18,11 +18,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Manager'" routerLink="/manager/clinic-team" routerLinkActive="active">View Clinic Team</a>
           <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Manager'" routerLink="/manager/medicine-list" routerLinkActive="active">View Medicine List</a>
-          <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Admin'" routerLink="/clinicList" routerLinkActive="active">View Clinics</a>
-          <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Admin'" routerLink="#" routerLinkActive="active">View Patients</a>
           <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Manager'" routerLink="#" routerLinkActive="active">View Patients</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Admin'" routerLink="clinic/registration" routerLinkActive="active">Clinic Registration</a>
       </div>
       </li>
 
@@ -30,11 +27,14 @@
         <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/patient-list" routerLinkActive="active">Patient List</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
-        </li>
+        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/pending-approval" routerLinkActive="active">Pending Approval</a>
+      </li>
       <li class="nav-item">
-          <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
-        </li>
+        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.loggedIn()" routerLink="main-login" routerLinkActive="active">Main Login</a>

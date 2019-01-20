@@ -20,6 +20,9 @@ export class MainLoginComponent implements OnInit {
   dPassword: '';
   aEmail: '';
   aPassword: '';
+  managerLogin: Boolean;
+  doctorLogin: Boolean;
+  receptionistLogin: Boolean;
 
   constructor(
     private authService: AuthService,
@@ -28,19 +31,29 @@ export class MainLoginComponent implements OnInit {
     private flashMessagesService: FlashMessagesService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.managerLogin = false;
+    this.doctorLogin = false;
+    this.receptionistLogin = false;
+   }
 
   onManager(){
     this.login = "Manager";
+    this.managerLogin = true;
+    this.doctorLogin = false;
+    this.receptionistLogin = false;
   }
   onDoctor(){
     this.login = "Doctor";
+    this.managerLogin = false;
+    this.doctorLogin = true;
+    this.receptionistLogin = false;
   }
   onReceptionist(){
     this.login = "Receptionist";
-  }
-  onAdmin(){
-    this.login = "Admin";
+    this.managerLogin = false;
+    this.doctorLogin = false;
+    this.receptionistLogin = true;
   }
 
   onDoctorLogin() {
@@ -131,39 +144,6 @@ export class MainLoginComponent implements OnInit {
           var user = res['user'];
           this.authService.setToken(res['token'], user.role);
           this.router.navigateByUrl('/manager/clinic-team');
-        } else {
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        } 
-      },
-      err => {
-        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
-        console.log(err);
-      }
-    );
-  }
-
-  onAdminLogin() {
-    const credentials = {
-      email: this.aEmail,
-      password: this.aPassword
-    };
-
-    if (!this.validateService.validateEmail(credentials.email)) {
-      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
-    }
-
-    if (credentials.password == '') {
-      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
-    }
-
-    this.authService.loginAdmin(credentials).subscribe(
-      res => {
-        if(res['success']){
-          var user = res['user'];
-          this.authService.setToken(res['token'], user.role);
-          this.router.navigateByUrl('/clinic/registration');
         } else {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
         } 

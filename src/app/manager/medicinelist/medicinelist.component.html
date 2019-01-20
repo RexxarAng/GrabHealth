@@ -33,7 +33,7 @@
       <tbody>
         <tr *ngFor="let medicine of medicineList | grdFilter: {name: medicineSearch}">
           <td>{{ medicine.name }}</td>
-          <td>{{ medicine.price }}</td>
+          <td>$ {{ medicine.price }}</td>
           <td>{{ medicine.category }}</td>
           <td>{{ medicine.effects }}</td>
           <td>

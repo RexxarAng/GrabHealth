@@ -15,8 +15,6 @@ import { ValidateService } from '../../services/validate.service';
 export class PatientListComponent implements OnInit {
   patient: any;
   patientlist: Array<any>;
-  toShowPatientDetails: boolean;
-  toShowEditPatientDetails: boolean;
   firstName: '';
   lastName: '';
   address: '';
@@ -25,6 +23,14 @@ export class PatientListComponent implements OnInit {
   dob: '';
   nationality: '';
   gender: '';
+  email: '';
+
+  editPFirstName: '';
+  editPLastName: '';
+  editPAddress: '';
+  editPDOB: '';
+  editPNationality: '';
+  editPContactNo: '';
 
 
   constructor(
@@ -76,32 +82,105 @@ export class PatientListComponent implements OnInit {
 
   ngOnInit() {
     this.getPatients();
-    //this.toShowPatientDetails = false;
-    //this.toShowEditPatientDetails = false;
   }
 
   viewPatientInfo(patient){
     this.patient = patient;
-    //this.toShowPatientDetails = true;
   }
 
   editPatientInfo(patient){
     this.patient = patient;
-    //this.toShowEditPatientDetails = true;
+    this.editPFirstName = patient.firstName;
+    this.editPLastName = patient.lastName;
+    this.nric = patient.nric;
+    this.gender = patient.gender;
+    this.editPAddress = patient.address;
+    this.dob = patient.dob;
+    this.editPNationality = patient.nationality;
+    this.editPContactNo = patient.contactNo;
+    this.email = patient.email;
   }
 
-  addPatientToQueue(patient){
-    this.patient = patient;
-    $("#addToQueueSuccessAlert").hide().show('medium');
+  onEditPatientInfo(){
+    let patient = {
+      firstName: this.editPFirstName,
+      lastName: this.editPLastName,
+      nric: this.nric,
+      gender: this.gender,
+      address: this.editPAddress,
+      dob: this.dob,
+      nationality: this.editPNationality,
+      contactNo: this.editPContactNo,
+      email: this.email
+    }
+
+    // Required fields
+    if(!this.validateService.validatePatientRegistration(patient)) {
+      this.flashMessagesService.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate First Name
+    if(!this.validateService.validateFirstName(patient.firstName)){
+      this.flashMessagesService.show('Please enter valid first name!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate Last Name
+    if(!this.validateService.validateLastName(patient.lastName)){
+      this.flashMessagesService.show('Please enter valid last name!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate Address
+    if(!this.validateService.validateAddress(patient.address)){
+      this.flashMessagesService.show('Please enter valid address!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate nationality
+    if(!this.validateService.validateNationality(patient.nationality)){
+      this.flashMessagesService.show('Please enter valid nationality!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    // Validate contact
+    if(!this.validateService.validateContactNo(patient.contactNo)) {
+      this.flashMessagesService.show('Please enter valid contact no.!', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+
+    this.receptionistService.editPatientInfo(patient).subscribe(
+      res=>{
+        if(res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+          this.getPatients();
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getPatients();
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke while attempting to save edited patient details!', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    );
   }
-  
+
+
+  // Display patients
   getPatients(){
     this.receptionistService.getPatients().subscribe(
       res=>{
         console.log(res);
         if(!res['success']){
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
-        } 
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        }
+         
         this.patientlist = res['patients'];
       },
       err=>{
@@ -110,6 +189,7 @@ export class PatientListComponent implements OnInit {
     )
   }
   
+  // Create patient
   createPatient(){
     let patient = {
       firstName: this.firstName,
@@ -119,9 +199,9 @@ export class PatientListComponent implements OnInit {
       contactNo: this.contactNo,
       nationality: this.nationality,
       dob: this.dob,
-      gender: this.gender
+      gender: this.gender,
+      email: this.email
     }
-    console.log(patient);
 
     // Required fields
     if(!this.validateService.validatePatientRegistration(patient)) {
@@ -181,7 +261,12 @@ export class PatientListComponent implements OnInit {
 
     // Validate nationality
     if(!this.validateService.validateNationality(patient.nationality)){
-      this.flashMessagesService.show('Please enter valid nationality!', { cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessagesService.show('Please select nationality!', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    if (this.nationality === '' || this.nationality === 0){
+      this.flashMessagesService.show('Please select nationality!', { cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
 
@@ -191,25 +276,58 @@ export class PatientListComponent implements OnInit {
       return false;
     }
 
+    // Validate email
+    if(!this.validateService.validateEmail(patient.email)) {
+      this.flashMessagesService.show('Please enter valid email!', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
 
 
     this.receptionistService.createPatient(patient).subscribe(
       res=>{
         if(res['success']){
           this.getPatients();
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 5000});
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 5000});
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getPatients();
         }
         // if(res['unauthenticated']){
         //   this.authService.logout();
         // }
       },
       err => {
-        this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-success', timeout: 3000});
+        this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-danger', timeout: 3000});
       }
     )    
 
+  }
+
+
+  addPatientToQueue(patient){
+    this.patient = patient;
+
+    this.receptionistService.addPatientToQueue(patient).subscribe(
+      res=>{
+        if(res['success']){
+          this.getPatients();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke while attempting to add patient to queue!', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    )    
   }
 
 
