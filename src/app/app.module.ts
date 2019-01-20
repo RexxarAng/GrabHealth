@@ -36,6 +36,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
 import { GrdFilterPipe } from './grd-filter.pipe';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
+import { RecaptchaModule } from 'angular-google-recaptcha';
+
 
 
 export function tokenGetter() {
@@ -83,7 +85,11 @@ export function tokenGetter() {
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
     }),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    RecaptchaModule.forRoot({
+      siteKey: '6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT',
+    }),
+    
 
 
   ],

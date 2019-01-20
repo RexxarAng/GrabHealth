@@ -37,6 +37,7 @@ export class NextPatientComponent implements OnInit {
 
   ngOnInit() {
     this.getDispensedMedicine();
+    this.getReasonForVisit();
   }
 
   getDispensedMedicine() {
@@ -63,10 +64,9 @@ export class NextPatientComponent implements OnInit {
   }
 
   getReasonForVisit() {
-    this.DoctorService.addReasonForVisit(this.reasonForVisit).subscribe(
+    this.DoctorService.getReasonForVisit().subscribe(
       res => {
-        let reasonForVisit = res['reasonForVisit'];
-        this.reasonForVisit = reasonForVisit.list;
+        this.reasonForVisit = res['reasonForVisit'];
       },
       err => {
         console.log(err);
@@ -79,11 +79,11 @@ export class NextPatientComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all the fields', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
-    let patient = {
+    let reasonForVisit = {
       "reasonForVisit": this.reasonForVisit
     }
 
-    this.DoctorService.addReasonForVisit(patient).subscribe(res => {
+    this.DoctorService.addReasonForVisit(reasonForVisit).subscribe(res => {
       if (res['success']) {
         this.getReasonForVisit();
         this.flashMessagesService.show('Reason for Visit added', { cssClass: 'alert-success', timeout: 3000 });

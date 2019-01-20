@@ -20,4 +20,9 @@ export class DoctorService {
   addReasonForVisit(patient) {
     return this.http.get(this.url + '/doctor/reasonForVisit', patient);
   }
+
+  getReasonForVisit() {
+    return this.http.get('http://localhost:4560/doctor/reasonForVisit');
+  }
+
 }
