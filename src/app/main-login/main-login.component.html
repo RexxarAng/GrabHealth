@@ -54,7 +54,14 @@
               <button type="submit" class="btn btn-primary">Login</button>
             </form>
           </div>
-        </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
+              placeholder="Password">
+          </div>
+          <recaptcha [ngModel]="myRecaptcha" name="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
+          <div class="g-recaptcha" data-sitekey="6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT"></div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
       </div>
     </div>
   </div>

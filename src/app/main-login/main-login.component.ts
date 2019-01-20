@@ -5,12 +5,14 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ValidateService } from '../services/validate.service';
 import 'rxjs/add/operator/map';
 
+
 @Component({
   selector: 'app-main-login',
   templateUrl: './main-login.component.html',
   styleUrls: ['./main-login.component.css']
 })
 export class MainLoginComponent implements OnInit {
+  myRecaptcha: boolean;
   login: string;
   mEmail: '';
   mPassword: '';
@@ -144,6 +146,47 @@ export class MainLoginComponent implements OnInit {
           var user = res['user'];
           this.authService.setToken(res['token'], user.role);
           this.router.navigateByUrl('/manager/clinic-team');
+        } else {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } 
+      },
+      err => {
+        this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
+        console.log(err);
+      }
+    );
+  }
+
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!')
+  }
+
+  onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
+  }
+
+  onAdminLogin() {
+    const credentials = {
+      email: this.aEmail,
+      password: this.aPassword
+    };
+
+    if (!this.validateService.validateEmail(credentials.email)) {
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    if (credentials.password == '') {
+      this.flashMessagesService.show('Please enter your password', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    this.authService.loginAdmin(credentials).subscribe(
+      res => {
+        if(res['success']){
+          var user = res['user'];
+          this.authService.setToken(res['token'], user.role);
+          this.router.navigateByUrl('/clinic/registration');
         } else {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
         } 
