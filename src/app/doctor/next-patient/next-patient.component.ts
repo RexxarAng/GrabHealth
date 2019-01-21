@@ -55,24 +55,14 @@ export class NextPatientComponent implements OnInit {
     this.medicine = medicine; 
   }
 
-  viewNextPatientDetail(patient) {
-    this.patient = patient; 
+  viewNextPatientInfo(reasonForVisit) {
+    this.reasonForVisit = reasonForVisit; 
   }
 
-  editReasonOfVisitDetail(patient) {
-    this.reasonForVisit = patient.reasonForVisit; 
-  }
+  // editReasonOfVisitDetail(patient) {
+  //   this.reasonForVisit = patient.reasonForVisit; 
+  // }
 
-  getReasonForVisit() {
-    this.DoctorService.getReasonForVisit().subscribe(
-      res => {
-        console.log(res); 
-        this.reasonForVisit = res['reasonForVisit'];
-      },
-      err => {
-        console.log(err);
-      });
-  }
   
 
   onAddReasonForVisit() {
@@ -81,8 +71,8 @@ export class NextPatientComponent implements OnInit {
       return false;
     }
     let reasonForVisit = {
-      "reasonForVisit": this.reasonForVisit
-    }
+      reasonForVisit : this.reasonForVisit
+    };
 
     this.DoctorService.addReasonForVisit(reasonForVisit).subscribe(res => {
       if (res['success']) {
@@ -104,7 +94,18 @@ export class NextPatientComponent implements OnInit {
       });
 
   }
+
+  getReasonForVisit() {
+    this.DoctorService.getReasonForVisit().subscribe(
+      res => {
+        if (res['success']) {
+          this.reasonForVisit = res['reasonForVisit'];
+        } else {
+          if (res['unauthenticated']) {
+            this.authService.unAuthenticated();
+            return false; 
+        }
+      }
+    })
   }
-
-
-
+}
