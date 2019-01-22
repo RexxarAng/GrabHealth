@@ -311,19 +311,9 @@ export class PatientListComponent implements OnInit {
 
 
   // Add patient to queue
-  onAddToQueue(){
-    let patient = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      address: this.address,
-      nric: this.nric,
-      contactNo: this.contactNo,
-      nationality: this.nationality,
-      dob: this.dob,
-      gender: this.gender,
-      email: this.email
-    }
-
+  onAddToQueue(patient){
+    this.patient = patient;
+    
     this.receptionistService.onAddToQueue(patient).subscribe(
       res=>{
         if(res['success']){
