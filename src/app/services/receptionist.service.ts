@@ -28,14 +28,16 @@ export class ReceptionistService {
     }
 
     getQueue(){
-        return this.http.get(this.url + 'http://localhost:4560/receptionist/queue-list');
+        return this.http.get(this.url + '/receptionist/queue-list');
     }  
 
-    /*onRemoveFromQueue(nric){
-      return this.http.post(this.url + 'http://localhost:4560/receptionist/removePatientFromQueue', nric);
+    onRemoveFromQueue(nric){
+      return this.http.post(this.url + '/receptionist/removePatientFromQueue', nric);
     }
 
-    viewPatientInfo(patient){
-      return this.http.post(this.url + 'http://localhost:4560/receptionist/viewPendingApproval', patient);
-    }*/
+    getPendingList(){
+      return this.http.get(this.url + '/receptionist/pendingList');
+    }
+    
+
 }

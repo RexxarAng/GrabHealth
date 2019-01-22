@@ -59,14 +59,14 @@
         </td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add patient to queue">
-            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueModal" (click)="addToQueue(patient)">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueModal" (click)="onAddToQueue(patient)">
               <i class="fa fa-plus fa-2x" id="addToQueue"></i>
             </button>
           </span>
         </td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove patient from queue">
-            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeFromQueueModal" (click)="removeFromQueue(patient)">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeFromQueueModal" (click)="onRemoveFromQueue()">
               <i class="fa fa-minus fa-2x" id="removeFromQueue"></i>
             </button>
           </span>
@@ -791,7 +791,7 @@
           </button>
         </div>
 
-        <div class="modal-body" *ngIf="patient">
+        <div class="modal-body" *ngIf="patient | grdFilter: {nric: nricSearch}">
           <form>
             <div class="row" style="padding-left: 4%;">
               <p>
