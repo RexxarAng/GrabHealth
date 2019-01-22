@@ -22,6 +22,7 @@ export class NextPatientComponent implements OnInit {
   // Patient Information 
   patient:any; 
   reasonForVisit = ''; 
+  doctor:any;
 
 
   constructor(

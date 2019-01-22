@@ -8,7 +8,7 @@ export class ManagerService {
   // private url = "/routes/comment";
     constructor(private http: HttpClient) {
     }
-    url = environment.url;
+    url = environment.clinicserverurl;
 
     registerReceptionist(receptionist) {
         return this.http.post(this.url + '/manager/register/receptionist', receptionist);                     

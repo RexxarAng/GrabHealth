@@ -21,6 +21,7 @@ export class MedicinelistComponent implements OnInit {
   name: '';
   category: '';
   price: Number;
+  medicineSearch:any;
   
   constructor(
     private router: Router,
