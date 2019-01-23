@@ -54,7 +54,7 @@ export class PendingApprovalComponent implements OnInit {
             this.authService.unAuthenticated();
             return false;
           }
-        }       
+        }
         this.pendingList = res['pendingList'];
       },
       err=>{
