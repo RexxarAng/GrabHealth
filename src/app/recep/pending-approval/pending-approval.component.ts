@@ -39,7 +39,6 @@ export class PendingApprovalComponent implements OnInit {
   // View patient info
   viewPatientInfo(patient) {
     this.patient = patient;
-
   }
 
 
@@ -50,7 +49,12 @@ export class PendingApprovalComponent implements OnInit {
         console.log(res);
         if(!res['success']){
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        }        
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
         this.pendingList = res['pendingList'];
       },
       err=>{

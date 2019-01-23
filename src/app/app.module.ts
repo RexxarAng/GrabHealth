@@ -26,7 +26,7 @@ import { ManagerService } from './services/manager.service';
 import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
+//import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
 import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 import { MainLoginComponent } from './main-login/main-login.component';
 import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
@@ -37,6 +37,7 @@ import { MedicinelistComponent } from './manager/medicinelist/medicinelist.compo
 import { GrdFilterPipe } from './grd-filter.pipe';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 import { RecaptchaModule } from 'angular-google-recaptcha';
+import { QueueListComponent } from './recep/queue-list/queue-list.component';
 
 
 export function tokenGetter() {
@@ -53,7 +54,7 @@ export function tokenGetter() {
     PaymentComponent,
     PatientListComponent,
     TeamComponent,
-    ViewQueueComponent,
+    //ViewQueueComponent,
     PaymentReceiptComponent,
     MainLoginComponent,
     DoctorMainComponent,
@@ -62,6 +63,7 @@ export function tokenGetter() {
     MedicinelistComponent,
     GrdFilterPipe,
     PendingApprovalComponent,
+    QueueListComponent,
 
   ],
   imports: [
