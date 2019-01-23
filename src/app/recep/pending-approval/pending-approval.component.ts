@@ -54,7 +54,7 @@ export class PendingApprovalComponent implements OnInit {
             this.authService.unAuthenticated();
             return false;
           }
-        }       
+        }
         this.pendingList = res['pendingList'];
       },
       err=>{
@@ -64,8 +64,29 @@ export class PendingApprovalComponent implements OnInit {
   }
 
   // Approve Appointment
-  onApproveAppointment(){
+  onApproveAppointment(patient){
+    this.patient = patient;
 
+    this.receptionistService.onApproveAppointment(patient).subscribe(
+      res=>{
+        if(res['success']){
+          console.log(res);
+          this.getPendingList();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          console.log(res);
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getPendingList();
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke while attempting to approve request!', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    )    
   }
 
 

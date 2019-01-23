@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of pendingList.patients | grdFilter: {nric: nricSearch}">
+      <tr *ngFor="let patient of pendingList?.patients | grdFilter: {nric: nricSearch}">
         <td class="colspacing">{{ patient.firstName }}</td>
         <td class="colspacing">{{ patient.lastName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>

@@ -21,7 +21,7 @@
           </form> -->
 
           <form class="form-inline my-2 my-lg-0">
-            <input [(ngModel)]="searchNric" class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+            <input [(ngModel)]="searchNric" name="searchNric" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
         </th>
