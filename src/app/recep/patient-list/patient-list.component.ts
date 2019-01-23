@@ -359,7 +359,7 @@ export class PatientListComponent implements OnInit {
         this.queuelist = res['queuelist'];
       },
       err=>{
-      
+        console.error(err)
       }
     )
   }

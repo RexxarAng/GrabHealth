@@ -64,25 +64,25 @@ export class QueueListComponent implements OnInit {
   }
 
   // // Display patients
-  // getPatients(){
-  //   this.receptionistService.getPatients().subscribe(
-  //     res=>{
-  //       console.log(res);
-  //       if(!res['success']){
-  //         this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-  //       } else {
-  //         if(res['unauthenticated']){
-  //           this.authService.unAuthenticated();
-  //           return false;
-  //         }
-  //       }       
-  //       this.patientlist = res['patients'];
-  //     },
-  //     err=>{
+  getPatients(){
+    this.receptionistService.getPatients().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
+        this.patientlist = res['patients'];
+      },
+      err=>{
       
-  //     }
-  //   )
-  // }
+      }
+    )
+  }
   
 
   // Display patients in queue
