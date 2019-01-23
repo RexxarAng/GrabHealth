@@ -29,8 +29,11 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/pending-approval" routerLinkActive="active">Pending Approval</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/view-queue" routerLinkActive="active">View Queue</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/queue-list" routerLinkActive="active">Queue List</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Receptionist'" routerLink="receptionist/payment" routerLinkActive="active">Payment</a>

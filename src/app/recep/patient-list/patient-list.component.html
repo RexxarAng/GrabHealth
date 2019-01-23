@@ -9,17 +9,21 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col"></th>
         <th scope="col">
           <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addNewPatientModal">
             <i class="fa fa-plus-circle fa-2x" id="addNewPatient"></i>
           </button>
         </th>
         <th scope="col">
-          <!-- <form class="form-inline my-2 my-lg-0"> -->
+          <!-- <form class="form-inline my-2 my-lg-0">
             <input [(ngModel)]="nricSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-lg-2 my-sm-0" type="submit">Search</button>
+          </form> -->
+
+          <form class="form-inline my-2 my-lg-0">
+            <input [(ngModel)]="searchNric" class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            <!-- </form> -->
+          </form>
         </th>
       </tr>
     </thead>
@@ -33,12 +37,11 @@
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
-        <th scope="col" class="colspacing"></th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of patientlist | grdFilter: {nric: nricSearch}">
+      <tr *ngFor="let patient of patientlist | grdFilter: {nric: searchNric}">
         <td class="colspacing">{{ patient.firstName }}</td>
         <td class="colspacing">{{ patient.lastName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>
@@ -59,15 +62,8 @@
         </td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add patient to queue">
-            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueModal" (click)="onAddToQueue(patient)">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#addToQueueModal" (click)="viewPatientInfo(patient)">
               <i class="fa fa-plus fa-2x" id="addToQueue"></i>
-            </button>
-          </span>
-        </td>
-        <td class="colspacing">
-          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove patient from queue">
-            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeFromQueueModal" (click)="onRemoveFromQueue()">
-              <i class="fa fa-minus fa-2x" id="removeFromQueue"></i>
             </button>
           </span>
         </td>
@@ -781,7 +777,41 @@
 
 <!--Add Patient To Queue Modal-->
 <div>
-  <div class="modal fade" id="addToQueueModal" tabindex="-1" role="dialog" aria-labelledby="addToQueueModal" aria-hidden="true">    
+    <div class="modal fade" id="addToQueueModal" tabindex="-1" role="dialog" aria-labelledby="addToQueueModal" aria-hidden="true">    
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Patient To Queue</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body" *ngIf="patient | grdFilter: {nric: nricSearch}">
+            <form>
+              <div class="row" style="padding-left: 4%;">
+                <p>Are you sure you want to add
+                  <b> {{ patient.firstName }} </b>
+                  <b>{{ patient.lastName }} </b>
+                  to the queue?
+                </p>
+              </div>
+            </form>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" data-toggle="modal" (click)="onAddToQueue(patient)" data-target="#confirmAddToQueueModal" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--Add Patient To Queue Modal (Success)-->
+<div>
+  <div class="modal fade" id="confirmAddToQueueModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddToQueueModal" aria-hidden="true">    
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -815,38 +845,3 @@
     </div>
   </div>
 </div>
-
-
-<!--Remove Patient From Queue Modal-->
-<div>
-    <div class="modal fade" id="removeFromQueueModal" tabindex="-1" role="dialog" aria-labelledby="removeFromQueueModal" aria-hidden="true">    
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="removeFromQueueTitle">Remove Patient From Queue</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-  
-          <div class="modal-body">
-            <form>
-              <div class="row" style="padding-left: 4%;">
-                <p>Are you sure you want to remove
-                  <b> {{ patient.firstName }} </b>
-                  <b>{{ patient.lastName }} </b>
-                  from the queue?
-                </p>
-              </div>
-  
-            </form>
-          </div>
-  
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary" (click)="onRemoveFromQueue()" data-dismiss="modal">Yes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

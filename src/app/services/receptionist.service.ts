@@ -28,11 +28,11 @@ export class ReceptionistService {
     }
 
     getQueue(){
-        return this.http.get(this.url + '/receptionist/queue-list');
+        return this.http.get(this.url + '/receptionist/queueList');
     }  
 
-    onRemoveFromQueue(nric){
-      return this.http.post(this.url + '/receptionist/removePatientFromQueue', nric);
+    onRemoveFromQueue(patient){
+      return this.http.post(this.url + '/receptionist/removePatientFromQueue', patient);
     }
 
     getPendingList(){
