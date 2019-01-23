@@ -12,7 +12,7 @@ export class DoctorService {
   }
   url = environment.clinicserverurl;
 
- getMedicineList(){
+    getMedicineList(){
         return this.http.get(this.url + '/doctor/medicineList');
     }
 
@@ -31,5 +31,23 @@ export class DoctorService {
   getMedicine() {
     return this.http.get(this.url + '/doctor/medicine');
   }
+
+  getWalkInPatients() {
+    return this.http.get(this.url + '/doctor/walkin-patientlist');
+  }
+
+  editWalkInPatientInfo(walkinpatient) {
+    return this.http.post(this.url + '/doctor/editWalkInPatientInfo', walkinpatient);
+  }
+
+  getPatients() {
+    return this.http.get(this.url + '/doctor/patient-list');
+  }
+
+  editPatientInfo(patient) {
+    return this.http.post(this.url + '/doctor/editPatientInfo', patient);
+
+  }
+
   
 }
