@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th scope="col">
-          <h3>Pending Approval List</h3>
+          <h3>Queue List</h3>
         </th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -11,11 +11,13 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>       
       </tr>
     </thead>
 
     <thead class="thead-light">
       <tr>
+        <th scope="col" class="colspacing">Queue No.</th>
         <th scope="col" class="colspacing">First Name</th>
         <th scope="col" class="colspacing">Last Name</th>
         <th scope="col" class="colspacing">NRIC/Passport No.</th>
@@ -23,13 +25,12 @@
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
         <th scope="col" class="colspacing"></th>
-        <th scope="col" class="colspacing"></th>
-        <th scope="col" class="colspacing"></th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of pendingList.patients | grdFilter: {nric: nricSearch}">
+      <tr *ngFor="let patient of queuelist.patients | grdFilter: {nric: searchNric}">
+        <td class="colspacing">{{ patient.queueNo }}</td>
         <td class="colspacing">{{ patient.firstName }}</td>
         <td class="colspacing">{{ patient.lastName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>
@@ -40,29 +41,24 @@
               <i class="fa fa-eye fa-2x" id="viewPatientDetail"></i>
             </button>
           </span>
-        </td>
+        </td>      
         <td class="colspacing">
-          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Approve Appointment">
-            <button type="button" class="btn btn-img" (click)="approveAppointment()">
-              <i class="fa fa-check fa-2x" id="approveAppointment"></i>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove patient from queue">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeFromQueueModal" (click)="viewPatientInfo(patient)">
+              <i class="fa fa-minus fa-2x" id="removeFromQueue"></i>
             </button>
           </span>
         </td>
-        <td class="colspacing">
-          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Reject Appointment">
-            <button type="button" class="btn btn-img" (click)="rejectAppointment()">
-              <i class="fa fa-times fa-2x" id="rejectAppointment"></i>
-            </button>
-          </span>
-        </td>
-        <td class="colspacing"></td>
         <td class="colspacing"></td>
       </tr>
     </tbody>
   </table>
 
-</div>
+  <div>
+   
+  </div>
 
+</div>
 
 
 <!--View Patient Details Modal-->
@@ -175,3 +171,70 @@
   </div>
 </div>
 
+
+<!--Remove Patient From Queue Modal-->
+<div>
+    <div class="modal fade" id="removeFromQueueModal" tabindex="-1" role="dialog" aria-labelledby="removeFromQueueModal" aria-hidden="true">    
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" >
+          <div class="modal-header">
+            <h5 class="modal-title" id="removeFromQueueTitle">Remove Patient From Queue</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  
+          <div class="modal-body" *ngIf="patient">
+            <form>
+              <div class="row" style="padding-left: 4%;">
+                <p>Are you sure you want to remove
+                  <b> {{ patient.firstName }} </b>
+                  <b>{{ patient.lastName }} </b>
+                  from the queue?
+                </p>
+              </div>
+  
+            </form>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="onRemoveFromQueue(patient)" data-target="#confirmRemoveFromQueueModal" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--Remove Patient From Queue Modal (Success)-->
+<div>
+  <div class="modal fade" id="confirmRemoveFromQueueModal" tabindex="-1" role="dialog" aria-labelledby="confirmRemoveFromQueueModal" aria-hidden="true">    
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="removeFromQueueTitle">Successfully Removed Patient From Queue</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngIf="patient">
+          <form>
+            <div class="row" style="padding-left: 4%;">
+              <p>
+                <b>{{ patient.firstName }} </b>
+                <b>{{ patient.lastName }} </b>
+                has been successfully removed from the queue.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

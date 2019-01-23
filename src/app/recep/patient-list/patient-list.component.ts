@@ -31,7 +31,8 @@ export class PatientListComponent implements OnInit {
   editPDOB: '';
   editPNationality: '';
   editPContactNo: '';
-  
+
+  searchNric: any;
 
   queuelist: Array<any>;
 
@@ -182,7 +183,12 @@ export class PatientListComponent implements OnInit {
         console.log(res);
         if(!res['success']){
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        }        
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
         this.patientlist = res['patients'];
       },
       err=>{
@@ -313,7 +319,7 @@ export class PatientListComponent implements OnInit {
   // Add patient to queue
   onAddToQueue(patient){
     this.patient = patient;
-    
+
     this.receptionistService.onAddToQueue(patient).subscribe(
       res=>{
         if(res['success']){
@@ -335,20 +341,20 @@ export class PatientListComponent implements OnInit {
       }
     )    
   }
-
-
-  addToQueue(patient) {
-    this.patient = patient;
-  }
   
 
-  // Display patients in queue <TBC>
+  // Display patients in queue
   getQueue(){
     this.receptionistService.getQueue().subscribe(
       res=>{
         console.log(res);
         if(!res['success']){
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
         }    
         this.queuelist = res['queuelist'];
       },
@@ -359,13 +365,32 @@ export class PatientListComponent implements OnInit {
   }
 
 
-  /*removeFromQueue(patient) {
+  // Remove patient from queue
+  onRemoveFromQueue(patient){
     this.patient = patient;
+
+    this.receptionistService.onRemoveFromQueue(patient).subscribe(
+      res=>{
+        if(res['success']){
+          console.log(res);
+          this.getQueue();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          console.log(res);
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getQueue();
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke while attempting to add patient to queue!', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    )    
+
   }
-
-  onRemoveFromQueue(){
-
-  }*/
 
 
 }
