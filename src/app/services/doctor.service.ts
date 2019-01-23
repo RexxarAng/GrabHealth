@@ -24,4 +24,12 @@ export class DoctorService {
     return this.http.get(this.url + '/doctor/reasonForVisit');
   }
 
+  addMedicine(selectedMedicine) {
+    return this.http.post(this.url + '/doctor/add/medicine', selectedMedicine);
+  }
+
+  getMedicine() {
+    return this.http.get(this.url + '/doctor/medicine');
+  }
+  
 }

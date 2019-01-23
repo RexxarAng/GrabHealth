@@ -15,8 +15,6 @@
               <th scope="col" class="colspacing">Name</th>
               <th scope="col" class="colspacing">DOB</th>
               <th scope="col" class="colspacing">NRIC</th>
-              <th scope="col" class="colspacing">Medical History</th>
-              <th scope="col" class="colspacing">Allergies</th>
               <th scope="col" class="colspacing">Reason for visit</th>
               <th scope="col" class="colspacing">View</th>
 
@@ -24,12 +22,10 @@
           </thead>
          
           <tbody>
-            <tr>
-              <td>Chloe</td>
-              <td>1/1/12</td>
-              <td>S12345678B</td>
-              <td>NIL</td>
-              <td>NIL</td>
+            <tr> 
+              <td class="colspacing">123</td>
+              <td class="colspacing">123</td>
+              <td class="colspacing">456</td>
               <td>
                 <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add Patient's Reason For Visit">
                   <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal">
@@ -56,11 +52,9 @@
     <thead class="thead-light">
       <tr>
         <th scope="col" class="colspacing">Medicine Name</th>
-        <th scope="col" class="colspacing">Frequency</th>
-        <th scope="col" class="colspacing">Instructions</th>
-        <th scope="col" class="colspacing">Dosage</th>
-        <th scope="col" class="colspacing">Use</th>
-        <th scope="col" class="colspacing">MC (Days)</th>
+        <th scope="col" class="colspacing">Price</th>
+        <th scope="col" class="colspacing">Category</th>
+        <th scope="col" class="colspacing">Effects</th>
 
       </tr>
     </thead>
@@ -68,11 +62,10 @@
     <tbody>
       <tr *ngFor="let medicine of medicineList">
         <td class="colspacing">{{ medicine.name }}</td>
-        <td class="colspacing">1/day</td>
-        <td class="colspacing">Take after food. Stop if feeling drowsy.</td>
-        <td class="colspacing">325 mg</td>
-        <td class="colspacing">For headache</td>
-        <td class="colspacing">20days</td>
+        <td class="colspacing">{{ medicine.price }}</td>
+        <td class="colspacing">{{ medicine.category }}</td>
+        <td class="colspacing">{{ medicine.effects }}</td>
+
        
       </tr>
     </tbody>
@@ -131,10 +124,10 @@
           </button>
         </div>
 
-  <div class="modal-body" *ngIf="visit">
+  <div class="modal-body" *ngIf="patient">
     <div class="row rowspacing">
       <div class="col">
-        <p >Reason for Visit: <b>{{ visit.reasonForVisit }}</b></p>
+        <p >Reason for Visit: <b>{{ patient.reasonForVisit }}</b></p>
 
       </div>
     </div>
@@ -166,29 +159,31 @@
           </button>
         </div>
 
-        <div class="modal-body" *ngFor="let medicine of medicineList">
+        <div class="modal-body" *ngFor="let selectedMedicine of medicineList">
           <form>
             <div class="row rowspacing">
               <div class="col">
-                <p><b>Medicine Name:</b> {{ medicine.name }}</p>
+                <p><b>Medicine Name:</b> {{ selectedMedicine.name }}</p>
               </div>
 
               <div class="col">
-                <p><b>Price:</b> {{ medicine.price }}</p>
+                <p><b>Price:</b> {{ selectedMedicine.price }}</p>
               </div>
             
 
             <div class="col">
-              <p><b>Category:</b> {{ medicine.category }}</p>
+              <p><b>Category:</b> {{ selectedMedicine.category }}</p>
             </div>
             
             <div class="col">
-              <p><b>Effect:</b> {{ medicine.effects }}</p>
+              <p><b>Effect:</b> {{ selectedMedicine.effects }}</p>
             </div>
+            <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(selectedMedicine)" data-dismiss="modal">Add
+                Medicine</button></p>
           </div> 
           </form>
         </div> 
-
+      
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>

@@ -20,9 +20,22 @@ export class NextPatientComponent implements OnInit {
   price: Number;
 
   // Patient Information 
-  patient:any; 
+  patient:any;
+  patientlist: Array<any>;
+  firstName: '';
+  lastName: '';
+  address: '';
+  contactNo: '';
+  nric: '';
+  dob: '';
+  nationality: '';
+  gender: '';
+  email: ''; 
   reasonForVisit = ''; 
   doctor:any;
+
+  // selected medicine
+  selectedMedicine: any; 
 
 
   constructor(
@@ -52,12 +65,14 @@ export class NextPatientComponent implements OnInit {
       });
   }
 
+  
+
   viewDispensedMedicine(medicine) {
     this.medicine = medicine; 
   }
 
-  viewNextPatientInfo(reasonForVisit) {
-    this.reasonForVisit = reasonForVisit; 
+  viewNextPatientInfo(patient) {
+    this.patient = patient; 
   }
 
   // editReasonOfVisitDetail(patient) {
@@ -71,11 +86,12 @@ export class NextPatientComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all the fields', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
-    let reasonForVisit = {
+    let patient = {
+
       reasonForVisit : this.reasonForVisit
     };
 
-    this.DoctorService.addReasonForVisit(reasonForVisit).subscribe(res => {
+    this.DoctorService.addReasonForVisit(patient).subscribe(res => {
       if (res['success']) {
         this.getReasonForVisit();
         this.flashMessagesService.show('Reason for Visit added', { cssClass: 'alert-success', timeout: 3000 });
@@ -96,6 +112,46 @@ export class NextPatientComponent implements OnInit {
 
   }
 
+  onGetMedicine() {
+    this.DoctorService.getMedicine().subscribe(
+      res => {
+        if (res['success']) {
+          this.selectedMedicine = res['selectedMedicine'];
+        } else {
+          if (res['unauthenticated']) {
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }
+      })
+  }
+
+  onAddMedicine() {
+    let selectedMedicine = {
+      selectedMedicine: this.selectedMedicine
+    };
+
+    this.DoctorService.addMedicine(selectedMedicine).subscribe(res => {
+      if (res['success']) {
+        this.onGetMedicine();
+        this.flashMessagesService.show('Medicine for Patient added', { cssClass: 'alert-success', timeout: 3000 });
+      } else {
+        if (res['unauthenticated']) {
+          this.authService.unAuthenticated();
+          return false;
+        }
+        this.flashMessagesService.show(res["msg"], { cssClass: 'alert-danger', timeout: 3000 });
+      }
+      // this.getReasonForVisit(); 
+
+    },
+      err => {
+        this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-danger', timeout: 3000 });
+
+      });
+  }
+
+  
   getReasonForVisit() {
     this.DoctorService.getReasonForVisit().subscribe(
       res => {
