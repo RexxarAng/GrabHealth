@@ -38,6 +38,10 @@ export class ReceptionistService {
     getPendingList(){
       return this.http.get(this.url + '/receptionist/pendingList');
     }
+
+    onApproveAppointment(patient){
+      return this.http.post(this.url + '/receptionist/approveAppointment', patient);
+    }
     
 
 }

@@ -27,7 +27,7 @@
         <th scope="col" class="colspacing"></th>
       </tr>
     </thead>
-
+  
     <tbody>
       <tr *ngFor="let patient of queuelist.patients | grdFilter: {nric: searchNric}">
         <td class="colspacing">{{ patient.queueNo }}</td>
