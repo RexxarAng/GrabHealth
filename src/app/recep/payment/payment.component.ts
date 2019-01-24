@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
 
-  appTitle = "Oreo"
   constructor() { }
 
   ngOnInit() {

@@ -3,13 +3,13 @@
     <thead>
       <tr>
         <th>
-          <h3>Payment</h3>
+          <h4>Payment</h4>
         </th>
       </tr>
     </thead>
 
     <thead class="thead-light">
-      <tr>
+      <tr *ngFor="let patient of patientlist">
         <th scope="col" class="colspacing">Queue No.</th>
         <th scope="col" class="colspacing">Name</th>
         <th scope="col" class="colspacing">NRIC</th>
@@ -19,8 +19,11 @@
 
     <tbody>
       <tr>
-        <td class="colspacing">001</td>
-        <td class="colspacing">Jake Peralta</td>
+        <td class="colspacing">{{ patient.queueNo}}</td>
+        <td class="colspacing">
+          <span>{{ patient.firstName }} </span>
+          <span>{{ patient.lastName }}</span>
+        </td>
         <td class="colspacing">S1234567A</td>
         <td class="colspacing">
           <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt">

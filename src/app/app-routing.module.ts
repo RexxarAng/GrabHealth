@@ -15,6 +15,7 @@ import { MedicinelistComponent } from './manager/medicinelist/medicinelist.compo
 import { TeamComponent } from './manager/team/team.component';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 import { QueueListComponent } from './recep/queue-list/queue-list.component';
+import { AllPatientListComponent } from './recep/all-patient-list/all-patient-list.component';
 
 const routes: Routes = [
   { path: '',  redirectTo: 'login', pathMatch: 'full'},
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'doctor/view-patient-details', component: ViewPatientDetailsComponent },
   { path: 'doctor/registration', component: RegistrationComponent },
   { path: 'receptionist/pending-approval', component: PendingApprovalComponent, canActivate:[AuthGuard]},
-  { path: 'receptionist/queue-list', component: QueueListComponent, canActivate:[AuthGuard]}
+  { path: 'receptionist/queue-list', component: QueueListComponent, canActivate:[AuthGuard]},
+  { path: 'receptionist/all-patient-list', component: AllPatientListComponent, canActivate:[AuthGuard]},
 ];
 
 @NgModule({

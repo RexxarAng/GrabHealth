@@ -63,26 +63,26 @@ export class QueueListComponent implements OnInit {
     this.patient = patient;
   }
 
-  // // Display patients
-  // getPatients(){
-  //   this.receptionistService.getPatients().subscribe(
-  //     res=>{
-  //       console.log(res);
-  //       if(!res['success']){
-  //         this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-  //       } else {
-  //         if(res['unauthenticated']){
-  //           this.authService.unAuthenticated();
-  //           return false;
-  //         }
-  //       }       
-  //       this.patientlist = res['patients'];
-  //     },
-  //     err=>{
+  // Display patients
+  getPatients(){
+    this.receptionistService.getPatients().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
+        this.patientlist = res['patients'];
+      },
+      err=>{
       
-  //     }
-  //   )
-  // }
+      }
+    )
+  }
   
 
   // Display patients in queue
@@ -128,7 +128,7 @@ export class QueueListComponent implements OnInit {
         }
       },
       err => {
-        this.flashMessagesService.show('Somewhere broke while attempting to remove patient to queue!', { cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessagesService.show('Somewhere broke while attempting to remove patient from queue!', { cssClass: 'alert-danger', timeout: 3000});
       }
     )    
 

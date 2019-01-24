@@ -91,8 +91,29 @@ export class PendingApprovalComponent implements OnInit {
 
 
   // Reject Appointment
-  onRejectAppointment(){
+  onRejectAppointment(patient){
+    this.patient = patient;
 
+    this.receptionistService.onRejectAppointment(patient).subscribe(
+      res=>{
+        if(res['success']){
+          console.log(res);
+          this.getPendingList();
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+          console.log(res);
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+          this.getPendingList();
+        }
+      },
+      err => {
+        this.flashMessagesService.show('Somewhere broke while attempting to approve request!', { cssClass: 'alert-danger', timeout: 3000});
+      }
+    )    
   }
 
 }
