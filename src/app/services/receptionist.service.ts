@@ -40,8 +40,15 @@ export class ReceptionistService {
     }
 
     onApproveAppointment(patient){
-      return this.http.post(this.url + '/receptionist/approveAppointment', patient);
+      return this.http.post(this.url + '/receptionist/acceptAppointmentRequest', patient);
+    }
+
+    onRejectAppointment(patient){
+      return this.http.post(this.url + '/receptionist/rejectAppointmentRequest', patient);
     }
     
+    getAllRecords(){
+        return this.http.get(this.url + '/receptionist/all-patient-list');
+    }  
 
 }
