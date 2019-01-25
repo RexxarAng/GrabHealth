@@ -22,20 +22,20 @@
           </thead>
          
           <tbody>
-            <tr *ngFor="let patient of queuelist?.patients"> 
+            <tr *ngIf="patient"> 
               <td class="colspacing">{{ patient.queueNo }}</td>
               <td class="colspacing">{{ patient.firstName }}</td>
               <td class="colspacing">{{ patient.nric }}</td>
               <td>
                 <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add Patient's Reason For Visit">
-                  <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal">
+                  <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal" (click)="addReasonForVisit(patient)">
                     <i class="fa fa-plus-circle fa-2x" id="addReasonForVisit"></i>
                   </button>
                 </span>
               </td>
               <td>
                 <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient's Details">
-                  <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewNextPatientDetailModal" (click)="viewNextPatientInfo(reasonForVisit)">
+                  <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewNextPatientDetailModal" (click)="viewNextPatientInfo(patient)">
                     <i class="fa fa-eye fa-2x" id="viewNextPatientDetail"></i>
                   </button>
                 </span>
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="onAddReasonForVisit()" data-dismiss="modal">Add Reason For Visit</button>
+        <button type="submit" class="btn btn-primary" (click)="onAddReasonForVisit(patient)" data-dismiss="modal">Add Reason For Visit</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -178,7 +178,7 @@
             <div class="col">
               <p><b>Effect:</b> {{ medicine.effects }}</p>
             </div>
-            <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(selectedMedicine)" data-dismiss="modal">Add
+            <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(medicine)" data-dismiss="modal">Add
                 Medicine</button></p>
           </div> 
           </form>

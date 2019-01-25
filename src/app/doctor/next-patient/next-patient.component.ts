@@ -41,7 +41,7 @@ export class NextPatientComponent implements OnInit {
 
   // patient in the queue list
   queuelist: Array<any>;
-
+  patients: Array<any>;
 
   constructor(
     private DoctorService: DoctorService,
@@ -83,21 +83,20 @@ export class NextPatientComponent implements OnInit {
   }
 
   
-
+  addReasonForVisit(patient){
+    this.patient = patient;
+  }
   onAddReasonForVisit() {
     if (this.reasonForVisit === '') {
       this.flashMessagesService.show('Please fill in all the fields', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
-    let patient = {
+    this.patient.reasonForVisit = this.reasonForVisit;
 
-      reasonForVisit : this.reasonForVisit
-    };
-
-    this.DoctorService.addReasonForVisit(patient).subscribe(res => {
+    this.DoctorService.addReasonForVisit(this.patient).subscribe(res => {
       if (res['success']) {
         this.getReasonForVisit();
-        this.flashMessagesService.show('Reason for Visit added', { cssClass: 'alert-success', timeout: 3000 });
+        this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000 });
       } else {
         if (res['unauthenticated']) {
           this.authService.unAuthenticated();
@@ -129,9 +128,10 @@ export class NextPatientComponent implements OnInit {
       })
   }
 
-  onAddMedicine() {
+  onAddMedicine(medicine) {
     let selectedMedicine = {
-      selectedMedicine: this.selectedMedicine
+      name: medicine.name,
+      queueNo: this.patient.queueNo
     };
 
     this.DoctorService.addMedicine(selectedMedicine).subscribe(res => {
@@ -167,7 +167,7 @@ export class NextPatientComponent implements OnInit {
             return false;
           }
         }
-        this.queuelist = res['queueList'];
+        this.patient = res['queueList'];
       },
       err => {
 
