@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit {
   gender: '';
   email: '';
 
-  
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
@@ -55,27 +55,32 @@ export class PaymentComponent implements OnInit {
   }
 
 
-  patientlist = [ {
-    first_name: "Jake",
-    last_name: "Peralta",
-    nric: "S1234567A",
-    gender: "Male",
-    address: "Blk 123 Happy Street #06-132 S(321123)",
-    dob: "01/04/1997",
-    nationality: "Singaporean",
-    contact: "91234567",
-
-  }, {
-    first_name: "Amy",
-    last_name: "Santiago",
-    nric: "S9812345J",
-    gender: "Female",
-    address: "Blk 124 Waterfall Street #02-100 S(321124)",
-    dob: "04/01/1998",
-    nationality: "Singaporean",
-    contact: "98765432"
-
-}]
+  visits = [{ 
+    patient:{
+      firstName: "Jake",
+      lastName: "Peralta",
+      nric: "S1234567A",
+      gender: "Male",
+      address: "Blk 123 Happy Street #06-132 S(321123)",
+      dob: "01/04/1997",
+      nationality: "Singaporean",
+      contactNo: "91234567",
+      queueNo: 1
+    },
+    reasonForVisit: "Keng mc",
+    dispenseMedicineList: [{
+      medicine: {
+        name: 'Panadol',
+        category: 'Painkiller',
+        effects: 'Drowsiness',
+        price: 3.90
+      },
+      frequency: '3/day',
+      instructions: 'Use only when in pain',
+      dosage: '300mg'
+      
+    }]
+}];
 
   // View and fill in receipt
   viewReceipt(){

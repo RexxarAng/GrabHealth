@@ -157,11 +157,11 @@ export class MainLoginComponent implements OnInit {
     );
   }
 
-  onScriptLoad() {
-    console.log('Google reCAPTCHA loaded and is ready for use!')
-  }
+  // onScriptLoad() {
+  //   console.log('Google reCAPTCHA loaded and is ready for use!')
+  // }
 
-  onScriptError() {
-    console.log('Something went long when loading the Google reCAPTCHA')
-  }
+  // onScriptError() {
+  //   console.log('Something went long when loading the Google reCAPTCHA')
+  // }
 }

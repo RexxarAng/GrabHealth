@@ -18,14 +18,13 @@
     </thead>
 
     <tbody>
-      <tr> <!-- *ngFor="let patient of patientlist"-->
-        <td class="colspacing">QueueNo <!--{{ patient.queueNo}}--></td>
+      <tr *ngFor="let visit of visits">
+        <td class="colspacing">{{ visit.patient.queueNo}}</td>
         <td class="colspacing">
-          <!--<span>{{ patient.firstName }} </span>
-          <span>{{ patient.lastName }}</span>-->
-          Alex Ang
+          <span>{{ visit.patient.firstName }} </span>
+          <span>{{ visit.patient.lastName }}</span>
         </td>
-        <td class="colspacing">S7412391I<!--{{ patient.nric }}--></td>
+        <td class="colspacing">{{ visit.patient.nric }}</td>
         <td class="colspacing">
           <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt" (click)="viewReceipt()">
             Complete Transaction
