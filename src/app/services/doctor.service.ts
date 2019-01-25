@@ -16,8 +16,8 @@ export class DoctorService {
         return this.http.get(this.url + '/doctor/medicineList');
     }
 
-  addReasonForVisit(reasonForVisit) {
-    return this.http.post(this.url + '/doctor/add/reasonForVisit', reasonForVisit);
+  savePatientDetails(patientDetails) {
+    return this.http.post(this.url + '/doctor/add/reasonForVisit', patientDetails);
   }
 
   getReasonForVisit() {

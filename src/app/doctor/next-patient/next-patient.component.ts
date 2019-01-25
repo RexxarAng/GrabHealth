@@ -3,6 +3,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 import { ValidateService } from 'src/app/services/validate.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class NextPatientComponent implements OnInit {
   email: ''; 
   reasonForVisit = ''; 
   doctor:any;
+  instructions: '';
 
   // selected medicine
   selectedMedicine: any; 
@@ -47,7 +49,8 @@ export class NextPatientComponent implements OnInit {
     private DoctorService: DoctorService,
     private validateService: ValidateService,
     private flashMessagesService: FlashMessagesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
 
 
   ) {
@@ -83,20 +86,27 @@ export class NextPatientComponent implements OnInit {
   }
 
   
-  addReasonForVisit(patient){
+  savePatientDetails(patient){
     this.patient = patient;
   }
-  onAddReasonForVisit() {
-    if (this.reasonForVisit === '') {
-      this.flashMessagesService.show('Please fill in all the fields', { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
-    }
+  onSavePatientDetails() {
+
+    this.patient.instructions = this.instructions; 
     this.patient.reasonForVisit = this.reasonForVisit;
 
-    this.DoctorService.addReasonForVisit(this.patient).subscribe(res => {
+    if (this.reasonForVisit === '') {
+      this.flashMessagesService.show("Please enter the patient's reason for visit", { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
+    
+
+    this.DoctorService.savePatientDetails(this.patient).subscribe(res => {
       if (res['success']) {
         this.getReasonForVisit();
+      
         this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000 });
+        this.router.navigateByUrl('/doctor/doctor-main');
       } else {
         if (res['unauthenticated']) {
           this.authService.unAuthenticated();
