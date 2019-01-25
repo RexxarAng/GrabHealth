@@ -7,7 +7,7 @@
         </th>
         <th scope="col">
           <form class="form-inline my-2 my-lg-0">
-            <input [(ngModel)]="searchNric" name="searchNric" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
+            <input [(ngModel)]="patientSearch" name="patientSearch" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
               type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -27,7 +27,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of patientlist | grdFilter: {nric: searchNric}">
+      <tr *ngFor="let patient of patientlist | grdFilter: {nric: patientSearch, firstName: patientSearch}">
         <td class="colspacing">{{ patient.firstName }}</td>
         <td class="colspacing">{{ patient.nric }}</td>
         <td class="colspacing">{{ patient.address }}</td>
@@ -364,7 +364,7 @@
         </th>
         <th scope="col">
           <form class="form-inline my-2 my-lg-0">
-            <input [(ngModel)]="searchNric" name="searchNric" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
+            <input [(ngModel)]="walkinSearch" name="walkinSearch" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
               type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -383,7 +383,7 @@
 </thead>
 
 <tbody>
-  <tr *ngFor="let walkinpatient of walkinpatientlist | grdFilter: {nric: searchNric}">
+  <tr *ngFor="let walkinpatient of walkinpatientlist | grdFilter: {nric: walkinSearch, firstName: walkinSearch}">
     <td class="colspacing">{{ walkinpatient.firstName }}</td>
     <td class="colspacing">{{ walkinpatient.nric }}</td>
     <td class="colspacing">{{ walkinpatient.address }}</td>

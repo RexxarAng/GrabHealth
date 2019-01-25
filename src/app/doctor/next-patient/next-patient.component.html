@@ -12,8 +12,8 @@
         <!-- <th scope="col"> -->
           <thead class="thead-light">
             <tr>
+              <th scope="col" class="colspacing">Queue Number</th>
               <th scope="col" class="colspacing">Name</th>
-              <th scope="col" class="colspacing">DOB</th>
               <th scope="col" class="colspacing">NRIC</th>
               <th scope="col" class="colspacing">Reason for visit</th>
               <th scope="col" class="colspacing">View</th>
@@ -22,10 +22,10 @@
           </thead>
          
           <tbody>
-            <tr> 
-              <td class="colspacing">123</td>
-              <td class="colspacing">123</td>
-              <td class="colspacing">456</td>
+            <tr *ngFor="let patient of queuelist?.patients"> 
+              <td class="colspacing">{{ patient.queueNo }}</td>
+              <td class="colspacing">{{ patient.firstName }}</td>
+              <td class="colspacing">{{ patient.nric }}</td>
               <td>
                 <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add Patient's Reason For Visit">
                   <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal">
@@ -60,7 +60,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let medicine of medicineList">
+      <tr *ngFor="let medicine of selectedMedicineList">
         <td class="colspacing">{{ medicine.name }}</td>
         <td class="colspacing">{{ medicine.price }}</td>
         <td class="colspacing">{{ medicine.category }}</td>
@@ -159,26 +159,26 @@
           </button>
         </div>
 
-        <div class="modal-body" *ngFor="let selectedMedicine of medicineList">
+        <div class="modal-body" *ngFor="let medicine of medicineList">
           <form>
             <div class="row rowspacing">
               <div class="col">
-                <p><b>Medicine Name:</b> {{ selectedMedicine.name }}</p>
+                <p><b>Medicine Name:</b> {{ medicine.name }}</p>
               </div>
 
               <div class="col">
-                <p><b>Price:</b> {{ selectedMedicine.price }}</p>
+                <p><b>Price:</b> {{ medicine.price }}</p>
               </div>
             
 
             <div class="col">
-              <p><b>Category:</b> {{ selectedMedicine.category }}</p>
+              <p><b>Category:</b> {{ medicine.category }}</p>
             </div>
             
             <div class="col">
-              <p><b>Effect:</b> {{ selectedMedicine.effects }}</p>
+              <p><b>Effect:</b> {{ medicine.effects }}</p>
             </div>
-            <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(medicine.value)" data-dismiss="modal">Add
+            <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(selectedMedicine)" data-dismiss="modal">Add
                 Medicine</button></p>
           </div> 
           </form>

@@ -49,5 +49,10 @@ export class DoctorService {
 
   }
 
+  getCurrentPatient() {
+    return this.http.get(this.url + '/doctor/current-patient');
+  }
+
+
   
 }

@@ -36,6 +36,11 @@ export class NextPatientComponent implements OnInit {
 
   // selected medicine
   selectedMedicine: any; 
+  selectedMedicineList: Array<any>; 
+
+
+  // patient in the queue list
+  queuelist: Array<any>;
 
 
   constructor(
@@ -52,6 +57,8 @@ export class NextPatientComponent implements OnInit {
   ngOnInit() {
     this.getDispensedMedicine();
     this.getReasonForVisit();
+    this.getCurrentPatient();
+    this.onGetMedicine();
   }
 
   getDispensedMedicine() {
@@ -74,10 +81,6 @@ export class NextPatientComponent implements OnInit {
   viewNextPatientInfo(patient) {
     this.patient = patient; 
   }
-
-  // editReasonOfVisitDetail(patient) {
-  //   this.reasonForVisit = patient.reasonForVisit; 
-  // }
 
   
 
@@ -150,6 +153,28 @@ export class NextPatientComponent implements OnInit {
 
       });
   }
+
+  // get current patient details 
+  getCurrentPatient() {
+    this.DoctorService.getCurrentPatient().subscribe(
+      res => {
+        console.log(res);
+        if (!res['success']) {
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000 });
+        } else {
+          if (res['unauthenticated']) {
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }
+        this.queuelist = res['queueList'];
+      },
+      err => {
+
+      }
+    )
+  }
+
 
   
   getReasonForVisit() {
