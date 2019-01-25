@@ -26,7 +26,7 @@ import { ManagerService } from './services/manager.service';
 import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-//import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
+import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
 import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 import { MainLoginComponent } from './main-login/main-login.component';
 import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
@@ -55,7 +55,7 @@ export function tokenGetter() {
     PaymentComponent,
     PatientListComponent,
     TeamComponent,
-    //ViewQueueComponent,
+    ViewQueueComponent,
     PaymentReceiptComponent,
     MainLoginComponent,
     DoctorMainComponent,

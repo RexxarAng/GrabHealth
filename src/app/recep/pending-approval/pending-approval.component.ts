@@ -23,6 +23,7 @@ export class PendingApprovalComponent implements OnInit {
   email: '';
   sessionSlot: '';
 
+  nricSearch: any;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -55,7 +56,7 @@ export class PendingApprovalComponent implements OnInit {
             return false;
           }
         }
-        this.pendingList = res['pendingList'];
+        this.pendingList = res['pendingList']['patients'];
       },
       err=>{
       
