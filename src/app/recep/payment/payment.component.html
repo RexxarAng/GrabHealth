@@ -9,7 +9,7 @@
     </thead>
 
     <thead class="thead-light">
-      <tr *ngFor="let patient of patientlist">
+      <tr>
         <th scope="col" class="colspacing">Queue No.</th>
         <th scope="col" class="colspacing">Name</th>
         <th scope="col" class="colspacing">NRIC</th>
@@ -18,15 +18,16 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td class="colspacing">{{ patient.queueNo}}</td>
+      <tr> <!-- *ngFor="let patient of patientlist"-->
+        <td class="colspacing">QueueNo <!--{{ patient.queueNo}}--></td>
         <td class="colspacing">
-          <span>{{ patient.firstName }} </span>
-          <span>{{ patient.lastName }}</span>
+          <!--<span>{{ patient.firstName }} </span>
+          <span>{{ patient.lastName }}</span>-->
+          Alex Ang
         </td>
-        <td class="colspacing">S1234567A</td>
+        <td class="colspacing">S7412391I<!--{{ patient.nric }}--></td>
         <td class="colspacing">
-          <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt">
+          <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt" (click)="viewReceipt()">
             Complete Transaction
           </button>
         </td>
