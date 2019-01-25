@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-queue.component.css']
 })
 export class ViewQueueComponent implements OnInit {
-
+  patient: any;
   constructor() { }
 
   ngOnInit() {

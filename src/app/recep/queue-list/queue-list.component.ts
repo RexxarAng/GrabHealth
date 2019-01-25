@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import $ from 'jquery';
 import { ReceptionistService } from '../../services/receptionist.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ValidateService } from '../../services/validate.service';
 
 @Component({
-  selector: 'app-pending-approval',
-  templateUrl: './pending-approval.component.html',
-  styleUrls: ['./pending-approval.component.css']
+  selector: 'app-queue-list',
+  templateUrl: './queue-list.component.html',
+  styleUrls: ['./queue-list.component.css']
 })
-export class PendingApprovalComponent implements OnInit {
+export class QueueListComponent implements OnInit {
+
   patient: any;
-  pendingList: Array<any>;
+  patientlist: Array<any>;
   firstName: '';
   lastName: '';
   address: '';
@@ -21,31 +24,46 @@ export class PendingApprovalComponent implements OnInit {
   nationality: '';
   gender: '';
   email: '';
-  sessionSlot: '';
+  searchNric: any;
 
-  nricSearch: any;
-
+  queuelist: Array<any>;
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private validateService: ValidateService,
+  ) {
 
-  ngOnInit() {
-    this.getPendingList();
+    $(function(){
+      var dtToday = new Date();
+      
+      var month = dtToday.getMonth() + 1;
+      var day = dtToday.getDate();
+      var year = dtToday.getFullYear();
+      if(this.month < 10)
+          this.month = '0' + month.toString();
+      if(this.day < 10)
+          this.day = '0' + day.toString();
+      
+      var maxDate = year + '-' + month + '-' + day;
+      $('#DOBId').attr('max', maxDate);
+    });
+
   }
 
+  ngOnInit() {
+    // this.getPatients();
+    this.getQueue();
+  }
 
-  // View patient info
-  viewPatientInfo(patient) {
+  viewPatientInfo(patient){
     this.patient = patient;
   }
 
-
   // Display patients
-  getPendingList(){
-    this.receptionistService.getPendingList().subscribe(
+  getPatients(){
+    this.receptionistService.getPatients().subscribe(
       res=>{
         console.log(res);
         if(!res['success']){
@@ -55,8 +73,30 @@ export class PendingApprovalComponent implements OnInit {
             this.authService.unAuthenticated();
             return false;
           }
-        }
-        this.pendingList = res['pendingList']['patients'];
+        }       
+        this.patientlist = res['patients'];
+      },
+      err=>{
+      
+      }
+    )
+  }
+  
+
+  // Display patients in queue
+  getQueue(){
+    this.receptionistService.getQueue().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }    
+        this.queuelist = res['queueList'];
       },
       err=>{
       
@@ -64,15 +104,16 @@ export class PendingApprovalComponent implements OnInit {
     )
   }
 
-  // Approve Appointment
-  onApproveAppointment(patient){
+
+  // Remove patient from queue
+  onRemoveFromQueue(patient){
     this.patient = patient;
 
-    this.receptionistService.onApproveAppointment(patient).subscribe(
+    this.receptionistService.onRemoveFromQueue(patient).subscribe(
       res=>{
         if(res['success']){
           console.log(res);
-          this.getPendingList();
+          this.getQueue();
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(res['unauthenticated']){
@@ -81,40 +122,13 @@ export class PendingApprovalComponent implements OnInit {
           }
           console.log(res);
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-          this.getPendingList();
+          this.getQueue();
         }
       },
       err => {
-        this.flashMessagesService.show('Somewhere broke while attempting to approve request!', { cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessagesService.show('Somewhere broke while attempting to remove patient from queue!', { cssClass: 'alert-danger', timeout: 3000});
       }
     )    
+
   }
-
-
-  // Reject Appointment
-  onRejectAppointment(patient){
-    this.patient = patient;
-
-    this.receptionistService.onRejectAppointment(patient).subscribe(
-      res=>{
-        if(res['success']){
-          console.log(res);
-          this.getPendingList();
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
-        } else {
-          if(res['unauthenticated']){
-            this.authService.unAuthenticated();
-            return false;
-          }
-          console.log(res);
-          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-          this.getPendingList();
-        }
-      },
-      err => {
-        this.flashMessagesService.show('Somewhere broke while attempting to approve request!', { cssClass: 'alert-danger', timeout: 3000});
-      }
-    )    
-  }
-
 }

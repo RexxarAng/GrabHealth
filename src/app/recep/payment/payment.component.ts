@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-
-  appTitle = "Oreo"
+  patientlist: Array<any>;
+  patient: any;
   constructor() { }
 
   ngOnInit() {

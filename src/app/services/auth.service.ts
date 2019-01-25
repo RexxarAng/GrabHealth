@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -13,17 +14,14 @@ export class AuthService {
         private router: Router,
         private flashMessagesService: FlashMessagesService
         ) {}
+    url = environment.clinicserverurl;
 
     noAuthHeader = { headers: new HttpHeaders({"NoAuth": "true"}) };
 
-    //Admin login 
-    loginAdmin(credentials){
-        return this.http.post('http://localhost:4560/admin/authenticate', credentials, this.noAuthHeader);
-    }
     //Doctor/Receptionist/Manager login
     loginClinic(credentials, role){
         credentials.role = role;
-        return this.http.post('http://localhost:4560/authenticate', credentials, this.noAuthHeader);
+        return this.http.post(this.url + '/authenticate', credentials, this.noAuthHeader);
     }
     getUserRole(){
         return sessionStorage.getItem('user');
@@ -48,7 +46,7 @@ export class AuthService {
         var userPayload = this.getUserPayload();
         if (userPayload) {
             if (!this.jwtHelper.isTokenExpired(userPayload)){
-                return this.http.post('http://localhost:4560/blacklistToken', "Nothing").subscribe(
+                return this.http.post(this.url + '/blacklistToken', "Nothing").subscribe(
                     res=>{
                         this.deleteToken();
                         this.router.navigateByUrl('/login');

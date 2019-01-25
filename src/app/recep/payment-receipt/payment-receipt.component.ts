@@ -15,6 +15,11 @@ export class PaymentReceiptComponent implements OnInit {
   currentDate = Date.now();
   datePolling: any;
 
+  disc: any;
+  consultationAmt: any;
+  payment: any;
+  clinic:any;
+
   constructor() {}
 
   ngOnInit() {

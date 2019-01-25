@@ -32,6 +32,9 @@ export class PatientListComponent implements OnInit {
   editPNationality: '';
   editPContactNo: '';
 
+  searchNric: any;
+  nricSearch: any;
+  queuelist: Array<any>;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -90,15 +93,15 @@ export class PatientListComponent implements OnInit {
 
   editPatientInfo(patient){
     this.patient = patient;
-    this.editPFirstName = patient.firstName;
-    this.editPLastName = patient.lastName;
-    this.nric = patient.nric;
-    this.gender = patient.gender;
-    this.editPAddress = patient.address;
-    this.dob = patient.dob;
-    this.editPNationality = patient.nationality;
-    this.editPContactNo = patient.contactNo;
-    this.email = patient.email;
+    this.editPFirstName = patient.patient.firstName;
+    this.editPLastName = patient.patient.lastName;
+    this.nric = patient.patient.nric;
+    this.gender = patient.patient.gender;
+    this.editPAddress = patient.patient.address;
+    this.dob = patient.patient.dob;
+    this.editPNationality = patient.patient.nationality;
+    this.editPContactNo = patient.patient.contactNo;
+    this.email = patient.patient.email;
   }
 
   onEditPatientInfo(){
@@ -179,8 +182,12 @@ export class PatientListComponent implements OnInit {
         console.log(res);
         if(!res['success']){
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-        }
-         
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
         this.patientlist = res['patients'];
       },
       err=>{
@@ -296,9 +303,6 @@ export class PatientListComponent implements OnInit {
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
           this.getPatients();
         }
-        // if(res['unauthenticated']){
-        //   this.authService.logout();
-        // }
       },
       err => {
         this.flashMessagesService.show('Somewhere broke!', { cssClass: 'alert-danger', timeout: 3000});
@@ -308,27 +312,32 @@ export class PatientListComponent implements OnInit {
   }
 
 
-  addPatientToQueue(patient){
+  // Add patient to queue
+  onAddToQueue(patient){
+    
     this.patient = patient;
 
-    this.receptionistService.addPatientToQueue(patient).subscribe(
+    this.receptionistService.onAddToQueue(patient.patient).subscribe(
       res=>{
         if(res['success']){
-          this.getPatients();
+          console.log(res);
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
         } else {
           if(res['unauthenticated']){
             this.authService.unAuthenticated();
             return false;
           }
+          console.log(res);
           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
         }
       },
       err => {
+        console.log(err);
         this.flashMessagesService.show('Somewhere broke while attempting to add patient to queue!', { cssClass: 'alert-danger', timeout: 3000});
       }
     )    
   }
+  
 
 
 }
