@@ -26,7 +26,7 @@
         </td>
         <td class="colspacing">{{ visit.patient.nric }}</td>
         <td class="colspacing">
-          <button type="submit" class="btn btn-primary" (click)="viewReceipt()">
+          <button type="submit" class="btn btn-primary" (click)="viewReceipt(visit)">
             Complete Transaction
           </button>
         </td>
@@ -37,17 +37,17 @@
 
 
 <!--Payment Receipt-->
-<div *ngIf="!showMain">
+<div *ngIf="!showMain && visit">
   <div class="container text-center" id="printToPDF" style="margin-top: 4%;"> 
     <div class="row text-center" style="margin-bottom: 2%;">
 
       <div class="col text-left" id="clinicDetails" style="margin-right: 20%; padding-top: 2%; margin-top: 4%;">
         <div>
-          <p id="clinicName"> {{ clinic.clinicName }}</p>
+          <p id="clinicName"> {{ visit.clinic.name }}</p>
         </div>
 
         <div>
-          <p id="clinicAddress">{{ clinic.clinicAddress }}</p>
+          <p id="clinicAddress">{{ visit.clinic.address }}</p>
         </div>
       </div>
 
@@ -69,17 +69,17 @@
         <form>
           <div class="row text-left">
             <div class="col">
-              <p><b>Patient Name:</b>  patient.firstName  <span> patient.lastName </span></p>
+              <p><b>Patient Name:</b>  {{ visit.patient.firstName }}  <span> {{ visit.patient.lastName }} </span></p>
             </div>
 
             <div class="col">
-              <p><b>Doctor:</b> Dr. doctor.doctorName</p>
+              <p><b>Doctor:</b> Dr. {{ visit.doctor.firstName}} {{ visit.doctor.lastName }}</p>
             </div>
           </div>
 
           <div class="row text-left">
             <div class="col">
-              <p><b>Address:</b>  patient.address </p>
+              <p><b>Address:</b>  {{ visit.patient.address }} </p>
             </div>
 
             <div class="col">
@@ -113,16 +113,16 @@
             <td class="colspacing" id="consultationQty">-</td>
             <td>
               <div class="form-group form-inline" style="float: right; padding-right: 2%;">
-                <label for="consultationAmt" style="padding-right: 5px;">$ </label>
+                <label for="consultationAmt" style="padding-right: 5px;">$ {{ visit.clinic.consultationFee }} </label>
                 <input type="number" class="form-control" id="consultationAmt" style="width: 100px;" [(ngModel)]="consultationAmt" name="consultationAmt">
               </div>
             </td>
           </tr>
 
-          <tr>
-            <td class="colspacing text-left" id="medName"> med.medName </td>
-            <td class="colspacing" id="medQty"> med.medQty </td>
-            <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> med.medAmt </td>
+          <tr *ngFor="let medicine of medicineList">
+            <td class="colspacing text-left" id="medName"> {{ medicine.name }} </td>
+            <td class="colspacing" id="medQty"> 1 </td>
+            <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> {{ medicine.price }}</td>
           </tr>
         </tbody>
 
