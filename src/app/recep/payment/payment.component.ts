@@ -5,6 +5,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ValidateService } from '../../services/validate.service';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import FileSaver from 'file-saver';
 
 
 @Component({
@@ -24,6 +27,15 @@ export class PaymentComponent implements OnInit {
   nationality: '';
   gender: '';
   email: '';
+  showMain: Boolean;
+
+  currentDate = Date.now();
+  datePolling: any;
+
+  disc: any;
+  consultationAmt: any;
+  payment: any;
+  clinic:any;
 
 
   constructor(
@@ -52,8 +64,14 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showMain= true;
+    this.datePolling = setInterval(() =>
+      this.loadDate(),2000);
   }
 
+  loadDate(){
+    this.currentDate = Date.now();
+  }
 
   visits = [{ 
     patient:{
@@ -84,8 +102,31 @@ export class PaymentComponent implements OnInit {
 
   // View and fill in receipt
   viewReceipt(){
-
+    this.showMain = false;
   }
 
+  closeReceipt(){
+    this.showMain = true;
+  }
 
+  // Generate Receipt PDF
+  downloadPDF(quality = 4) {
+    const filename = 'receipt.pdf';
+    const date = Date.now();
+
+    html2canvas(document.querySelector('#printToPDF'), {scale: quality}).then(canvas => {
+      var imgWidth = 210;   
+      var pageHeight = 298;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+      
+      const contentDataURL = canvas.toDataURL('image/png');
+
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save(date + filename);
+    });
+  }
 }

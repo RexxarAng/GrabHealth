@@ -21,6 +21,7 @@ export class PendingApprovalComponent implements OnInit {
   nationality: '';
   gender: '';
   email: '';
+  remarks: '';
   sessionSlot: '';
   pendingApprovalPolling: any;
 
@@ -34,7 +35,7 @@ export class PendingApprovalComponent implements OnInit {
   ngOnInit() {
     this.getPendingList();
     this.pendingApprovalPolling = setInterval(() =>
-      this.getPendingList(),1000);
+      this.getPendingList(),3000);
   }
 
 
@@ -74,7 +75,7 @@ export class PendingApprovalComponent implements OnInit {
   // Approve Appointment
   onApproveAppointment(patient){
     this.patient = patient;
-
+    this.patient.remarks = this.remarks;
     this.receptionistService.onApproveAppointment(patient).subscribe(
       res=>{
         if(res['success']){
@@ -101,6 +102,7 @@ export class PendingApprovalComponent implements OnInit {
   // Reject Appointment
   onRejectAppointment(patient){
     this.patient = patient;
+    this.patient.remarks = this.remarks;
 
     this.receptionistService.onRejectAppointment(patient).subscribe(
       res=>{
