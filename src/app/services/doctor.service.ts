@@ -8,13 +8,13 @@ export class DoctorService {
 
   // private url = "/routes/comment";
   constructor(private http: HttpClient) {
-    
+
   }
   url = environment.clinicserverurl;
 
-    getMedicineList(){
-        return this.http.get(this.url + '/doctor/medicineList');
-    }
+  getMedicineList() {
+    return this.http.get(this.url + '/doctor/medicineList');
+  }
 
   savePatientDetails(patientDetails) {
     return this.http.post(this.url + '/doctor/add/reasonForVisit', patientDetails);
@@ -53,6 +53,14 @@ export class DoctorService {
     return this.http.get(this.url + '/doctor/current-patient');
   }
 
+  getInstructions() {
+    return this.http.get(this.url + 'doctor/instructions');
+  }
 
-  
+  createVisit(visit){
+    return this.http.post(this.url + '/doctor/create/visit', visit);
+
+  }
+
+
 }
