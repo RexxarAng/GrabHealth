@@ -7,7 +7,8 @@
         </th>
         <th scope="col">
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <input [(ngModel)]="patientSearch" name="patientSearch" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
+              type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
         </th>
@@ -16,30 +17,692 @@
 
     <thead class="thead-light">
       <tr>
+        <th scope="col" class="colspacing">Name</th>
         <th scope="col" class="colspacing">NRIC/Passport No.</th>
         <th scope="col" class="colspacing">Address</th>
         <th scope="col" class="colspacing">Contact No.</th>
-        <th scope="col" class="colspacing">Allergies</th>
-        <th scope="col" class="colspacing">Medical History</th>
         <th scope="col" class="colspacing">Edit</th>
 
       </tr>
     </thead>
 
     <tbody>
-      <tr>
-        <td class="colspacing">S1234567A</td>
-        <td class="colspacing">614 Moon Street 93</td>
-        <td class="colspacing">987654325</td>
-        <td class="colspacing">Penicillin</td>
-        <td class="colspacing">N/A</td>
-
+      <tr *ngFor="let patient of patientlist | grdFilter: {nric: patientSearch, firstName: patientSearch}">
+        <td class="colspacing">{{ patient.firstName }}</td>
+        <td class="colspacing">{{ patient.nric }}</td>
+        <td class="colspacing">{{ patient.address }}</td>
+        <td class="colspacing">{{ patient.contactNo }}</td>
         <td class="colspacing">
-          <button type="submit" class="btn btn-primary" routerLink="/doctor/edit-details">
-            Edit Patient Details
-          </button>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Edit Patient Details">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editPatientDetailModal" (click)="editPatientInfo(patient)">
+              <i class="fa fa-edit fa-2x" id="editPatientDetail"></i>
+            </button>
+          </span>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<!--Edit Patient Details Modal-->
+<div>
+  <div class="modal fade" id="editPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="editPatientDetailModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPatientDetailModalLabel">Edit Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngIf="patient">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>First Name:</b></label>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" name="firstName"
+                    [(ngModel)]="editPFirstName" required />
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Last Name:</b></label>
+                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" name="lastName"
+                    [(ngModel)]="editPLastName" required />
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>NRIC/ Passport No:</b></label>
+                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." name="nric"
+                    [(ngModel)]="nric" required disabled />
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Nationality:</b></label>
+                  <select class="form-control" id="nationalityId" placeholder="Nationality" name="editPNationality"
+                    [(ngModel)]="editPNationality" required>
+                    <option value="">-- Select One --</option>
+                    <option value="afghan">Afghan</option>
+                    <option value="Albanian">Albanian</option>
+                    <option value="Algerian">Algerian</option>
+                    <option value="American">American</option>
+                    <option value="Andorran">Andorran</option>
+                    <option value="Angolan">Angolan</option>
+                    <option value="Antiguans">Antiguans</option>
+                    <option value="Argentinean">Argentinean</option>
+                    <option value="Armenian">Armenian</option>
+                    <option value="Australian">Australian</option>
+                    <option value="Austrian">Austrian</option>
+                    <option value="Azerbaijani">Azerbaijani</option>
+                    <option value="Bahamian">Bahamian</option>
+                    <option value="Bahraini">Bahraini</option>
+                    <option value="Bangladeshi">Bangladeshi</option>
+                    <option value="Barbadian">Barbadian</option>
+                    <option value="Barbudans">Barbudans</option>
+                    <option value="Batswana">Batswana</option>
+                    <option value="Belarusian">Belarusian</option>
+                    <option value="Belgian">Belgian</option>
+                    <option value="Belizean">Belizean</option>
+                    <option value="Beninese">Beninese</option>
+                    <option value="Bhutanese">Bhutanese</option>
+                    <option value="Bolivian">Bolivian</option>
+                    <option value="Brazilian">Brazilian</option>
+                    <option value="British">British</option>
+                    <option value="Bruneian">Bruneian</option>
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Burkinabe">Burkinabe</option>
+                    <option value="Burmese">Burmese</option>
+                    <option value="Burundian">Burundian</option>
+                    <option value="Cambodian">Cambodian</option>
+                    <option value="Cameroonian">Cameroonian</option>
+                    <option value="Canadian">Canadian</option>
+                    <option value="Cape Verdean">Cape Verdean</option>
+                    <option value="Central African">Central African</option>
+                    <option value="Chadian">Chadian</option>
+                    <option value="Chilean">Chilean</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Colombian">Colombian</option>
+                    <option value="Comoran">Comoran</option>
+                    <option value="Congolese">Congolese</option>
+                    <option value="Costa Rican">Costa Rican</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Cuban">Cuban</option>
+                    <option value="Cypriot">Cypriot</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Dominican">Dominican</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="East Timorese">East Timorese</option>
+                    <option value="Ecuadorean">Ecuadorean</option>
+                    <option value="Egyptian">Egyptian</option>
+                    <option value="Emirian">Emirian</option>
+                    <option value="Equatorial Guinean">Equatorial Guinean</option>
+                    <option value="Eritrean">Eritrean</option>
+                    <option value="Estonian">Estonian</option>
+                    <option value="Ethiopian">Ethiopian</option>
+                    <option value="Fijian">Fijian</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="French">French</option>
+                    <option value="Gabonese">Gabonese</option>
+                    <option value="Gambian">Gambian</option>
+                    <option value="Georgian">Georgian</option>
+                    <option value="German">German</option>
+                    <option value="Ghanaian">Ghanaian</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Grenadian">Grenadian</option>
+                    <option value="Guatemalan">Guatemalan</option>
+                    <option value="Guinea-Bissauan">Guinea-Bissauan</option>
+                    <option value="Guinean">Guinean</option>
+                    <option value="Guyanese">Guyanese</option>
+                    <option value="Haitian">Haitian</option>
+                    <option value="Herzegovinian">Herzegovinian</option>
+                    <option value="Honduran">Honduran</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Icelander">Icelander</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Iranian">Iranian</option>
+                    <option value="Iraqi">Iraqi</option>
+                    <option value="Irish">Irish</option>
+                    <option value="Israeli">Israeli</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Ivorian">Ivorian</option>
+                    <option value="Jamaican">Jamaican</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Jordanian">Jordanian</option>
+                    <option value="Kazakhstani">Kazakhstani</option>
+                    <option value="Kenyan">Kenyan</option>
+                    <option value="Kittian and Nevisian">Kittian and Nevisian</option>
+                    <option value="Kuwaiti">Kuwaiti</option>
+                    <option value="Kyrgyz">Kyrgyz</option>
+                    <option value="Laotian">Laotian</option>
+                    <option value="Latvian">Latvian</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Liberian">Liberian</option>
+                    <option value="Libyan">Libyan</option>
+                    <option value="Liechtensteiner">Liechtensteiner</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Luxembourger">Luxembourger</option>
+                    <option value="Macedonian">Macedonian</option>
+                    <option value="Malagasy">Malagasy</option>
+                    <option value="Malawian">Malawian</option>
+                    <option value="Malaysian">Malaysian</option>
+                    <option value="Maldivan">Maldivan</option>
+                    <option value="Malian">Malian</option>
+                    <option value="Maltese">Maltese</option>
+                    <option value="Marshallese">Marshallese</option>
+                    <option value="Mauritanian">Mauritanian</option>
+                    <option value="Mauritian">Mauritian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Micronesian">Micronesian</option>
+                    <option value="Moldovan">Moldovan</option>
+                    <option value="Monacan">Monacan</option>
+                    <option value="Mongolian">Mongolian</option>
+                    <option value="Moroccan">Moroccan</option>
+                    <option value="Mosotho">Mosotho</option>
+                    <option value="Motswana">Motswana</option>
+                    <option value="Mozambican">Mozambican</option>
+                    <option value="Namibian">Namibian</option>
+                    <option value="Nauruan">Nauruan</option>
+                    <option value="Nepalese">Nepalese</option>
+                    <option value="New Zealander">New Zealander</option>
+                    <option value="Ni-Vanuatu">Ni-Vanuatu</option>
+                    <option value="Nicaraguan">Nicaraguan</option>
+                    <option value="Nigerien">Nigerien</option>
+                    <option value="North Korean">North Korean</option>
+                    <option value="Northern Irish">Northern Irish</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Omani">Omani</option>
+                    <option value="Pakistani">Pakistani</option>
+                    <option value="Palauan">Palauan</option>
+                    <option value="Panamanian">Panamanian</option>
+                    <option value="Papua New Guinean">Papua New Guinean</option>
+                    <option value="Paraguayan">Paraguayan</option>
+                    <option value="Peruvian">Peruvian</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Qatari">Qatari</option>
+                    <option value="Romanian">Romanian</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Rwandan">Rwandan</option>
+                    <option value="Saint Lucian">Saint Lucian</option>
+                    <option value="Salvadoran">Salvadoran</option>
+                    <option value="Samoan">Samoan</option>
+                    <option value="San Marinese">San Marinese</option>
+                    <option value="Sao Tomean">Sao Tomean</option>
+                    <option value="Saudi">Saudi</option>
+                    <option value="Scottish">Scottish</option>
+                    <option value="Senegalese">Senegalese</option>
+                    <option value="Serbian">Serbian</option>
+                    <option value="Seychellois">Seychellois</option>
+                    <option value="Sierra Leonean">Sierra Leonean</option>
+                    <option value="Singaporean" selected>Singaporean</option>
+                    <option value="Slovakian">Slovakian</option>
+                    <option value="Slovenian">Slovenian</option>
+                    <option value="Solomon Islander">Solomon Islander</option>
+                    <option value="Somali">Somali</option>
+                    <option value="South African">South African</option>
+                    <option value="South Korean">South Korean</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Sri Lankan">Sri Lankan</option>
+                    <option value="Sudanese">Sudanese</option>
+                    <option value="Surinamer">Surinamer</option>
+                    <option value="Swazi">Swazi</option>
+                    <option value="Swedish">Swedish</option>
+                    <option value="Swiss">Swiss</option>
+                    <option value="Syrian">Syrian</option>
+                    <option value="Taiwanese">Taiwanese</option>
+                    <option value="Tajik">Tajik</option>
+                    <option value="Tanzanian">Tanzanian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Togolese">Togolese</option>
+                    <option value="Tongan">Tongan</option>
+                    <option value="Trinidadian or Tobagonian">Trinidadian or Tobagonian</option>
+                    <option value="Tunisian">Tunisian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Tuvaluan">Tuvaluan</option>
+                    <option value="Ugandan">Ugandan</option>
+                    <option value="Ukrainian">Ukrainian</option>
+                    <option value="Uruguayan">Uruguayan</option>
+                    <option value="Uzbekistani">Uzbekistani</option>
+                    <option value="Venezuelan">Venezuelan</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Welsh">Welsh</option>
+                    <option value="Yemenite">Yemenite</option>
+                    <option value="Zambian">Zambian</option>
+                    <option value="Zimbabwean">Zimbabwean</option>
+                  </select>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Gender:</b></label>
+                  <select class="form-control" id="genderId" placeholder="Gender" name="gender" [(ngModel)]="gender"
+                    required disabled>
+                    <option value="">--Select One--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Date of Birth:</b></label>
+                  <input type="date" class="form-control" id="DOBId" name="dob" [(ngModel)]="dob" required disabled>
+                  <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Email:</b></label>
+                  <input type="email" class="form-control" id="emailId" placeholder="Email" name="email" [(ngModel)]="email"
+                    required disabled>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Contact No:</b></label>
+                  <input type="tel" class="form-control" id="contactId" pattern="[8|9][0-9]{7}" size="8" placeholder="Contact No."
+                    name="editPContactNo" [(ngModel)]="editPContactNo" required>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Address:</b></label>
+                  <textarea class="form-control" id="addressId" rows="3" placeholder="Address" name="address"
+                    [(ngModel)]="editPAddress" required></textarea>
+                </fieldset>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="onEditPatientInfo()" id="editPatientInfoBtn">Save
+            Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- For walk in patients -->
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <h3>View Walkin Patient Details</h3>
+        </th>
+        <th scope="col">
+          <form class="form-inline my-2 my-lg-0">
+            <input [(ngModel)]="walkinSearch" name="walkinSearch" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2"
+              type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </th>
+      </tr>
+    </thead>
+<thead class="thead-light">
+  <tr>
+    <th scope="col" class="colspacing">Name</th>
+    <th scope="col" class="colspacing">NRIC/Passport No.</th>
+    <th scope="col" class="colspacing">Address</th>
+    <th scope="col" class="colspacing">Contact No.</th>
+    <th scope="col" class="colspacing">Edit</th>
+
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let walkinpatient of walkinpatientlist | grdFilter: {nric: walkinSearch, firstName: walkinSearch}">
+    <td class="colspacing">{{ walkinpatient.firstName }}</td>
+    <td class="colspacing">{{ walkinpatient.nric }}</td>
+    <td class="colspacing">{{ walkinpatient.address }}</td>
+    <td class="colspacing">{{ walkinpatient.contactNo }}</td>
+    <td class="colspacing">
+      <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Edit Patient Details">
+        <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editWalkInPatientDetailModal" (click)="editWalkInPatientInfo(walkinpatient)">
+          <i class="fa fa-edit fa-2x" id="editWalkInPatientDetail"></i>
+        </button>
+      </span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!--Edit Patient Details Modal-->
+<div>
+  <div class="modal fade" id="editWalkInPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="editWalkInPatientDetailModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editWalkInPatientDetailModalLabel">Edit Walk In Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngIf="walkinpatient">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>First Name:</b></label>
+                  <input type="text" class="form-control" id="firstNameId" placeholder="First Name" name="firstName"
+                    [(ngModel)]="editWFirstName" required />
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Last Name:</b></label>
+                  <input type="text" class="form-control" id="lastNameId" placeholder="Last Name" name="lastName"
+                    [(ngModel)]="editWLastName" required />
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>NRIC/ Passport No:</b></label>
+                  <input type="text" class="form-control" id="nricNoId" placeholder="NRIC/ Passport No." name="nric"
+                    [(ngModel)]="nric" required disabled />
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Nationality:</b></label>
+                  <select class="form-control" id="nationalityId" placeholder="Nationality" name="editWNationality"
+                    [(ngModel)]="editWNationality" required>
+                    <option value="">-- Select One --</option>
+                    <option value="afghan">Afghan</option>
+                    <option value="Albanian">Albanian</option>
+                    <option value="Algerian">Algerian</option>
+                    <option value="American">American</option>
+                    <option value="Andorran">Andorran</option>
+                    <option value="Angolan">Angolan</option>
+                    <option value="Antiguans">Antiguans</option>
+                    <option value="Argentinean">Argentinean</option>
+                    <option value="Armenian">Armenian</option>
+                    <option value="Australian">Australian</option>
+                    <option value="Austrian">Austrian</option>
+                    <option value="Azerbaijani">Azerbaijani</option>
+                    <option value="Bahamian">Bahamian</option>
+                    <option value="Bahraini">Bahraini</option>
+                    <option value="Bangladeshi">Bangladeshi</option>
+                    <option value="Barbadian">Barbadian</option>
+                    <option value="Barbudans">Barbudans</option>
+                    <option value="Batswana">Batswana</option>
+                    <option value="Belarusian">Belarusian</option>
+                    <option value="Belgian">Belgian</option>
+                    <option value="Belizean">Belizean</option>
+                    <option value="Beninese">Beninese</option>
+                    <option value="Bhutanese">Bhutanese</option>
+                    <option value="Bolivian">Bolivian</option>
+                    <option value="Brazilian">Brazilian</option>
+                    <option value="British">British</option>
+                    <option value="Bruneian">Bruneian</option>
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Burkinabe">Burkinabe</option>
+                    <option value="Burmese">Burmese</option>
+                    <option value="Burundian">Burundian</option>
+                    <option value="Cambodian">Cambodian</option>
+                    <option value="Cameroonian">Cameroonian</option>
+                    <option value="Canadian">Canadian</option>
+                    <option value="Cape Verdean">Cape Verdean</option>
+                    <option value="Central African">Central African</option>
+                    <option value="Chadian">Chadian</option>
+                    <option value="Chilean">Chilean</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Colombian">Colombian</option>
+                    <option value="Comoran">Comoran</option>
+                    <option value="Congolese">Congolese</option>
+                    <option value="Costa Rican">Costa Rican</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Cuban">Cuban</option>
+                    <option value="Cypriot">Cypriot</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Dominican">Dominican</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="East Timorese">East Timorese</option>
+                    <option value="Ecuadorean">Ecuadorean</option>
+                    <option value="Egyptian">Egyptian</option>
+                    <option value="Emirian">Emirian</option>
+                    <option value="Equatorial Guinean">Equatorial Guinean</option>
+                    <option value="Eritrean">Eritrean</option>
+                    <option value="Estonian">Estonian</option>
+                    <option value="Ethiopian">Ethiopian</option>
+                    <option value="Fijian">Fijian</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="French">French</option>
+                    <option value="Gabonese">Gabonese</option>
+                    <option value="Gambian">Gambian</option>
+                    <option value="Georgian">Georgian</option>
+                    <option value="German">German</option>
+                    <option value="Ghanaian">Ghanaian</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Grenadian">Grenadian</option>
+                    <option value="Guatemalan">Guatemalan</option>
+                    <option value="Guinea-Bissauan">Guinea-Bissauan</option>
+                    <option value="Guinean">Guinean</option>
+                    <option value="Guyanese">Guyanese</option>
+                    <option value="Haitian">Haitian</option>
+                    <option value="Herzegovinian">Herzegovinian</option>
+                    <option value="Honduran">Honduran</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Icelander">Icelander</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Iranian">Iranian</option>
+                    <option value="Iraqi">Iraqi</option>
+                    <option value="Irish">Irish</option>
+                    <option value="Israeli">Israeli</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Ivorian">Ivorian</option>
+                    <option value="Jamaican">Jamaican</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Jordanian">Jordanian</option>
+                    <option value="Kazakhstani">Kazakhstani</option>
+                    <option value="Kenyan">Kenyan</option>
+                    <option value="Kittian and Nevisian">Kittian and Nevisian</option>
+                    <option value="Kuwaiti">Kuwaiti</option>
+                    <option value="Kyrgyz">Kyrgyz</option>
+                    <option value="Laotian">Laotian</option>
+                    <option value="Latvian">Latvian</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Liberian">Liberian</option>
+                    <option value="Libyan">Libyan</option>
+                    <option value="Liechtensteiner">Liechtensteiner</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Luxembourger">Luxembourger</option>
+                    <option value="Macedonian">Macedonian</option>
+                    <option value="Malagasy">Malagasy</option>
+                    <option value="Malawian">Malawian</option>
+                    <option value="Malaysian">Malaysian</option>
+                    <option value="Maldivan">Maldivan</option>
+                    <option value="Malian">Malian</option>
+                    <option value="Maltese">Maltese</option>
+                    <option value="Marshallese">Marshallese</option>
+                    <option value="Mauritanian">Mauritanian</option>
+                    <option value="Mauritian">Mauritian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Micronesian">Micronesian</option>
+                    <option value="Moldovan">Moldovan</option>
+                    <option value="Monacan">Monacan</option>
+                    <option value="Mongolian">Mongolian</option>
+                    <option value="Moroccan">Moroccan</option>
+                    <option value="Mosotho">Mosotho</option>
+                    <option value="Motswana">Motswana</option>
+                    <option value="Mozambican">Mozambican</option>
+                    <option value="Namibian">Namibian</option>
+                    <option value="Nauruan">Nauruan</option>
+                    <option value="Nepalese">Nepalese</option>
+                    <option value="New Zealander">New Zealander</option>
+                    <option value="Ni-Vanuatu">Ni-Vanuatu</option>
+                    <option value="Nicaraguan">Nicaraguan</option>
+                    <option value="Nigerien">Nigerien</option>
+                    <option value="North Korean">North Korean</option>
+                    <option value="Northern Irish">Northern Irish</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Omani">Omani</option>
+                    <option value="Pakistani">Pakistani</option>
+                    <option value="Palauan">Palauan</option>
+                    <option value="Panamanian">Panamanian</option>
+                    <option value="Papua New Guinean">Papua New Guinean</option>
+                    <option value="Paraguayan">Paraguayan</option>
+                    <option value="Peruvian">Peruvian</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Qatari">Qatari</option>
+                    <option value="Romanian">Romanian</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Rwandan">Rwandan</option>
+                    <option value="Saint Lucian">Saint Lucian</option>
+                    <option value="Salvadoran">Salvadoran</option>
+                    <option value="Samoan">Samoan</option>
+                    <option value="San Marinese">San Marinese</option>
+                    <option value="Sao Tomean">Sao Tomean</option>
+                    <option value="Saudi">Saudi</option>
+                    <option value="Scottish">Scottish</option>
+                    <option value="Senegalese">Senegalese</option>
+                    <option value="Serbian">Serbian</option>
+                    <option value="Seychellois">Seychellois</option>
+                    <option value="Sierra Leonean">Sierra Leonean</option>
+                    <option value="Singaporean" selected>Singaporean</option>
+                    <option value="Slovakian">Slovakian</option>
+                    <option value="Slovenian">Slovenian</option>
+                    <option value="Solomon Islander">Solomon Islander</option>
+                    <option value="Somali">Somali</option>
+                    <option value="South African">South African</option>
+                    <option value="South Korean">South Korean</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Sri Lankan">Sri Lankan</option>
+                    <option value="Sudanese">Sudanese</option>
+                    <option value="Surinamer">Surinamer</option>
+                    <option value="Swazi">Swazi</option>
+                    <option value="Swedish">Swedish</option>
+                    <option value="Swiss">Swiss</option>
+                    <option value="Syrian">Syrian</option>
+                    <option value="Taiwanese">Taiwanese</option>
+                    <option value="Tajik">Tajik</option>
+                    <option value="Tanzanian">Tanzanian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Togolese">Togolese</option>
+                    <option value="Tongan">Tongan</option>
+                    <option value="Trinidadian or Tobagonian">Trinidadian or Tobagonian</option>
+                    <option value="Tunisian">Tunisian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Tuvaluan">Tuvaluan</option>
+                    <option value="Ugandan">Ugandan</option>
+                    <option value="Ukrainian">Ukrainian</option>
+                    <option value="Uruguayan">Uruguayan</option>
+                    <option value="Uzbekistani">Uzbekistani</option>
+                    <option value="Venezuelan">Venezuelan</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Welsh">Welsh</option>
+                    <option value="Yemenite">Yemenite</option>
+                    <option value="Zambian">Zambian</option>
+                    <option value="Zimbabwean">Zimbabwean</option>
+                  </select>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Gender:</b></label>
+                  <select class="form-control" id="genderId" placeholder="Gender" name="gender" [(ngModel)]="gender"
+                    required disabled>
+                    <option value="">--Select One--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Date of Birth:</b></label>
+                  <input type="date" class="form-control" id="DOBId" name="dob" [(ngModel)]="dob" required disabled>
+                  <small id="DOBHelp" class="form-text text-muted">Date of Birth (Format: DD/MM/YYYY)</small>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Email:</b></label>
+                  <input type="email" class="form-control" id="emailId" placeholder="Email" name="email" [(ngModel)]="email"
+                    required disabled>
+                </fieldset>
+              </div>
+
+              <div class="col">
+                <fieldset>
+                  <label><b>Contact No:</b></label>
+                  <input type="tel" class="form-control" id="contactId" pattern="[8|9][0-9]{7}" size="8" placeholder="Contact No."
+                    name="editWContactNo" [(ngModel)]="editWContactNo" required>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <label><b>Address:</b></label>
+                  <textarea class="form-control" id="addressId" rows="3" placeholder="Address" name="address"
+                    [(ngModel)]="editWAddress" required></textarea>
+                </fieldset>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="onEditWalkInPatientInfo()" id="editWalkInPatientInfoBtn">Save
+            Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
