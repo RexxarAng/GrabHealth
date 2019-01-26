@@ -14,6 +14,7 @@ import { ValidateService } from '../../services/validate.service';
 export class AllPatientListComponent implements OnInit {
   patient: any;
   patientlist: Array<any>;
+  patientRecords: Array<any>;
   firstName: '';
   lastName: '';
   address: '';
@@ -32,6 +33,7 @@ export class AllPatientListComponent implements OnInit {
   editPContactNo: '';
 
   searchNric: any;
+  allPatientListPolling: any;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -59,6 +61,9 @@ export class AllPatientListComponent implements OnInit {
   ngOnInit() {
     //this.getAllRecords();
     this.getPatients();
+    this.getAllRecords();
+    this.allPatientListPolling = setInterval(() =>
+      this.getAllRecords(),2000);
   }
 
   viewPatientInfo(patient){
@@ -170,26 +175,26 @@ export class AllPatientListComponent implements OnInit {
     )
   }
 
-  // // Display patients
-  // getAllRecords(){
-  //   this.receptionistService.getAllRecords().subscribe(
-  //     res=>{
-  //       console.log(res);
-  //       if(!res['success']){
-  //         this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
-  //       } else {
-  //         if(res['unauthenticated']){
-  //           this.authService.unAuthenticated();
-  //           return false;
-  //         }
-  //       }       
-  //       this.patientlist = res['patients'];
-  //     },
-  //     err=>{
+  // Display patients
+  getAllRecords(){
+    this.receptionistService.getAllRecords().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
+        this.patientRecords = res['patientRecords'];
+      },
+      err=>{
       
-  //     }
-  //   )
-  // }
+      }
+    )
+  }
   
 
 }

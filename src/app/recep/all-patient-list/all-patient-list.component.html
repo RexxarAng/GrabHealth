@@ -37,11 +37,11 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of patientlist | grdFilter: {nric: searchNric}">
-        <td class="colspacing">{{ patient.patient.firstName }}</td>
-        <td class="colspacing">{{ patient.patient.lastName }}</td>
-        <td class="colspacing">{{ patient.patient.nric }}</td>
-        <td class="colspacing">{{ patient.patient.contactNo }}</td>
+      <tr *ngFor="let patient of patientRecords | grdFilter: {nric: searchNric}">
+        <td class="colspacing">{{ patient.firstName }}</td>
+        <td class="colspacing">{{ patient.lastName }}</td>
+        <td class="colspacing">{{ patient.nric }}</td>
+        <td class="colspacing">{{ patient.contactNo }}</td>
         <td class="colspacing">
           <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient Details">
             <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPatientDetailModal" (click)="viewPatientInfo(patient)">

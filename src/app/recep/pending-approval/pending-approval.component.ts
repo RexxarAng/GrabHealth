@@ -22,7 +22,7 @@ export class PendingApprovalComponent implements OnInit {
   gender: '';
   email: '';
   sessionSlot: '';
-
+  pendingApprovalPolling: any;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -33,6 +33,8 @@ export class PendingApprovalComponent implements OnInit {
 
   ngOnInit() {
     this.getPendingList();
+    this.pendingApprovalPolling = setInterval(() =>
+      this.getPendingList(),1000);
   }
 
 
@@ -62,6 +64,12 @@ export class PendingApprovalComponent implements OnInit {
       }
     )
   }
+
+  // Handle Appointment Btn
+  handleAppointment(patient){
+    this.patient = patient;
+  }
+
 
   // Approve Appointment
   onApproveAppointment(patient){
