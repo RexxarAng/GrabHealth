@@ -36,9 +36,33 @@ a {
     text-decoration: none;
 }
 
-#ClinicManagerLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
+/* #ClinicManagerLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
   height: 100%;
+} */
+
+html {
+  height: 100%;
+  margin: 0 auto;
 }
+
+body {
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+
+#ClinicManagerLoginForm{ 
+  background-image:url("http://totaltechpro.com/wp-content/uploads/2016/06/blurred-image-7588-7881-hd-wallpapers.jpg"); 
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:cover; 
+  padding:10px; 
+  overflow-y: hidden;
+  width:100%;
+  margin:0 auto;
+  height:100vh;
+}
+
 
 #ReceptionistLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
   height: 100%;
