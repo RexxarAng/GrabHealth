@@ -14,6 +14,7 @@ import { ValidateService } from '../../services/validate.service';
 export class AllPatientListComponent implements OnInit {
   patient: any;
   patientlist: Array<any>;
+  patientRecords: Array<any>;
   firstName: '';
   lastName: '';
   address: '';
@@ -27,11 +28,11 @@ export class AllPatientListComponent implements OnInit {
   editPFirstName: '';
   editPLastName: '';
   editPAddress: '';
-  editPDOB: '';
   editPNationality: '';
   editPContactNo: '';
 
   searchNric: any;
+  allPatientListPolling: any;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -57,7 +58,12 @@ export class AllPatientListComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.getAllRecords();
     this.getPatients();
+    this.getAllRecords();
+    
+    this.allPatientListPolling = setInterval(() =>
+      this.getAllRecords(),3000);
   }
 
   viewPatientInfo(patient){
@@ -66,15 +72,15 @@ export class AllPatientListComponent implements OnInit {
 
   editPatientInfo(patient){
     this.patient = patient;
-    this.editPFirstName = patient.patient.firstName;
-    this.editPLastName = patient.patient.lastName;
-    this.nric = patient.patient.nric;
-    this.gender = patient.patient.gender;
-    this.editPAddress = patient.patient.address;
-    this.dob = patient.patient.dob;
-    this.editPNationality = patient.patient.nationality;
-    this.editPContactNo = patient.patient.contactNo;
-    this.email = patient.patient.email;
+    this.editPFirstName = patient.firstName;
+    this.editPLastName = patient.lastName;
+    this.nric = patient.nric;
+    this.gender = patient.gender;
+    this.editPAddress = patient.address;
+    this.dob = patient.dob;
+    this.editPNationality = patient.nationality;
+    this.editPContactNo = patient.contactNo;
+    this.email = patient.email;
   }
 
   onEditPatientInfo(){
@@ -162,6 +168,28 @@ export class AllPatientListComponent implements OnInit {
           }
         }       
         this.patientlist = res['patients'];
+      },
+      err=>{
+      
+      }
+    )
+  }
+
+
+  // Display patients in clinic
+  getAllRecords(){
+    this.receptionistService.getAllRecords().subscribe(
+      res=>{
+        console.log(res);
+        if(!res['success']){
+          this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }       
+        this.patientRecords = res['patientRecords'];
       },
       err=>{
       
