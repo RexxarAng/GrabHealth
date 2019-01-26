@@ -60,9 +60,6 @@ export class ViewPatientDetailsComponent implements OnInit {
     this.patient = patient;
   }
 
-  viewWalkInPatientinfo(walkinpatient) {
-    this.walkinpatient = walkinpatient; 
-  }
 
 
   editPatientInfo(patient) {
