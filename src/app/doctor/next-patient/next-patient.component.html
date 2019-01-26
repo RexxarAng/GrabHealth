@@ -8,159 +8,91 @@
       </tr>
     </thead>
 
- 
-        <!-- <th scope="col"> -->
-          <thead class="thead-light">
-            <tr>
-              <th scope="col" class="colspacing">Name</th>
-              <th scope="col" class="colspacing">DOB</th>
-              <th scope="col" class="colspacing">NRIC</th>
-              <th scope="col" class="colspacing">Medical History</th>
-              <th scope="col" class="colspacing">Allergies</th>
-              <th scope="col" class="colspacing">Reason for visit</th>
-              <th scope="col" class="colspacing">View</th>
+    <form id="currentPatientDetails" >
+      <!-- <th scope="col"> -->
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="colspacing">Queue Number</th>
+          <th scope="col" class="colspacing">First Name</th>
+          <th scope="col" class="colspacing">Last Name</th>
+          <th scope="col" class="colspacing">NRIC</th>
+          <th scope="col" class="colspacing">Address</th>
+          <th scope="col" class="colspacing">Reason for visit</th>
+          <th scope="col" class="colspacing">Add Medicine</th>
+          <th scope="col" class="colspacing">View Full Details</th>
 
-            </tr>
-          </thead>
-         
-          <tbody>
-            <tr>
-              <td>Chloe</td>
-              <td>1/1/12</td>
-              <td>S12345678B</td>
-              <td>NIL</td>
-              <td>NIL</td>
-              <td>
-                <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Add Patient's Reason For Visit">
-                  <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addReasonForVisitModal">
-                    <i class="fa fa-plus-circle fa-2x" id="addReasonForVisit"></i>
-                  </button>
-                </span>
-              </td>
-              <td>
-                <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient's Details">
-                  <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewNextPatientDetailModal" (click)="viewNextPatientDetail(patient)">
-                    <i class="fa fa-eye fa-2x" id="viewNextPatientDetail"></i>
-                  </button>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-         
-        <th scope="col">
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#dispenseMedicineModal">
-            <i class="fa fa-plus-circle fa-2x" id="dispenseMedicine"></i>
-          </button>
-        </th>
-  
-    <thead class="thead-light">
-      <tr>
-        <th scope="col" class="colspacing">Medicine Name</th>
-        <th scope="col" class="colspacing">Frequency</th>
-        <th scope="col" class="colspacing">Instructions</th>
-        <th scope="col" class="colspacing">Dosage</th>
-        <th scope="col" class="colspacing">Use</th>
-        <th scope="col" class="colspacing">MC (Days)</th>
+        </tr>
+      </thead>
 
-      </tr>
-    </thead>
+      <tbody>
+        <tr *ngIf="patient">
+          <td class="colspacing">{{ patient.queueNo }}</td>
+          <td class="colspacing">{{ patient.firstName }}</td>
+          <td class="colspacing">{{ patient.lastName }}</td>
+          <td class="colspacing">{{ patient.nric }}</td>
+          <td class="colspacing">{{ patient.address }}</td>
 
-    <tbody>
-      <tr *ngFor="let medicine of medicineList">
-        <td class="colspacing">{{ medicine.name }}</td>
-        <td class="colspacing">1/day</td>
-        <td class="colspacing">Take after food. Stop if feeling drowsy.</td>
-        <td class="colspacing">325 mg</td>
-        <td class="colspacing">For headache</td>
-        <td class="colspacing">20days</td>
-       
-      </tr>
-    </tbody>
+          <td>
+            <input type="text" class="form-control" id="reasonForVisit" name="reasonForVisit" [(ngModel)]="reasonForVisit"
+              placeholder="Reason For Visit">
+          </td>
+          <td>
+            <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Medicine">
+              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#dispenseMedicineModal">
+                <i class="fa fa-plus-circle fa-2x" id="dispenseMedicine"></i>
+              </button>
+            </span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewCurrentPatientDetailModal" (click)="viewCurrentPatientInfo(patient)">
+              <i class="fa fa-eye fa-2x" id="viewCurrentPatientDetail"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="colspacing">Medicine Name</th>
+          <th scope="col" class="colspacing">Price</th>
+          <th scope="col" class="colspacing">Category</th>
+          <th scope="col" class="colspacing">Effects</th>
+          <!-- <th scope="col" class="colspacing">Instructions</th> -->
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let medicine of selectedMedicineList">
+          <td class="colspacing">{{ medicine.name }}</td>
+          <td class="colspacing">{{ medicine.price }}</td>
+          <td class="colspacing">{{ medicine.category }}</td>
+          <td class="colspacing">{{ medicine.effects }}</td>
+
+        </tr>
+      </tbody>
 
 
-          <button type="submit" class="btn btn-primary" routerLink="/doctor/doctor-main">
-      Save and back to Home
-    </button>
-    <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment">
-      Proceed to payment
-    </button>
+      <button type="submit" class="btn btn-primary" (click)="onCreateVisit()">
+        Save and back to Home
+      </button>
+      <button type="submit" class="btn btn-primary" routerLink="/doctor/doctor-main">
+          Go back to Home
+      </button>
+    </form>
   </table>
 </div>
-
-<!-- Add Patient's Reason For Visit Modal -->
-<div>
-  <div class="modal fade" id="addReasonForVisitModal" tabindex="-1" role="dialog" aria-labelledby="addReasonForVisitModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addReasonForVisitModalLabel">Add Reason for Visit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <div class="modal-body">
-        <div class="row rowspacing">
-          <div class="col">
-            <fieldset>
-              <input type="text" class="form-control" name="reasonForVisit" [(ngModel)]="reasonForVisit" id="reasonForVisitId" placeholder="Reason For Visit"
-                required="required" />
-            </fieldset>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="onAddReasonForVisit()" data-dismiss="modal">Add Reason For Visit</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-<!-- View Patient Details -->
-<div>
-  <div class="modal fade" id="viewNextPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewNextPatientDetailModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="viewNextPatientDetailModalLabel">View Patient Details</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-  <div class="modal-body">
-    <div class="row rowspacing">
-      <div class="col">
-        <p *ngIf="doctor"><b>Reason for Visit:</b> {{ doctor.reasonForVisit }}</p>
-
-      </div>
-    </div>
-  </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-   </div>
-  </div>
-</div>
-
-
-
 
 
 <!-- Dispense Medicine Modal-->
 <div>
-  <div class="modal fade" id="dispenseMedicineModal" tabindex="-1" role="dialog" aria-labelledby="dispenseMedicineModal" aria-hidden="true">
+  <div class="modal fade" id="dispenseMedicineModal" tabindex="-1" role="dialog" aria-labelledby="dispenseMedicineModal"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        
+
         <div class="modal-header">
-          <h5 class="modal-title" id="dispenseMedicineModalLabel">Dispense Medicine</h5>
+          <h5 class="modal-title" id="dispenseMedicineModalLabel">Add Medicine for Patient</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -176,27 +108,107 @@
               <div class="col">
                 <p><b>Price:</b> {{ medicine.price }}</p>
               </div>
-            
 
-            <div class="col">
-              <p><b>Category:</b> {{ medicine.category }}</p>
+
+              <div class="col">
+                <p><b>Category:</b> {{ medicine.category }}</p>
+              </div>
+
+              <div class="col">
+                <p><b>Effect:</b> {{ medicine.effects }}</p>
+              </div>
+              <p> <button type="submit" class="btn btn-primary" (click)="onAddMedicine(medicine)" data-dismiss="modal">Add
+                  Medicine</button></p>
             </div>
-            
-            <div class="col">
-              <p><b>Effect:</b> {{ medicine.effects }}</p>
-            </div>
-          </div> 
           </form>
-        </div> 
+        </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
 </div>
-        
 
+<!-- View current patient full details -->
+<div>
+  <div class="modal fade" id="viewCurrentPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewCurrentPatientDetailModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewCurrentPatientDetailModalLabel">View Current Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+        <div class="modal-body" *ngIf="patient">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>First Name:</b></label>
+                <p>{{ patient.firstName }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Last Name:</b></label>
+                <p>{{ patient.lastName }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>NRIC/ Passport No.:</b></label>
+                <p>{{ patient.nric }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Nationality:</b></label>
+                <p>{{ patient.nationality }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Gender:</b></label>
+                <p>{{ patient.gender }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>D.O.B:</b></label>
+                <p>{{ patient.dob | date: 'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Email:</b></label>
+                <p>{{ patient.email }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Contact No:</b></label>
+                <p>{{ patient.contactNo }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Address:</b></label>
+                <p>{{ patient.address }}</p>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

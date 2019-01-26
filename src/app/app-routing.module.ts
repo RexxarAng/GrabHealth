@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PaymentComponent } from './recep/payment/payment.component';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
 //import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
-import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
+//import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
 import { MainLoginComponent } from './main-login/main-login.component';
 import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
 import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'receptionist/payment', component: PaymentComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/patient-list', component: PatientListComponent, canActivate:[AuthGuard]},
   //{ path: 'receptionist/view-queue', component: ViewQueueComponent, canActivate:[AuthGuard]},
-  { path: 'receptionist/payment-receipt', component: PaymentReceiptComponent, canActivate:[AuthGuard]},
+  //{ path: 'receptionist/payment-receipt', component: PaymentReceiptComponent, canActivate:[AuthGuard]},
   { path: 'manager/clinic-team', component: TeamComponent, canActivate:[AuthGuard]},
   { path: 'manager/medicine-list', component: MedicinelistComponent, canActivate:[AuthGuard]},
   { path: 'doctor/doctor-main', component: DoctorMainComponent },

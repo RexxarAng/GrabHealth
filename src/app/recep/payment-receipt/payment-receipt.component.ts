@@ -24,7 +24,7 @@ export class PaymentReceiptComponent implements OnInit {
 
   ngOnInit() {
     this.datePolling = setInterval(() =>
-    this.loadDate(),2000);
+      this.loadDate(),2000);
   }
   
   loadDate(){

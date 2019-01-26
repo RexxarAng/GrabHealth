@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showMain">
   <table class="table">
     <thead>
       <tr>
@@ -9,7 +9,7 @@
     </thead>
 
     <thead class="thead-light">
-      <tr *ngFor="let patient of patientlist">
+      <tr>
         <th scope="col" class="colspacing">Queue No.</th>
         <th scope="col" class="colspacing">Name</th>
         <th scope="col" class="colspacing">NRIC</th>
@@ -18,19 +18,148 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td class="colspacing">{{ patient.queueNo}}</td>
+      <tr *ngFor="let visit of visits">
+        <td class="colspacing">{{ visit.patient.queueNo}}</td>
         <td class="colspacing">
-          <span>{{ patient.firstName }} </span>
-          <span>{{ patient.lastName }}</span>
+          <span>{{ visit.patient.firstName }} </span>
+          <span>{{ visit.patient.lastName }}</span>
         </td>
-        <td class="colspacing">S1234567A</td>
+        <td class="colspacing">{{ visit.patient.nric }}</td>
         <td class="colspacing">
-          <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment-receipt">
+          <button type="submit" class="btn btn-primary" (click)="viewReceipt(visit)">
             Complete Transaction
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+
+<!--Payment Receipt-->
+<div *ngIf="!showMain && visit">
+  <div class="container text-center" id="printToPDF" style="margin-top: 4%;"> 
+    <div class="row text-center" style="margin-bottom: 2%;">
+
+      <div class="col text-left" id="clinicDetails" style="margin-right: 20%; padding-top: 2%; margin-top: 4%;">
+        <div>
+          <p id="clinicName"> {{ visit.clinic.name }}</p>
+        </div>
+
+        <div>
+          <p id="clinicAddress">{{ visit.clinic.address }}</p>
+        </div>
+      </div>
+
+      <div class="col" id="receiptDetails">
+        <div style="border-bottom: 1px black solid; padding-top: 2%; margin-top: 4%;">
+          <h4>Receipt</h4>
+        </div>
+        <div class="text-left" style="padding-top: 1%;">
+          <p><b>Number:</b> {{ payment.receiptNo }}</p>
+        </div>
+        <div class="text-left">
+          <p><b>Date:</b> {{ currentDate | date: 'dd MMMM yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col" id="patientDetails">
+        <form>
+          <div class="row text-left">
+            <div class="col">
+              <p><b>Patient Name:</b>  {{ visit.patient.firstName }}  <span> {{ visit.patient.lastName }} </span></p>
+            </div>
+
+            <div class="col">
+              <p><b>Doctor:</b> Dr. {{ visit.doctor.firstName}} {{ visit.doctor.lastName }}</p>
+            </div>
+          </div>
+
+          <div class="row text-left">
+            <div class="col">
+              <p><b>Address:</b>  {{ visit.patient.address }} </p>
+            </div>
+
+            <div class="col">
+              <div class="form-group form-inline">
+                <label for="paymentModeSelect" style="padding-right: 5px;"><b>Payment Mode: </b></label>
+                <select class="form-control" id="paymentModeSelect"> 
+                  <option>Cash</option>
+                  <option>Nets</option>
+                </select>
+              </div>
+            </div>         
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" class="colspacing"><h5>Description</h5></th>
+            <th scope="col" class="colspacing"><h5>Qty</h5></th>
+            <th scope="col" class="colspacing"><h5>Amount</h5></th>
+          </tr>
+        </thead>
+
+        <!--Prescription/Consultation-->
+        <tbody>
+          <tr>
+            <td class="colspacing text-left" id="consultation">Consultation</td>
+            <td class="colspacing" id="consultationQty">-</td>
+            <td>
+              <div class="form-group form-inline" style="float: right; padding-right: 2%;">
+                <label for="consultationAmt" style="padding-right: 5px;">$ {{ visit.clinic.consultationFee }} </label>
+                <input type="number" class="form-control" id="consultationAmt" style="width: 100px;" [(ngModel)]="consultationAmt" name="consultationAmt">
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngFor="let medicine of medicineList">
+            <td class="colspacing text-left" id="medName"> {{ medicine.name }} </td>
+            <td class="colspacing" id="medQty"> 1 </td>
+            <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> {{ medicine.price }}</td>
+          </tr>
+        </tbody>
+
+        <!--Payment Calculation-->
+        <tbody>
+          <tr class="table-active">
+            <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
+            <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> payment.subTtl </td>
+          </tr>
+
+          <tr class="table-active">
+            <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
+            <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> payment.gst </td>
+          </tr>
+
+          <tr class="table-active">
+            <td colspan="2" class="colspacing text-left"><b>Discount</b></td>
+            <td>
+              <div class="form-group form-inline" style="float: right; padding-right: 2%;">
+                <label for="disc" style="padding-right: 5px;">$ </label>
+                <input type="number" class="form-control" id="disc" style="width: 100px;" [(ngModel)]="disc" name="disc">
+              </div>
+            </td>
+          </tr>
+
+          <tr class="table-active">
+            <td colspan="2" class="colspacing text-left"><b>Total Due</b></td>
+            <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> payment.totalDue </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row text-center" id="wrapper">
+    <button type="reset" class="btn btn-secondary" (click)="closeReceipt()">Cancel</button>
+    <button id="print-pdf" (click)="downloadPDF()" class="btn btn-primary" style="margin-left: 4%;">Confirm</button>
+  </div>
 </div>
