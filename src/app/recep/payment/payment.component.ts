@@ -39,7 +39,9 @@ export class PaymentComponent implements OnInit {
   visit: any;
   visits: Array<any>;
   medicineList: Array<any>;
-
+  subtotal: number;
+  medicineItem: any;
+  gst: number;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -71,6 +73,8 @@ export class PaymentComponent implements OnInit {
     this.datePolling = setInterval(() =>
       this.loadDate(),2000);
     this.getVisits();
+    this.subtotal = 0;
+    this.gst = 0;
     
   }
 
@@ -114,7 +118,6 @@ export class PaymentComponent implements OnInit {
     this.receptionistService.getAllVisits().subscribe(res=>{
       if(res['success']){
         this.visits = res['visits'];
-        this.medicineList = res['visits']['medicineList'];
       } else {
         if(res['unauthenticated']){
           this.authService.unAuthenticated();
@@ -129,7 +132,36 @@ export class PaymentComponent implements OnInit {
   viewReceipt(visit){
     this.showMain = false;
     this.visit = visit;
+    var totalMedicineCost: number; 
+    for(let medicineItem of visit.medicineList){
+      console.log(medicineItem);
+      totalMedicineCost += +medicineItem.price;
+    }
+    this.subtotal = totalMedicineCost;
+    console.log(totalMedicineCost);
+    this.subtotal += +visit.clinic.consultationFee;
+    this.gst = 0.07 * this.subtotal;
   }
+
+  // viewReceipt(visit){
+  //   this.visit = visit;
+
+  //   this.receptionistService.createPayment(this.visit).subscribe(res=>{
+  //     if(res['success']){
+  //       this.showMain = false;
+  //       this.payment = res['payment'];
+  //       this.medicineList = res['payment']['visit']['medicineList'];
+  //       this.flashMessagesService.show('Successful', { cssClass: 'alert-success', timeout: 3000});
+  //     } else {
+  //       if(res['unauthenticated']){
+  //         this.authService.unAuthenticated();
+  //         return false;
+  //       }
+  //       this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+
+  //     }
+  //   });
+  // }
 
   closeReceipt(){
     this.showMain = true;

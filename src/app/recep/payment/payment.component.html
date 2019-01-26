@@ -56,7 +56,7 @@
           <h4>Receipt</h4>
         </div>
         <div class="text-left" style="padding-top: 1%;">
-          <p><b>Number:</b> {{ payment.receiptNo }}</p>
+          <p><b>Number:</b> payment.receiptNo</p>
         </div>
         <div class="text-left">
           <p><b>Date:</b> {{ currentDate | date: 'dd MMMM yyyy' }}</p>
@@ -114,12 +114,11 @@
             <td>
               <div class="form-group form-inline" style="float: right; padding-right: 2%;">
                 <label for="consultationAmt" style="padding-right: 5px;">$ {{ visit.clinic.consultationFee }} </label>
-                <input type="number" class="form-control" id="consultationAmt" style="width: 100px;" [(ngModel)]="consultationAmt" name="consultationAmt">
               </div>
             </td>
           </tr>
 
-          <tr *ngFor="let medicine of medicineList">
+          <tr *ngFor="let medicine of visit.medicineList">
             <td class="colspacing text-left" id="medName"> {{ medicine.name }} </td>
             <td class="colspacing" id="medQty"> 1 </td>
             <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> {{ medicine.price }}</td>
@@ -130,12 +129,12 @@
         <tbody>
           <tr class="table-active">
             <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
-            <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> payment.subTtl </td>
+            <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> {{ subtotal }} </td>
           </tr>
 
           <tr class="table-active">
             <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
-            <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> payment.gst </td>
+            <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> {{ gst }} </td>
           </tr>
 
           <tr class="table-active">
@@ -159,7 +158,7 @@
 
 
   <div class="row text-center" id="wrapper">
-    <button type="reset" class="btn btn-secondary" (click)="closeReceipt()">Cancel</button>
     <button id="print-pdf" (click)="downloadPDF()" class="btn btn-primary" style="margin-left: 4%;">Confirm</button>
+    <button type="reset" class="btn btn-secondary" (click)="closeReceipt()">Cancel</button>
   </div>
 </div>
