@@ -193,6 +193,7 @@ export class NextPatientComponent implements OnInit {
     this.DoctorService.createVisit(visit).subscribe(res=>{
       if (res['success']) {
         this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000 });
+        this.router.navigateByUrl("/doctor/doctor-main");
       } else {
         if (res['unauthenticated']) {
           this.authService.unAuthenticated();

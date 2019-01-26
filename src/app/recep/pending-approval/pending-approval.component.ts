@@ -38,6 +38,10 @@ export class PendingApprovalComponent implements OnInit {
       this.getPendingList(),3000);
   }
 
+  ngOnDestroy() {
+    clearInterval(this.pendingApprovalPolling);
+  }
+
 
   // View patient info
   viewPatientInfo(patient) {
