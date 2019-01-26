@@ -66,6 +66,10 @@ export class AllPatientListComponent implements OnInit {
       this.getAllRecords(),3000);
   }
 
+  ngOnDestroy() {
+    clearInterval(this.allPatientListPolling);
+  }
+
   viewPatientInfo(patient){
     this.patient = patient;
   }
