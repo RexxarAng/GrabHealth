@@ -36,6 +36,9 @@ export class PaymentComponent implements OnInit {
   consultationAmt: any;
   payment: any;
   clinic:any;
+  visit: any;
+  visits: Array<any>;
+  medicineList: Array<any>;
 
 
   constructor(
@@ -67,42 +70,65 @@ export class PaymentComponent implements OnInit {
     this.showMain= true;
     this.datePolling = setInterval(() =>
       this.loadDate(),2000);
+    this.getVisits();
+    
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.datePolling);
   }
 
   loadDate(){
     this.currentDate = Date.now();
   }
 
-  visits = [{ 
-    patient:{
-      firstName: "Jake",
-      lastName: "Peralta",
-      nric: "S1234567A",
-      gender: "Male",
-      address: "Blk 123 Happy Street #06-132 S(321123)",
-      dob: "01/04/1997",
-      nationality: "Singaporean",
-      contactNo: "91234567",
-      queueNo: 1
-    },
-    reasonForVisit: "Keng mc",
-    dispenseMedicineList: [{
-      medicine: {
-        name: 'Panadol',
-        category: 'Painkiller',
-        effects: 'Drowsiness',
-        price: 3.90
-      },
-      frequency: '3/day',
-      instructions: 'Use only when in pain',
-      dosage: '300mg'
+//   visits = [{ 
+//     patient:{
+//       firstName: "Jake",
+//       lastName: "Peralta",
+//       nric: "S1234567A",
+//       gender: "Male",
+//       address: "Blk 123 Happy Street #06-132 S(321123)",
+//       dob: "01/04/1997",
+//       nationality: "Singaporean",
+//       contactNo: "91234567",
+//       queueNo: 1
+//     },
+//     reasonForVisit: "Keng mc",
+//     dispenseMedicineList: [{
+//       medicine: {
+//         name: 'Panadol',
+//         category: 'Painkiller',
+//         effects: 'Drowsiness',
+//         price: 3.90
+//       },
+//       frequency: '3/day',
+//       instructions: 'Use only when in pain',
+//       dosage: '300mg'
       
-    }]
-}];
+//     }]
+// }];
+
+  // Retrieve all visits created by doctor for payment
+  getVisits(){
+    this.receptionistService.getAllVisits().subscribe(res=>{
+      if(res['success']){
+        this.visits = res['visits'];
+        this.medicineList = res['visits']['medicineList'];
+      } else {
+        if(res['unauthenticated']){
+          this.authService.unAuthenticated();
+          return false;
+        }
+      }
+    })
+  }
+
 
   // View and fill in receipt
-  viewReceipt(){
+  viewReceipt(visit){
     this.showMain = false;
+    this.visit = visit;
   }
 
   closeReceipt(){

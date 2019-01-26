@@ -51,4 +51,8 @@ export class ReceptionistService {
         return this.http.get(this.url + '/receptionist/all-patient-list');
     }  
 
+    getAllVisits(){
+        return this.http.get(this.url + '/receptionist/visits');
+    }
+
 }
