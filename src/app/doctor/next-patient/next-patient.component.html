@@ -16,9 +16,10 @@
           <th scope="col" class="colspacing">First Name</th>
           <th scope="col" class="colspacing">Last Name</th>
           <th scope="col" class="colspacing">NRIC</th>
-          <th scope="col" class="colspacing">Adress</th>
+          <th scope="col" class="colspacing">Address</th>
           <th scope="col" class="colspacing">Reason for visit</th>
-          <th scope="col" class="colspacing">View</th>
+          <th scope="col" class="colspacing">Add Medicine</th>
+          <th scope="col" class="colspacing">View Full Details</th>
 
         </tr>
       </thead>
@@ -36,21 +37,19 @@
               placeholder="Reason For Visit">
           </td>
           <td>
-            <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Patient's Details">
-              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewNextPatientDetailModal"
-                (click)="viewNextPatientInfo(patient)">
-                <i class="fa fa-eye fa-2x" id="viewNextPatientDetail"></i>
+            <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Medicine">
+              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#dispenseMedicineModal">
+                <i class="fa fa-plus-circle fa-2x" id="dispenseMedicine"></i>
               </button>
             </span>
           </td>
+          <td>
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewCurrentPatientDetailModal" (click)="viewCurrentPatientInfo(patient)">
+              <i class="fa fa-eye fa-2x" id="viewCurrentPatientDetail"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
-
-      <th scope="col">
-        <button type="button" class="btn btn-img" data-toggle="modal" data-target="#dispenseMedicineModal">
-          <i class="fa fa-plus-circle fa-2x" id="dispenseMedicine"></i>
-        </button>
-      </th>
 
       <thead class="thead-light">
         <tr>
@@ -58,7 +57,7 @@
           <th scope="col" class="colspacing">Price</th>
           <th scope="col" class="colspacing">Category</th>
           <th scope="col" class="colspacing">Effects</th>
-          <th scope="col" class="colspacing">Instructions</th>
+          <!-- <th scope="col" class="colspacing">Instructions</th> -->
 
         </tr>
       </thead>
@@ -69,12 +68,6 @@
           <td class="colspacing">{{ medicine.price }}</td>
           <td class="colspacing">{{ medicine.category }}</td>
           <td class="colspacing">{{ medicine.effects }}</td>
-          <td class="colspacing">
-            <input type="text" class="form-control" id="medicineInstructions" name="medicineInstructions" [(ngModel)]="medicineInstructions"
-              placeholder="Medicine Instructions">
-          </td>
-
-
 
         </tr>
       </tbody>
@@ -83,9 +76,9 @@
       <button type="submit" class="btn btn-primary" (click)="onCreateVisit()">
         Save and back to Home
       </button>
-      <!-- <button type="submit" class="btn btn-primary" routerLink="/receptionist/payment">
-      Proceed to payment
-    </button> -->
+      <button type="submit" class="btn btn-primary" routerLink="/doctor/doctor-main">
+          Go back to Home
+      </button>
     </form>
   </table>
 </div>
@@ -99,7 +92,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="dispenseMedicineModalLabel">Dispense Medicine</h5>
+          <h5 class="modal-title" id="dispenseMedicineModalLabel">Add Medicine for Patient</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -134,6 +127,87 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View current patient full details -->
+<div>
+  <div class="modal fade" id="viewCurrentPatientDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewCurrentPatientDetailModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewCurrentPatientDetailModalLabel">View Current Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngIf="patient">
+          <form>
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>First Name:</b></label>
+                <p>{{ patient.firstName }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Last Name:</b></label>
+                <p>{{ patient.lastName }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>NRIC/ Passport No.:</b></label>
+                <p>{{ patient.nric }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Nationality:</b></label>
+                <p>{{ patient.nationality }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Gender:</b></label>
+                <p>{{ patient.gender }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>D.O.B:</b></label>
+                <p>{{ patient.dob | date: 'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Email:</b></label>
+                <p>{{ patient.email }}</p>
+              </div>
+
+              <div class="col">
+                <label><b>Contact No:</b></label>
+                <p>{{ patient.contactNo }}</p>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <label><b>Address:</b></label>
+                <p>{{ patient.address }}</p>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

@@ -81,7 +81,7 @@ export class NextPatientComponent implements OnInit {
     this.medicine = medicine;
   }
 
-  viewNextPatientInfo(patient) {
+  viewCurrentPatientInfo(patient) {
     this.patient = patient;
   }
 

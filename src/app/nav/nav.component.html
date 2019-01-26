@@ -46,13 +46,7 @@
         <a class="nav-link" *ngIf="!authService.loggedIn()" routerLink="main-login" routerLinkActive="active">Main Login</a>
       </li> -->
 
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Doctor'" routerLink="doctor/doctor-main" routerLinkActive="active">Doctor Main</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="authService.loggedIn() && authService.getUserRole() === 'Doctor'" routerLink="doctor/registration" routerLinkActive="active">Clinic Manager Registration</a>
-      </li>
+    
     </ul>
 
 
