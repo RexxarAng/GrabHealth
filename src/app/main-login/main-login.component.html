@@ -125,7 +125,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="resetMEmail" required>
                 </fieldset>
               </div>
             </div>
@@ -133,7 +133,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="resetMNric" required>
                 </fieldset>
               </div>
             </div>
@@ -142,7 +142,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" (click)="onResetPw('Manager')"  data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -171,7 +171,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="resetREmail" required>
                 </fieldset>
               </div>
             </div>
@@ -179,7 +179,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="resetRNric" required>
                 </fieldset>
               </div>
             </div>
@@ -188,7 +188,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" (click)="onResetPw('Receptionist')" data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -217,7 +217,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="resetDEmail" required>
                 </fieldset>
               </div>
             </div>
@@ -225,7 +225,7 @@
             <div class="row rowspacing">
               <div class="col">
                 <fieldset>
-                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="resetDNric" required>
                 </fieldset>
               </div>
             </div>
@@ -234,7 +234,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" (click)="onResetPw('Doctor')"  data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>

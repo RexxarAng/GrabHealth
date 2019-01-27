@@ -23,6 +23,9 @@ export class AuthService {
         credentials.role = role;
         return this.http.post(this.url + '/authenticate', credentials, this.noAuthHeader);
     }
+    resetPassword(credentials){
+        return this.http.post(this.url + '/forgetpassword', credentials, this.noAuthHeader);
+    }
     getUserRole(){
         return sessionStorage.getItem('user');
     }
