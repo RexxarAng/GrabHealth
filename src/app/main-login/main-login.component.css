@@ -36,24 +36,72 @@ a {
     text-decoration: none;
 }
 
-#ClinicManagerLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
+/* #ClinicManagerLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
   height: 100%;
+} */
+
+html {
+  height: 100%;
+  margin: 0 auto;
 }
 
-#ReceptionistLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
-  height: 100%;
-
+body {
+  font-size: 18px;
+  overflow-x: hidden;
 }
 
 
-#AdminLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
-  height: 100%;
-
+#ClinicManagerLoginForm{ 
+  background-image:url("http://totaltechpro.com/wp-content/uploads/2016/06/blurred-image-7588-7881-hd-wallpapers.jpg"); 
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:cover; 
+  padding:10px; 
+  overflow-y: hidden;
+  width:100%;
+  margin:0 auto;
+  height:100vh;
 }
-#DoctorLoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px; height:100%;
-  height: 100%;
 
+
+#ReceptionistLoginForm{ 
+  background-image:url("http://totaltechpro.com/wp-content/uploads/2016/06/blurred-image-7588-7881-hd-wallpapers.jpg"); 
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:cover; 
+  padding:10px; 
+  overflow-y: hidden;
+  width:100%;
+  margin:0 auto;
+  height:100vh;
 }
+
+
+#AdminLoginForm{ 
+  background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:cover; 
+  padding:10px; 
+  overflow-y: hidden;
+  width:100%;
+  margin:0 auto;
+  height:100vh;
+}
+
+
+#DoctorLoginForm{ 
+  background-image:url("http://totaltechpro.com/wp-content/uploads/2016/06/blurred-image-7588-7881-hd-wallpapers.jpg");
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:cover; 
+  padding:10px; 
+  overflow-y: hidden;
+  width:100%;
+  margin:0 auto;
+  height:100vh;
+}
+
 
 .form-heading { color:#fff; font-size:23px;}
 .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
@@ -153,4 +201,20 @@ a {
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
+}
+
+
+/* Forgot Password btn */
+.forgotPw {
+  margin-top: 3%;
+  background: none;
+  color: 	#2292a4;
+}
+
+.rowspacing {
+  margin-bottom: 2%;
+}
+
+#forgotPasswordMsg{
+  padding: 2%;
 }

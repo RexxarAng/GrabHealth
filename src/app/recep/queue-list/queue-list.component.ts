@@ -24,11 +24,9 @@ export class QueueListComponent implements OnInit {
   nationality: '';
   gender: '';
   email: '';
-
   searchNric: any;
 
   queuelist: Array<any>;
-
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,

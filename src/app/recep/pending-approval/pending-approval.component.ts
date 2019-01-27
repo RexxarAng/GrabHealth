@@ -25,6 +25,8 @@ export class PendingApprovalComponent implements OnInit {
   sessionSlot: '';
   pendingApprovalPolling: any;
 
+  nricSearch: any;
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
@@ -62,7 +64,7 @@ export class PendingApprovalComponent implements OnInit {
             return false;
           }
         }
-        this.pendingList = res['pendingList'];
+        this.pendingList = res['pendingList']['patients'];
       },
       err=>{
       
