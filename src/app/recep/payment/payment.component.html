@@ -56,7 +56,7 @@
           <h4>Receipt</h4>
         </div>
         <div class="text-left" style="padding-top: 1%;">
-          <p><b>Number:</b> payment.receiptNo</p>
+          <p><b>Number:</b> {{ payment.receiptNo }}</p>
         </div>
         <div class="text-left">
           <p><b>Date:</b> {{ currentDate | date: 'dd MMMM yyyy' }}</p>
@@ -69,7 +69,7 @@
         <form>
           <div class="row text-left">
             <div class="col">
-              <p><b>Patient Name:</b>  {{ payment.patient.firstName }}  <span> {{ payment.patient.lastName }} </span></p>
+              <p><b>Patient Name:</b> {{ payment.patient.firstName }}<span> {{ payment.patient.lastName }} </span></p>
             </div>
 
             <div class="col">
@@ -102,7 +102,7 @@
           <tr>
             <th scope="col" class="colspacing"><h5>Description</h5></th>
             <th scope="col" class="colspacing"><h5>Qty</h5></th>
-            <th scope="col" class="colspacing"><h5>Amount</h5></th>
+            <th scope="col" class="colspacing" style="float: right; padding-right: 2%;"><h5>Amount</h5></th>
           </tr>
         </thead>
 
@@ -135,16 +135,6 @@
           <tr class="table-active">
             <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
             <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> ${{ payment.gst | number:'1.2-2'}} </td>
-          </tr>
-
-          <tr class="table-active">
-            <td colspan="2" class="colspacing text-left"><b>Discount</b></td>
-            <td>
-              <div class="form-group form-inline" style="float: right; padding-right: 2%;">
-                <label for="disc" style="padding-right: 5px;">$ </label>
-                <input type="number" class="form-control" id="disc" style="width: 100px;" [(ngModel)]="disc" name="disc">
-              </div>
-            </td>
           </tr>
 
           <tr class="table-active">

@@ -92,6 +92,7 @@ export class PatientListComponent implements OnInit {
   }
 
   editPatientInfo(patient){
+    console.log(patient);
     this.patient = patient;
     this.editPFirstName = patient.patient.firstName;
     this.editPLastName = patient.patient.lastName;
@@ -339,5 +340,9 @@ export class PatientListComponent implements OnInit {
   }
   
 
+  // View visit info
+  viewVisitInfo(patient){
+    this.patient = patient;
+  }
 
 }

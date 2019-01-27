@@ -147,20 +147,20 @@
                 <tr>
                   <td>Receipt No.</td>
                   <td>Date</td>
-                  <td>Time</td>
                   <td>Total Due</td>
-                  <td><img src="assets/img/view.png" class="logo"></td>
+                  <td></td>
                 </tr>
 
                 <tr>
-                  <td>#123</td>
-                  <td>20/12/2018</td>
-                  <td>14:58</td>
-                  <td>$30.50</td>
+                  <td> payment.receiptNo </td>
+                  <td> payment.date | date: 'dd MMMM yyyy' </td>
+                  <td> payment.total | number : '1.2-2' </td>
                   <td>
-                    <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewPaymentDetail">
-                      <img src="assets/img/view.png" class="logo" id="viewPayment">
-                    </button>
+                    <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Visit Details">
+                      <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewVisitDetailModal" (click)="viewVisitInfo(patient)">
+                        <i class="fa fa-file fa-2x" id="viewVisitDetail"></i>
+                      </button>
+                    </span>
                   </td>
                 </tr>
               </tbody>
@@ -173,6 +173,139 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--View Visit Details Modal-->
+<div>
+  <div class="modal fade" id="viewVisitDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewVisitDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewVisitDetailModalLabel">View Visit Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body" *ngIf="patient">
+          <div class="container text-center" id="printToPDF" style="margin-top: 4%;"> 
+            <div class="row text-center" style="margin-bottom: 2%;">
+
+              <div class="col text-left" id="clinicDetails" style="margin-right: 20%; padding-top: 2%; margin-top: 4%;">
+                <div>
+                  <p id="clinicName"> {{ payment.clinic.name }}</p>
+                </div>
+
+                <div>
+                  <p id="clinicAddress">{{ payment.clinic.address }}</p>
+                </div>
+              </div>
+
+              <div class="col" id="receiptDetails">
+                <div style="border-bottom: 1px black solid; padding-top: 2%; margin-top: 4%;">
+                  <h4>Receipt</h4>
+                </div>
+                <div class="text-left" style="padding-top: 1%;">
+                  <p><b>Number:</b> {{ payment.receiptNo }}</p>
+                </div>
+                <div class="text-left">
+                  <p><b>Date:</b> {{ currentDate | date: 'dd MMMM yyyy' }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col" id="patientDetails">
+                <form>
+                  <div class="row text-left">
+                    <div class="col">
+                      <p><b>Patient Name:</b>  {{ payment.patient.firstName }}  <span> {{ payment.patient.lastName }} </span></p>
+                    </div>
+
+                    <div class="col">
+                      <p><b>Doctor:</b> Dr. {{ payment.visit.doctor.firstName}} {{ payment.visit.doctor.lastName }}</p>
+                    </div>
+                  </div>
+
+                  <div class="row text-left">
+                    <div class="col">
+                      <p><b>Address:</b> {{ payment.patient.address }}</p>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-group form-inline">
+                        <label for="paymentModeSelect" style="padding-right: 5px;"><b>Payment Mode: </b></label>
+                        <select class="form-control" id="paymentModeSelect" disabled> 
+                          <option>Cash</option>
+                          <option>Nets</option>
+                        </select>
+                      </div>
+                    </div>         
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="row">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="colspacing"><h5>Description</h5></th>
+                    <th scope="col" class="colspacing"><h5>Qty</h5></th>
+                    <th scope="col" class="colspacing"><h5>Amount</h5></th>
+                  </tr>
+                </thead>
+
+                <!--Prescription/Consultation-->
+                <tbody>
+                  <tr>
+                    <td class="colspacing text-left" id="consultation">Consultation</td>
+                    <td class="colspacing" id="consultationQty">-</td>
+                    <td>
+                      <div class="form-group form-inline" style="float: right; padding-right: 2%;">
+                        <label for="consultationAmt" style="padding-right: 5px;">${{ payment.clinic.consultationFee }} </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr *ngFor="let medicine of medicineList">
+                    <td class="colspacing text-left" id="medName"> {{ medicine.name }} </td>
+                    <td class="colspacing" id="medQty"> 1 </td>
+                    <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> ${{ medicine.price | number : '1.2-2'}}</td>
+                  </tr>
+                </tbody>
+
+                <!--Payment Calculation-->
+                <tbody>
+                  <tr class="table-active">
+                    <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
+                    <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> ${{ payment.subtotal | number:'1.2-2'}} </td>
+                  </tr>
+
+                  <tr class="table-active">
+                    <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
+                    <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> ${{ payment.gst | number:'1.2-2'}} </td>
+                  </tr>
+
+                  <tr class="table-active">
+                    <td colspan="2" class="colspacing text-left"><b>Total Due</b></td>
+                    <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> ${{ payment.total | number : '1.2-2'}} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
       </div>
     </div>
   </div>
