@@ -54,5 +54,9 @@ export class ReceptionistService {
     getAllVisits(){
         return this.http.get(this.url + '/receptionist/visits');
     }
+    
+    createPayment(visit){
+      return this.http.post(this.url + '/receptionist/create/payment', visit);
+    }
 
 }

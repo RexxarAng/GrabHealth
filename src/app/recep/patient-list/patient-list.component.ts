@@ -33,7 +33,7 @@ export class PatientListComponent implements OnInit {
   editPContactNo: '';
 
   searchNric: any;
-
+  nricSearch: any;
   queuelist: Array<any>;
 
   constructor(

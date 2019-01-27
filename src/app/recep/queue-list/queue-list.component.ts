@@ -24,10 +24,9 @@ export class QueueListComponent implements OnInit {
   nationality: '';
   gender: '';
   email: '';
-
   searchNric: any;
 
-  queuelist: Array<any>;
+  queueList: Array<any>;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -98,7 +97,8 @@ export class QueueListComponent implements OnInit {
             return false;
           }
         }    
-        this.queuelist = res['queueList'];
+        console.log("queueList")
+        this.queueList = res['queueList']['patients'];
       },
       err=>{
       
