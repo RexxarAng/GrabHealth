@@ -26,7 +26,8 @@ export class QueueListComponent implements OnInit {
   email: '';
   searchNric: any;
 
-  queuelist: Array<any>;
+  queueList: Array<any>;
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
@@ -96,7 +97,8 @@ export class QueueListComponent implements OnInit {
             return false;
           }
         }    
-        this.queuelist = res['queueList'];
+        console.log("queueList")
+        this.queueList = res['queueList']['patients'];
       },
       err=>{
       
