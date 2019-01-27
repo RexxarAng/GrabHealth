@@ -157,11 +157,28 @@ export class MainLoginComponent implements OnInit {
     );
   }
 
-  onScriptLoad() {
-    console.log('Google reCAPTCHA loaded and is ready for use!')
-  }
+  // onScriptLoad() {
+  //   console.log('Google reCAPTCHA loaded and is ready for use!')
+  // }
 
-  onScriptError() {
-    console.log('Something went long when loading the Google reCAPTCHA')
-  }
+  // onScriptError() {
+  //   console.log('Something went long when loading the Google reCAPTCHA')
+  // }
 }
+//     this.authService.loginAdmin(credentials).subscribe(
+//       res => {
+//         if(res['success']){
+//           var user = res['user'];
+//           this.authService.setToken(res['token'], user.role);
+//           this.router.navigateByUrl('/clinic/registration');
+//         } else {
+//           this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+//         } 
+//       },
+//       err => {
+//         this.flashMessagesService.show('Invalid email or password', { cssClass: 'alert-danger', timeout: 3000 });
+//         console.log(err);
+//       }
+//     );
+//   }
+// }

@@ -1,67 +1,76 @@
 <form>
   <div class="tab">
-      <button class="tablinks" (click)="onManager()" [ngClass]="{'active': managerLogin}">Clinic Manager</button>
-      <button class="tablinks" (click)="onReceptionist()" [ngClass]="{'active': receptionistLogin}" >Receptionist</button>
-      <button class="tablinks" (click)="onDoctor()" [ngClass]="{'active': doctorLogin}">Doctor</button>
+    <button class="tablinks" (click)="onManager()" [ngClass]="{'active': managerLogin}">Clinic Manager</button>
+    <button class="tablinks" (click)="onReceptionist()" [ngClass]="{'active': receptionistLogin}">Receptionist</button>
+    <button class="tablinks" (click)="onDoctor()" [ngClass]="{'active': doctorLogin}">Doctor</button>
   </div>
 
-  <!--CLINICMANAGER LOGIN-->
-  <div id="ClinicManagerLoginForm" *ngIf="login === 'Manager'">
-    <div class="container">
-      <div>
-        <h1 class="form-heading">Clinic Manager Login Form</h1>
-        <div class="login-form">
-          <div class="main-div">
-            <div class="panel">
-              <h2>Clinic Manager Login</h2>
-              <p>Please enter your email and password</p>
+    <!--CLINICMANAGER LOGIN-->
+    <div id="ClinicManagerLoginForm" *ngIf="login === 'Manager'">
+      <div class="container">
+        <div>
+          <h1 class="form-heading">Clinic Manager Login Form</h1>
+          <div class="login-form">
+            <div class="main-div">
+              <div class="panel">
+                <h2>Clinic Manager Login</h2>
+                <p>Please enter your email and password</p>
+              </div>
+              <form id="ClinicManagerLogin">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email" name="email" [(ngModel)]="mEmail" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="password" name="password" [(ngModel)]="mPassword"
+                    placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary" (click)="onClinicManagerLogin()">Login</button>
+                  <button type="submit" class="btn forgotPw" data-toggle="modal" data-target="#clinicManagerForgetPWModal">Forgot Password</button>
+                </div>
+              </form>
             </div>
-            <form id="ClinicManagerLogin" (submit)="onClinicManagerLogin()">
-              <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="mEmail" placeholder="Email Address">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="mPassword"
-                  placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!--RECEPTIONIST LOGIN-->
-  <div id="ReceptionistLoginForm" *ngIf="login === 'Receptionist'">
-    <div class="container">
-      <div>
-        <h1 class="form-heading">Receptionist Login Form</h1>
-        <div class="login-form">
-          <div class="main-div">
-            <div class="panel">
-              <h2>Receptionist Login</h2>
-              <p>Please enter your email and password</p>
+    <!--RECEPTIONIST LOGIN-->
+    <div id="ReceptionistLoginForm" *ngIf="login === 'Receptionist'">
+      <div class="container">
+        <div>
+          <h1 class="form-heading">Receptionist Login Form</h1>
+          <div class="login-form">
+            <div class="main-div">
+              <div class="panel">
+                <h2>Receptionist Login</h2>
+                <p>Please enter your email and password</p>
+              </div>
+              <form id="ReceptionistLogin">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email" name="email" [(ngModel)]="rEmail" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
+                    placeholder="Password">
+                </div>
+                <!-- <recaptcha [ngModel]="myRecaptcha" name="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
+                <div class="g-recaptcha" data-sitekey="6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT"></div> -->
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary" (click)="onReceptionistLogin()">Login</button>
+                  <button type="submit" class="btn forgotPw" data-toggle="modal" data-target="#receptionistForgetPWModal">Forgot Password</button>
+                </div>
+              </form>
             </div>
-            <form id="ReceptionistLogin" (submit)="onReceptionistLogin()">
-              <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="rEmail" placeholder="Email Address">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="rPassword"
-                  placeholder="Password">
-              </div>
-              <recaptcha [ngModel]="myRecaptcha" name="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
-              <div class="g-recaptcha" data-sitekey="6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT"></div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 
-  <!--DOCTOR LOGIN-->
+    <!--DOCTOR LOGIN-->
   <div id="DoctorLoginForm" *ngIf="login === 'Doctor'">
     <div class="container">
       <div>
@@ -72,7 +81,7 @@
               <h2>Doctor Login</h2>
               <p>Please enter your email and password</p>
             </div>
-            <form id="DoctorLogin" (submit)="onDoctorLogin()">
+            <form id="DoctorLogin">
               <div class="form-group">
                 <input type="email" class="form-control" id="email" name="email" [(ngModel)]="dEmail" placeholder="Email Address">
               </div>
@@ -80,7 +89,11 @@
                 <input type="password" class="form-control" id="password" name="password" [(ngModel)]="dPassword"
                   placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="onDoctorLogin()">Login</button>
+                <button type="submit" class="btn forgotPw" data-toggle="modal" data-target="#doctorForgetPWModal">Forgot Password</button>
+              </div>
             </form>
           </div>
         </div>
@@ -88,3 +101,142 @@
     </div>
   </div>
 </form>
+
+
+
+<!--Clinic Manager Forget Password Modal-->
+<div>
+  <div class="modal fade" id="clinicManagerForgetPWModal" tabindex="-1" role="dialog" aria-labelledby="clinicManagerForgetPWModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="clinicManagerForgetPWModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <div class="row rowspacing">
+              <p id="forgotPasswordMsg">Enter your email address and NRIC and we'll send you the instructions to reset your password.</p>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Receptionist Forget Password Modal-->
+<div>
+  <div class="modal fade" id="receptionistForgetPWModal" tabindex="-1" role="dialog" aria-labelledby="receptionistForgetPWModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="receptionistForgetPWModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <div class="row rowspacing">
+              <p id="forgotPasswordMsg">Enter your email address and NRIC and we'll send you the instructions to reset your password.</p>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Doctor Forget Password Modal-->
+<div>
+  <div class="modal fade" id="doctorForgetPWModal" tabindex="-1" role="dialog" aria-labelledby="doctorForgetPWModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="doctorForgetPWModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <div class="row rowspacing">
+              <p id="forgotPasswordMsg">Enter your email address and NRIC and we'll send you the instructions to reset your password.</p>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" [(ngModel)]="email" required>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" id="nric" placeholder="NRIC" name="nric" [(ngModel)]="nric" required>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+          <button type="submit" class="btn btn-primary" id="submitForgotPW" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

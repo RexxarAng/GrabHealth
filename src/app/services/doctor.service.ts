@@ -8,21 +8,59 @@ export class DoctorService {
 
   // private url = "/routes/comment";
   constructor(private http: HttpClient) {
-    
+
   }
   url = environment.clinicserverurl;
 
- getMedicineList(){
-        return this.http.get(this.url + '/doctor/medicineList');
-    }
+  getMedicineList() {
+    return this.http.get(this.url + '/doctor/medicineList');
+  }
 
-
-  addReasonForVisit(patient) {
-    return this.http.get(this.url + '/doctor/reasonForVisit', patient);
+  savePatientDetails(patientDetails) {
+    return this.http.post(this.url + '/doctor/add/reasonForVisit', patientDetails);
   }
 
   getReasonForVisit() {
-    return this.http.get('http://localhost:4560/doctor/reasonForVisit');
+    return this.http.get(this.url + '/doctor/reasonForVisit');
   }
+
+  addMedicine(selectedMedicine) {
+    return this.http.post(this.url + '/doctor/add/medicine', selectedMedicine);
+  }
+
+  getMedicine() {
+    return this.http.get(this.url + '/doctor/medicine');
+  }
+
+  getWalkInPatients() {
+    return this.http.get(this.url + '/doctor/walkin-patientlist');
+  }
+
+  editWalkInPatientInfo(walkinpatient) {
+    return this.http.post(this.url + '/doctor/editWalkInPatientInfo', walkinpatient);
+  }
+
+  getPatients() {
+    return this.http.get(this.url + '/doctor/patient-list');
+  }
+
+  editPatientInfo(patient) {
+    return this.http.post(this.url + '/doctor/editPatientInfo', patient);
+
+  }
+
+  getCurrentPatient() {
+    return this.http.get(this.url + '/doctor/current-patient');
+  }
+
+  getInstructions() {
+    return this.http.get(this.url + 'doctor/instructions');
+  }
+
+  createVisit(visit){
+    return this.http.post(this.url + '/doctor/create/visit', visit);
+
+  }
+
 
 }
