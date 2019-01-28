@@ -14,6 +14,10 @@ import { TeamComponent } from './manager/team/team.component';
 import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
 import { QueueListComponent } from './recep/queue-list/queue-list.component';
 import { AllPatientListComponent } from './recep/all-patient-list/all-patient-list.component';
+import { DoctorChangePasswordComponent } from './doctor/doctor-change-password/doctor-change-password.component';
+import { ManagerChangePasswordComponent } from './manager/manager-change-password/manager-change-password.component';
+import { RecepChangePasswordComponent } from './recep/recep-change-password/recep-change-password.component';
+
 
 
 const routes: Routes = [
@@ -32,6 +36,10 @@ const routes: Routes = [
   { path: 'receptionist/pending-approval', component: PendingApprovalComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/queue-list', component: QueueListComponent, canActivate:[AuthGuard]},
   { path: 'receptionist/all-patient-list', component: AllPatientListComponent, canActivate:[AuthGuard]},
+  { path: 'doctor/doctor-change-password', component: DoctorChangePasswordComponent, canActivate:[AuthGuard]},
+  { path: 'manager/manager-change-password', component: ManagerChangePasswordComponent, canActivate:[AuthGuard]},
+  { path: 'recep/recep-change-password', component: RecepChangePasswordComponent, canActivate:[AuthGuard]}
+
 ];
 
 @NgModule({
