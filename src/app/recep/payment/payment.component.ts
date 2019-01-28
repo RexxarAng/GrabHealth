@@ -187,4 +187,5 @@ export class PaymentComponent implements OnInit {
       pdf.save(date + filename);
     });
   }
+    
 }
