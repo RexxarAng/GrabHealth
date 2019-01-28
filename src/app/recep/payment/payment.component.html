@@ -141,6 +141,11 @@
             <td colspan="2" class="colspacing text-left"><b>Total Due</b></td>
             <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> ${{ payment.total | number : '1.2-2'}} </td>
           </tr>
+          
+
+            <td colspan="2" class="colspacing text-left"><b>Sign:</b></td>
+              <signature-pad [options]="signaturePadOptions" (click)="drawComplete()"></signature-pad>
+              
         </tbody>
       </table>
     </div>

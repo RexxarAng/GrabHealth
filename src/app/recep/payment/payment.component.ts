@@ -8,7 +8,8 @@ import { ValidateService } from '../../services/validate.service';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import FileSaver from 'file-saver';
-
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-payment',
@@ -43,6 +44,9 @@ export class PaymentComponent implements OnInit {
   medicineItem: any;
   gst: number;
 
+  SignaturePad: SignaturePad; 
+  Md5 = new Md5(); 
+
   constructor(
     private receptionistService: ReceptionistService,
     private flashMessagesService: FlashMessagesService,
@@ -75,7 +79,7 @@ export class PaymentComponent implements OnInit {
     this.getVisits();
     this.subtotal = 0;
     this.gst = 0;
-    
+    this.SignaturePad; 
   }
 
   ngOnDestroy(){
@@ -185,7 +189,20 @@ export class PaymentComponent implements OnInit {
 
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save(date + filename);
+      Md5.hashStr('receipt.pdf');
     });
   }
+
+  drawComplete() {
+    // will be notified of szimek/signature_pad's onEnd event
+    console.log(this.SignaturePad.toDataURL());
     
+  }
+
+  signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+    'minWidth': 5,
+    'canvasWidth': 100,
+    'canvasHeight': 100
+  };
+
 }
