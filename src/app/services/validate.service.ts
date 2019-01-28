@@ -26,16 +26,16 @@ export class ValidateService {
     var st = Array("J", "Z", "I", "H", "G", "F", "E", "D", "C", "B", "A");
     var fg = Array("X", "W", "U", "T", "R", "Q", "P", "N", "M", "L", "K");
     var theAlpha;
-    if (icArray[0] == "S" || icArray[0] == "T") {
+    if (icArray[0] === "S" || icArray[0] === "T") {
       theAlpha = st[temp];
-    } else if (icArray[0] == "F" || icArray[0] == "G") {
+    } else if (icArray[0] === "F" || icArray[0] === "G") {
       theAlpha = fg[temp];
     }
-    return (icArray[8] == theAlpha);
+    return (icArray[8] === theAlpha);
   }
 
   validateRegistration(user) {
-      if (user.firstname == "" || user.lastname == "" || user.email == "" || user.address == "" || user.nric == "" || user.contactNo == "") {
+      if (user.firstname === "" || user.lastname === "" || user.email === "" || user.address === "" || user.nric === "" || user.contactNo === "") {
           return false;
         } else {
           return true;
@@ -43,7 +43,7 @@ export class ValidateService {
   }
 
   validateClinicRegistration(user, clinic) {
-    if (user.firstName.length == 0 || user.lastName.length == 0 || user.email.length == 0 || user.nric.length == 0 || user.contactNo.length == 0 || user.doctorLicenseNo.length == 0 || clinic.name.trim().length == 0 || clinic.address.length == 0 || clinic.location.length == 0 || clinic.contactNo.length == 0 || clinic.clinicLicenseNo.length == 0 || clinic.clinicPhoto.length == 0 ) {
+    if (user.firstName.length === 0 || user.lastName.length === 0 || user.email.length === 0 || user.nric.length === 0 || user.contactNo.length === 0 || user.doctorLicenseNo.length === 0 || clinic.name.trim().length === 0 || clinic.address.length === 0 || clinic.location.length === 0 || clinic.contactNo.length === 0 || clinic.clinicLicenseNo.length === 0 || clinic.clinicPhoto.length === 0 ) {
       return false;
     } else {
       return true;
@@ -77,21 +77,74 @@ export class ValidateService {
         return false;
       }
       else if (password.length >= 8) {
-        if (password.search(hasUpperCase) == -1) {
+        if (password.search(hasUpperCase) === -1) {
           return false;
         }
-        else if (password.search(hasNumbers) == -1) {
+        else if (password.search(hasNumbers) === -1) {
           return false;
         }
-        else if (password.search(hasLowerCase) == -1) {
+        else if (password.search(hasLowerCase) === -1) {
           return false;
         }
         else if (password.search(hasLowerCase) >= 0 && password.search(hasUpperCase) >= 0 && password.search(hasNumbers) >= 0) {
           return true;
         }
       }
-
   }
 
-  
+  //Validate patient registration
+  validatePatientRegistration(user) {
+    if (user.firstName.length === '' || user.lastName.length === '' || user.nric.length === '' || user.gender.select === '' || user.address.length === '' || user.dob.length === '' || user.nationality.length === '' || user.contactNo.length === '' ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateFirstName(firstName) {
+    if (firstName.length <2 || firstName.length === '') {
+        return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateLastName(lastName) {
+    if (lastName.length <2 || lastName.length === '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateGender(gender) {
+    if (gender.length === 0 || gender.length === '' || gender.select ==='') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateAddress(address) {
+    if (address.length === 0 || address.length === '' || address.length >256) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateDOB(dob) {
+    var re = /^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/;
+    return re.test(dob);
+  }
+
+  validateNationality(nationality) {
+    if (nationality.length === 0 || nationality.length === '' || nationality.select === '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 }

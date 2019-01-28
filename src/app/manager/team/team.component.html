@@ -2,17 +2,15 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">
-          <h3>Receptionist</h3>
+        <th scope="col" colspan="5">
+          <h3>Receptionists</h3>
         </th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
         <th scope="col">
           <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addNewReceptionistModal">
-            <img src="assets/img/addNew.png" class="logo" id="addNewReceptionist">
+            <i class="fa fa-plus-circle fa-2x" id="addNewReceptionist"></i>
           </button>
+        </th>
+        <th scope="col">
         </th>
         <th scope="col">
         </th>
@@ -26,8 +24,9 @@
         <th scope="col">Address</th>
         <th scope="col">Contact Number</th>
         <th scope="col">NRIC</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">View</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -38,33 +37,43 @@
         <td>{{ receptionist.contactNo }}</td>
         <td>{{ receptionist.nric }}</td>
         <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewReceptionistDetailModal" (click)="viewReceptionistInfo(receptionist)">
-            <img src="assets/img/view.png" class="logo" id="viewReceptionistDetail">
-          </button>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Receptionist Details">
+              <button type="button" class="btn btn-img"  data-toggle="modal" data-target="#viewReceptionistDetailModal" (click)="viewReceptionistInfo(receptionist)">
+                <i class="fa fa-eye fa-2x" id="viewReceptionistDetail"></i>
+              </button>
+          </span>
+        </td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Edit Receptionist Details">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editReceptionistDetailModal" (click)="editReceptionistInfo(receptionist)">
+              <i class="fa fa-edit fa-2x" id="editReceptionistDetail"></i>
+            </button>
+          </span>
+        </td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove Receptionist">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeReceptionistModal" (click)="deleteReceptionistInfo(receptionist)">
+              <i class="fa fa-remove fa-2x" id="deleteReceptionist"></i>
+            </button>
+          </span>
         </td>
       </tr>
     </tbody>
-  </table>
-  <table class="table">
+
     <thead>
       <tr>
-        <th scope="col">
+        <th scope="col" colspan="5">
           <h3>Doctors</h3>
         </th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
         <th scope="col">
-          <button type="button" class="btn btn-img" name="registrationBtn">
-            <img src="assets/img/addNew.png" class="logo" id="addNewClinic">
+          <button type="button" class="btn btn-img" name="registrationBtn" data-toggle="modal" data-target="#addNewDoctorModal">
+            <i class="fa fa-plus-circle fa-2x" id="addNewDoctor"></i>
           </button>
         </th>
         <th scope="col">
         </th>
       </tr>
     </thead>
-
     <thead class="thead-light">
       <tr>
         <th scope="col">First Name</th>
@@ -72,8 +81,9 @@
         <th scope="col">Address</th>
         <th scope="col">Contact Number</th>
         <th scope="col">NRIC</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">View</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -84,9 +94,25 @@
         <td>{{ doctor.contactNo }}</td>
         <td>{{ doctor.nric }}</td>
         <td>
-          <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewDoctorDetailModal" (click)="viewDoctorInfo(doctor)">
-            <img src="assets/img/view.png" class="logo" id="viewDoctorDetail">
-          </button>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Doctor Details">
+              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewDoctorDetailModal" (click)="viewDoctorInfo(doctor)">
+                <i class="fa fa-eye fa-2x" id="viewDoctorDetail"></i>
+              </button>
+          </span>
+        </td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Edit Doctor Details">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#editDoctorDetailModal" (click)="editDoctorInfo(doctor)">
+              <i class="fa fa-edit fa-2x" id="editDoctorDetail"></i>
+            </button>
+          </span>
+        </td>
+        <td>
+          <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove Doctor">
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeDoctorModal" (click)="deleteDoctorInfo(doctor)">
+              <i class="fa fa-remove fa-2x" id="deleteDoctor"></i>
+            </button>
+          </span>
         </td>
       </tr>
     </tbody>
@@ -148,7 +174,7 @@
             </div>
             <div class="row rowspacing">
               <div class="col">
-                <textarea class="form-control"  name="address"  [(ngModel)]="rAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+                <textarea class="form-control txtarea"  name="address"  [(ngModel)]="rAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
               </div>
             </div>
           </div>
@@ -160,6 +186,7 @@
       </div>
     </div>
 </div>
+
 <!--View Receptionist Details Modal-->
 <div>
   <div class="modal fade" id="viewReceptionistDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewReceptionistDetailModal" aria-hidden="true">
@@ -209,6 +236,144 @@
   </div>
 </div>
 
+<!--Edit Receptionist Details Modal-->
+<div>
+  <div class="modal fade" id="editReceptionistDetailModal" tabindex="-1" role="dialog" aria-labelledby="EditReceptionistModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EditReceptionistModalLabel">Edit Receptionist</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row rowspacing">
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="firstName"  [(ngModel)]="eRFirstName" id="firstNameId" placeholder="First Name" required="required"/>
+              </fieldset>
+            </div>  
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="lastName"  [(ngModel)]="eRLastName" id="lastNameId" placeholder="Last Name" required="required"/>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row rowspacing">
+            <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="contactNo"  [(ngModel)]="eRContactNo" id="contactNoId" placeholder="Contact No." required="required"/>
+                </fieldset>
+            </div>
+          </div>
+          <div class="row rowspacing">
+            <div class="col">
+              <textarea class="form-control txtarea"  name="address"  [(ngModel)]="eRAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onEditReceptionist()" data-dismiss="modal">Edit Receptionist</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Remove Receptionist Modal-->
+<div>
+    <div class="modal fade" id="removeReceptionistModal" tabindex="-1" role="dialog" aria-labelledby="removeReceptionistModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="removeReceptionistModalLabel">Remove Receptionist</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to remove and delete this receptionist?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" (click)="onRemoveReceptionist()" data-dismiss="modal">Remove Receptionist</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--Add New Doctor Modal-->
+<div>
+  <div class="modal fade" id="addNewDoctorModal" tabindex="-1" role="dialog" aria-labelledby="addNewDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewDoctorModalLabel">New Doctor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row rowspacing">
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="firstName"  [(ngModel)]="dFirstName" id="firstNameId" placeholder="First Name" required="required"/>
+              </fieldset>
+            </div>
+                  
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="lastName"  [(ngModel)]="dLastName" id="lastNameId" placeholder="Last Name" required="required"/>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="row rowspacing">
+            <div class="col">
+              <fieldset>
+                <input type="text" class="form-control" name="nric"  [(ngModel)]="dNric" id="nricNoId" placeholder="NRIC/ Passport No." required="required"/>
+              </fieldset>
+            </div>
+            <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="contactNo"  [(ngModel)]="dContactNo" id="contactNoId" placeholder="Contact No." required="required"/>
+                </fieldset>
+            </div>
+            <!-- <div class="col">
+              <fieldset>
+                <select class="form-control" id="genderId" placeholder="Gender" required="required">
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </fieldset>
+            </div> -->
+          </div>
+          <div class ="row rowspacing">
+              <div class="col">
+                  <input type="text" class="form-control" name="email"  [(ngModel)]="dEmail" id="emailId" placeholder="Email" required="required"/>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" name="doctorLicenseNo"  [(ngModel)]="dDoctorLicenseNo" id="doctorLicenseNoId" placeholder="Doctor License Number" required="required"/>
+            </div>
+          </div>
+          <div class="row rowspacing">
+            <div class="col">
+              <textarea class="form-control"  name="address"  [(ngModel)]="dAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onAddDoctor()" data-dismiss="modal">Add Doctor</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--View Doctor Details Modal-->
 <div>
   <div class="modal fade" id="viewDoctorDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewDoctorDetailModal" aria-hidden="true">
@@ -262,6 +427,74 @@
             </div> 
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Edit Doctor Details Modal-->
+<div>
+    <div class="modal fade" id="editDoctorDetailModal" tabindex="-1" role="dialog" aria-labelledby="EditDoctorModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="EditDoctorModalLabel">Edit Doctor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="firstName"  [(ngModel)]="eDFirstName" id="firstNameId" placeholder="First Name" required="required"/>
+                </fieldset>
+              </div>  
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="lastName"  [(ngModel)]="eDLastName" id="lastNameId" placeholder="Last Name" required="required"/>
+                </fieldset>
+              </div>
+            </div>
+            <div class="row rowspacing">
+              <div class="col">
+                  <fieldset>
+                    <input type="text" class="form-control" name="contactNo"  [(ngModel)]="eDContactNo" id="contactNoId" placeholder="Contact No." required="required"/>
+                  </fieldset>
+              </div>
+            </div>
+            <div class="row rowspacing">
+              <div class="col">
+                <textarea class="form-control txtarea"  name="address"  [(ngModel)]="eDAddress" id="addressId" rows="3" placeholder="Address" required="required"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" (click)="onEditDoctor()" data-dismiss="modal">Edit Doctor</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!--Remove Doctor Modal-->
+<div>
+  <div class="modal fade" id="removeDoctorModal" tabindex="-1" role="dialog" aria-labelledby="removeDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="removeDoctorModalLabel">Remove Doctor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove and delete this Doctor?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onRemoveDoctor()" data-dismiss="modal">Remove Doctor</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>

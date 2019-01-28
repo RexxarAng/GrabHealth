@@ -11,31 +11,31 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
   
   appTitle = 'GrabHealth';
-  
+  role = '';
   menuDisplay: boolean;
+  currentDate = Date.now();
+  datePolling: any;
+
+
   constructor(
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
 
     ) { }
 
   ngOnInit() {
     //menu not opened
     this.menuDisplay = false;
+    this.datePolling = setInterval(() =>
+      this.loadDate(),2000);
+
+  }
+
+  loadDate(){
+    this.currentDate = Date.now();
   }
   
-  toggleMenu() {
-    //if menu is closed, open it
-    if(this.menuDisplay == false) {
-      this.menuDisplay = true;
-    } else {
-      //if menu is opened, close it
-      this.menuDisplay = false;
-    }
-  }
   logout(){
-    this.router.navigateByUrl('/login');
-    this.authService.deleteToken();
-
+    this.authService.logout();
   }
 }

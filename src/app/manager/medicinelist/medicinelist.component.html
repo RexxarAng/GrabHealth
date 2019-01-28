@@ -1,0 +1,170 @@
+<div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" colspan="5">
+            <h3>Medicine List</h3>
+          </th>
+          <th scope="col">
+            <button type="button" class="btn btn-img" name="addBtn">
+              <img src="assets/img/addNew.png" class="logo" id="addNewMedicine" data-toggle="modal" data-target="#addNewMedicineModal" >
+            </button>
+          </th>
+          <th scope="col">
+            <form class="form-inline my-2 my-lg-0">
+              <input [(ngModel)]="medicineSearch" class="form-control mr-sm-2" type="text" placeholder="Search" >
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </th>
+        </tr>
+      </thead>
+  
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Category</th>
+          <th scope="col">Effects</th>
+          <th scope="col">View</th>
+          <th scope="col">Remove</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let medicine of medicineList | grdFilter: {name: medicineSearch}">
+          <td>{{ medicine.name }}</td>
+          <td>$ {{ medicine.price }}</td>
+          <td>{{ medicine.category }}</td>
+          <td>{{ medicine.effects }}</td>
+          <td>
+            <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewMedicineDetailModal" (click)="viewMedicineInfo(medicine)">
+              <img src="assets/img/view.png" class="logo" id="viewMedicineDetail">
+            </button>
+          </td>
+          <td>
+            <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Remove Medicine">
+              <button type="button" class="btn btn-img" data-toggle="modal" data-target="#removeMedicineModal" (click)="removeMedicine(medicine)">
+                <i class="fa fa-remove fa-2x" id="deleteMedicine"></i>
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+
+  <!--Add New Medicine Modal-->
+<div>
+    <div class="modal fade" id="addNewMedicineModal" tabindex="-1" role="dialog" aria-labelledby="addNewMedicineModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addNewMedicineModalLabel">New Medicine</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  
+          <div class="modal-body">
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="name"  [(ngModel)]="name" id="name" placeholder="Name" required="required"/>
+                </fieldset>
+              </div>
+                    
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="price"  [(ngModel)]="price" id="price" placeholder="Price" required="required"/>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row rowspacing">
+              <div class="col">
+                <fieldset>
+                  <input type="text" class="form-control" name="category"  [(ngModel)]="category" id="category" placeholder="Category" required="required"/>
+                </fieldset>
+              </div>
+            </div>
+            <div class="row rowspacing">
+                <div class="col">
+                  <textarea class="form-control txtarea"  name="effects"  [(ngModel)]="effects" id="effects" rows="3" placeholder="Effects" required="required"></textarea>
+                </div>
+            </div>
+            
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" (click)="onAddMedicine()" data-dismiss="modal">Add Medicine</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <!--View Medicine Details Modal-->
+  <div>
+    <div class="modal fade" id="viewMedicineDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewMedicineDetailModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewMedicineDetailModalLabel">View Medicine Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+              <div class="row rowspacing">
+                <div class="col">
+                  <p *ngIf="medicine"><b>Name:</b> {{ medicine.name }}</p>
+                </div>
+                        
+                <div class="col">
+                  <p *ngIf="medicine"><b>Price:</b>$ {{ medicine.price }}</p>
+                </div>
+              </div>
+              <div class="row rowspacing">
+                <div class="col">
+                  <fieldset>
+                      <p *ngIf="medicine"><b>Category:</b> {{ medicine.category }}</p>
+                    </fieldset>
+                </div>
+    
+                <div class="col">   
+                  <p *ngIf="medicine"><b>Effects:</b> {{ medicine.effects }}</p>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Remove Medicine Modal-->
+<div>
+  <div class="modal fade" id="removeMedicineModal" tabindex="-1" role="dialog" aria-labelledby="removeMedicineModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="removeMedicineModalLabel">Remove Medicine</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this medicine??</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onRemoveMedicine()" data-dismiss="modal">Remove medicine</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

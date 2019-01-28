@@ -14,6 +14,7 @@ export class AppComponent {
 
   menuDisplay: boolean;
 
+    
   ngOnInit() {
     //menu not opened
    this.menuDisplay = false;

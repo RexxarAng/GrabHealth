@@ -1,19 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { NgxElectronModule } from 'ngx-electron';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from './material-module';
 import { FormsModule } from '@angular/forms';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './doctor/registration/registration.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentComponent } from './recep/payment/payment.component';
-import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminService } from './services/admin.service';
 import { AuthService } from './services/auth.service';
@@ -22,15 +21,26 @@ import { ValidateService } from './services/validate.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { PatientListComponent } from './recep/patient-list/patient-list.component';
-import { SearchComponent } from './recep/search/search.component';
 import { TeamComponent } from './manager/team/team.component';
 import { ManagerService } from './services/manager.service';
 import { DoctorService } from './services/doctor.service';
 import { ReceptionistService } from './services/receptionist.service';
-import { SearchListComponent } from './recep/search-list/search-list.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ViewQueueComponent } from './recep/view-queue/view-queue.component';
-import { PaymentReceiptComponent } from './recep/payment-receipt/payment-receipt.component';
+import { MainLoginComponent } from './main-login/main-login.component';
+import { DoctorMainComponent } from './doctor/doctor-main/doctor-main.component';
+import { NextPatientComponent } from './doctor/next-patient/next-patient.component';
+import { ViewPatientDetailsComponent } from './doctor/view-patient-details/view-patient-details.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MedicinelistComponent } from './manager/medicinelist/medicinelist.component';
+import { GrdFilterPipe } from './grd-filter.pipe';
+import { PendingApprovalComponent } from './recep/pending-approval/pending-approval.component';
+import { RecaptchaModule } from 'angular-google-recaptcha';
+import { QueueListComponent } from './recep/queue-list/queue-list.component';
+import { AllPatientListComponent } from './recep/all-patient-list/all-patient-list.component';
+import { DoctorChangePasswordComponent } from './doctor/doctor-change-password/doctor-change-password.component';
+import { ManagerChangePasswordComponent } from './manager/manager-change-password/manager-change-password.component';
+import { RecepChangePasswordComponent } from './recep/recep-change-password/recep-change-password.component';
+
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -40,19 +50,25 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     NavComponent,
     RegistrationComponent,
     NavComponent,
     PaymentComponent,
-    RegisterComponent,
     PatientListComponent,
-    SearchComponent,
-    TeamComponent
-    SearchComponent,
-    SearchListComponent,
-    ViewQueueComponent,
-    PaymentReceiptComponent,
+    TeamComponent,
+    MainLoginComponent,
+    DoctorMainComponent,
+    NextPatientComponent,
+    ViewPatientDetailsComponent,
+    MedicinelistComponent,
+    GrdFilterPipe,
+    PendingApprovalComponent,
+    QueueListComponent,
+    AllPatientListComponent,
+    DoctorChangePasswordComponent,
+    ManagerChangePasswordComponent,
+    RecepChangePasswordComponent
+
   ],
   imports: [
     BrowserModule,
@@ -61,8 +77,10 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
+    HttpModule,
     HttpClientModule,
     AngularMaterialModule,
+    FileUploadModule,
     NgbModule.forRoot(),
     FlashMessagesModule.forRoot(),
     JwtModule.forRoot({
@@ -72,7 +90,11 @@ export function tokenGetter() {
         blacklistedRoutes: ['http://localhost:4560/authenticate']
       }
     }),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    RecaptchaModule.forRoot({
+      siteKey: '6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT',
+    }),
+    
 
 
   ],
