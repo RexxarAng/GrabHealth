@@ -25,7 +25,12 @@ export class MainLoginComponent implements OnInit {
   managerLogin: Boolean;
   doctorLogin: Boolean;
   receptionistLogin: Boolean;
-
+  resetREmail: '';
+  resetRNric: '';
+  resetMEmail: '';
+  resetMNric: '';
+  resetDEmail: '';
+  resetDNric: '';
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -155,6 +160,43 @@ export class MainLoginComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  onResetPw(role){
+    const credentials = {
+      role: role,
+      nric: '',
+      email: ''
+    };
+    if(role === 'Doctor') {
+      credentials.nric = this.resetDNric,
+      credentials.email = this.resetDEmail
+    } else if(role === 'Manager'){
+      credentials.nric = this.resetMNric,
+      credentials.email = this.resetMEmail
+    } else if(role === 'Receptionist'){
+      credentials.nric = this.resetRNric,
+      credentials.email = this.resetREmail
+    }
+
+    if (!this.validateService.validateEmail(credentials.email) ) {
+      this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+    if(!this.validateService.validateNric(credentials.nric)){
+      this.flashMessagesService.show('Please enter a valid nric', { cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    this.authService.resetPassword(credentials).subscribe(res=>{
+      if(res['success']){
+        this.flashMessagesService.show(res['msg'], { cssClass: 'alert-success', timeout: 3000});
+        this.router.navigateByUrl('/login');
+      } else {
+        this.flashMessagesService.show(res['msg'], { cssClass: 'alert-danger', timeout: 3000});
+      } 
+    })
+
+
   }
 
   // onScriptLoad() {
