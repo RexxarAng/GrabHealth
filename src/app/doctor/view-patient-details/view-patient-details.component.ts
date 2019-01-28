@@ -43,7 +43,8 @@ export class ViewPatientDetailsComponent implements OnInit {
   Wdob: '';
   Wemail: '';
   Wgender: '';
-  
+  patientSearch: any;
+
   constructor(
     private DoctorService: DoctorService,
     private flashMessagesService: FlashMessagesService,

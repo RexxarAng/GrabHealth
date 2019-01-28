@@ -44,6 +44,9 @@ export class NextPatientComponent implements OnInit {
   queuelist: Array<any>;
   patients: Array<any>;
 
+  patientSearch: any;
+  
+
   constructor(
     private DoctorService: DoctorService,
     private validateService: ValidateService,

@@ -32,6 +32,9 @@ export class PatientListComponent implements OnInit {
   editPNationality: '';
   editPContactNo: '';
 
+  payments: Array<any>;
+  payment: any;
+  medicineList: Array<any>;
   searchNric: any;
   nricSearch: any;
   queuelist: Array<any>;
@@ -89,6 +92,17 @@ export class PatientListComponent implements OnInit {
 
   viewPatientInfo(patient){
     this.patient = patient;
+    this.receptionistService.getVisitHistory(patient.patient).subscribe(
+      res=>{
+        if(res['success']){
+          this.payments = res['payments'];
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }
+    })
   }
 
   editPatientInfo(patient){
@@ -341,8 +355,9 @@ export class PatientListComponent implements OnInit {
   
 
   // View visit info
-  viewVisitInfo(patient){
-    this.patient = patient;
+  viewVisitInfo(payment){
+    this.payment = payment;
+    this.medicineList = payment.visit.medicineList;
   }
 
 }
