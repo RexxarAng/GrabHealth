@@ -6,8 +6,8 @@
             <h3>Medicine List</h3>
           </th>
           <th scope="col">
-            <button type="button" class="btn btn-img" name="addBtn">
-              <img src="assets/img/addNew.png" class="logo" id="addNewMedicine" data-toggle="modal" data-target="#addNewMedicineModal" >
+            <button type="button" class="btn btn-img" name="addBtn"data-toggle="modal" data-target="#addNewMedicineModal">
+              <i class="fa fa-plus-circle fa-2x" id="addNewMedicine" ></i>
             </button>
           </th>
           <th scope="col">
@@ -38,7 +38,7 @@
           <td>{{ medicine.effects }}</td>
           <td>
             <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewMedicineDetailModal" (click)="viewMedicineInfo(medicine)">
-              <img src="assets/img/view.png" class="logo" id="viewMedicineDetail">
+              <i class="fa fa-eye fa-2x" id="viewMedicineDetail"></i>
             </button>
           </td>
           <td>
