@@ -11,6 +11,10 @@ export class ReceptionistService {
     }
     url = environment.clinicserverurl;
 
+    changePassword(password){
+      return this.http.post(this.url + '/receptionist/changePassword', password)
+    }
+
     createPatient(patient){
       return this.http.post(this.url + '/receptionist/createPatient', patient);
     }
