@@ -474,7 +474,7 @@
 <!--View Visit Details Modal-->
 <div>
   <div class="modal fade" id="viewVisitDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewVisitDetailModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-full" role="document">
       <div class="modal-content" *ngIf="payment">
         <div class="modal-header">
           <h5 class="modal-title" id="viewVisitDetailModalLabel">View Visit Details</h5>
@@ -515,11 +515,11 @@
                 <form>
                   <div class="row text-left">
                     <div class="col">
-                      <p><b>Patient Name:</b> {{ payment.patient.firstName }} <span> {{ payment.patient.lastName }} </span></p>
+                      <p><b>Patient Name:</b> {{ payment.patient.firstName }} <span>{{ payment.patient.lastName }} </span></p>
                     </div>
 
                     <div class="col">
-                      <p><b>Doctor:</b> Dr. {{ payment.visit.doctor.firstName }} <span> {{ payment.visit.doctor.lastName }} </span></p>
+                      <p><b>Doctor:</b> Dr. {{ payment.visit.doctor.firstName }} <span>{{ payment.visit.doctor.lastName }} </span></p>
                     </div>
                   </div>
 
