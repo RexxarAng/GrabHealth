@@ -59,4 +59,8 @@ export class ReceptionistService {
       return this.http.post(this.url + '/receptionist/create/payment', visit);
     }
 
+    getVisitHistory(patient){
+      return this.http.post(this.url + '/receptionist/getVisit', patient);
+    }
+
 }
