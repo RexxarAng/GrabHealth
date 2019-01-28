@@ -444,13 +444,13 @@
                   <td></td>
                 </tr>
 
-                <tr>
-                  <td> payment.receiptNo </td>
-                  <td> payment.date | date: 'dd MMMM yyyy' </td>
-                  <td> payment.total | number : '1.2-2' </td>
+                <tr *ngFor="let payment of payments">
+                  <td> {{ payment.receiptNo }}</td>
+                  <td> {{ payment.date  | date: 'dd MMMM yyyy' }} </td>
+                  <td> {{ payment.total | number : '1.2-2' }}</td>
                   <td>
                     <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="View Visit Details">
-                      <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewVisitDetailModal" (click)="viewVisitInfo(patient)">
+                      <button type="button" class="btn btn-img" data-toggle="modal" data-target="#viewVisitDetailModal" (click)="viewVisitInfo(payment)">
                         <i class="fa fa-file fa-2x" id="viewVisitDetail"></i>
                       </button>
                     </span>
@@ -474,8 +474,8 @@
 <!--View Visit Details Modal-->
 <div>
   <div class="modal fade" id="viewVisitDetailModal" tabindex="-1" role="dialog" aria-labelledby="viewVisitDetailModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-full" role="document">
+      <div class="modal-content" *ngIf="payment">
         <div class="modal-header">
           <h5 class="modal-title" id="viewVisitDetailModalLabel">View Visit Details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -489,11 +489,11 @@
 
               <div class="col text-left" id="clinicDetails" style="margin-right: 20%; padding-top: 2%; margin-top: 4%;">
                 <div>
-                  <p id="clinicName"> payment.clinic.name </p>
+                  <p id="clinicName"> {{ payment.clinic.name }} </p>
                 </div>
 
                 <div>
-                  <p id="clinicAddress"> payment.clinic.address </p>
+                  <p id="clinicAddress"> {{ payment.clinic.address }} </p>
                 </div>
               </div>
 
@@ -502,10 +502,10 @@
                   <h4>Receipt</h4>
                 </div>
                 <div class="text-left" style="padding-top: 1%;">
-                  <p><b>Number:</b> payment.receiptNo </p>
+                  <p><b>Number:</b> {{ payment.receiptNo }} </p>
                 </div>
                 <div class="text-left">
-                  <p><b>Date:</b> currentDate | date: 'dd MMMM yyyy' </p>
+                  <p><b>Date:</b> {{ payment.date | date: 'dd MMMM yyyy' }} </p>
                 </div>
               </div>
             </div>
@@ -515,17 +515,17 @@
                 <form>
                   <div class="row text-left">
                     <div class="col">
-                      <p><b>Patient Name:</b> payment.patient.firstName <span> payment.patient.lastName </span></p>
+                      <p><b>Patient Name:</b> {{ payment.patient.firstName }} <span>{{ payment.patient.lastName }} </span></p>
                     </div>
 
                     <div class="col">
-                      <p><b>Doctor:</b> Dr. payment.visit.doctor.firstName <span>{{ payment.visit.doctor.lastName }}</span></p>
+                      <p><b>Doctor:</b> Dr. {{ payment.visit.doctor.firstName }} <span>{{ payment.visit.doctor.lastName }} </span></p>
                     </div>
                   </div>
 
                   <div class="row text-left">
                     <div class="col">
-                      <p><b>Address:</b> payment.patient.address </p>
+                      <p><b>Address:</b> {{ payment.patient.address }} </p>
                     </div>
 
                     <div class="col">
@@ -559,15 +559,15 @@
                     <td class="colspacing" id="consultationQty">-</td>
                     <td>
                       <div class="form-group form-inline" style="float: right; padding-right: 2%;">
-                        <label for="consultationAmt" style="padding-right: 5px;">$ payment.clinic.consultationFee </label>
+                        <label for="consultationAmt" style="padding-right: 5px;">$ {{ payment.clinic.consultationFee | number : '1.2-2'}} </label>
                       </div>
                     </td>
                   </tr>
 
                   <tr *ngFor="let medicine of medicineList">
-                    <td class="colspacing text-left" id="medName"> medicine.name  </td>
+                    <td class="colspacing text-left" id="medName"> {{ medicine.name }}  </td>
                     <td class="colspacing" id="medQty"> 1 </td>
-                    <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> $ medicine.price | number : '1.2-2'</td>
+                    <td class="colspacing text-right" id="medAmt" style="padding-right: 2%;"> $ {{ medicine.price | number : '1.2-2' }}</td>
                   </tr>
                 </tbody>
 
@@ -575,17 +575,17 @@
                 <tbody>
                   <tr class="table-active">
                     <td colspan="2" class="colspacing text-left"><b>Sub-Total</b></td>
-                    <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> $ payment.subtotal | number:'1.2-2' </td>
+                    <td class="colspacing text-right" id="subTtl" style="padding-right: 2"> $ {{ payment.subtotal | number:'1.2-2' }}</td>
                   </tr>
 
                   <tr class="table-active">
                     <td colspan="2" class="colspacing text-left"><b>GST (7%)</b></td>
-                    <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> $ payment.gst | number:'1.2-2' </td>
+                    <td class="colspacing text-right" id="gst" style="padding-right: 2%;"> $ {{ payment.gst | number:'1.2-2' }}</td>
                   </tr>
 
                   <tr class="table-active">
                     <td colspan="2" class="colspacing text-left"><b>Total Due</b></td>
-                    <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> $ payment.total | number : '1.2-2' </td>
+                    <td class="colspacing text-right" id="totalDue" style="padding-right: 2%;"> $ {{ payment.total | number : '1.2-2' }}</td>
                   </tr>
                 </tbody>
               </table>

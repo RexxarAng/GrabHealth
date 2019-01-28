@@ -33,6 +33,11 @@ export class AllPatientListComponent implements OnInit {
 
   searchNric: any;
   allPatientListPolling: any;
+  payments: Array<any>;
+  payment: any;
+  medicineList: Array<any>;
+  nricSearch: any;
+  queuelist: Array<any>;
 
   constructor(
     private receptionistService: ReceptionistService,
@@ -72,6 +77,17 @@ export class AllPatientListComponent implements OnInit {
 
   viewPatientInfo(patient){
     this.patient = patient;
+    this.receptionistService.getVisitHistory(patient).subscribe(
+      res=>{
+        if(res['success']){
+          this.payments = res['payments'];
+        } else {
+          if(res['unauthenticated']){
+            this.authService.unAuthenticated();
+            return false;
+          }
+        }
+    })
   }
 
   editPatientInfo(patient){
@@ -199,6 +215,13 @@ export class AllPatientListComponent implements OnInit {
       
       }
     )
+  }
+
+
+  // View visit info
+  viewVisitInfo(payment){
+    this.payment = payment;
+    this.medicineList = payment.visit.medicineList;
   }
   
 

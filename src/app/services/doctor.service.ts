@@ -12,6 +12,10 @@ export class DoctorService {
   }
   url = environment.clinicserverurl;
 
+  changePassword(password){
+    return this.http.post(this.url + '/doctor/changePassword', password)
+  }
+
   getMedicineList() {
     return this.http.get(this.url + '/doctor/medicineList');
   }

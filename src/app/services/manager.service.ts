@@ -10,6 +10,10 @@ export class ManagerService {
     }
     url = environment.clinicserverurl;
 
+    changePassword(password){
+        return this.http.post(this.url + '/manager/changePassword', password);
+    }
+
     registerReceptionist(receptionist) {
         return this.http.post(this.url + '/manager/register/receptionist', receptionist);                     
     }
