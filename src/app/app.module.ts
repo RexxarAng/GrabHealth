@@ -40,6 +40,9 @@ import { AllPatientListComponent } from './recep/all-patient-list/all-patient-li
 import { DoctorChangePasswordComponent } from './doctor/doctor-change-password/doctor-change-password.component';
 import { ManagerChangePasswordComponent } from './manager/manager-change-password/manager-change-password.component';
 import { RecepChangePasswordComponent } from './recep/recep-change-password/recep-change-password.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { Md5 } from 'ts-md5/dist/md5';
+
 
 
 export function tokenGetter() {
@@ -94,6 +97,7 @@ export function tokenGetter() {
     RecaptchaModule.forRoot({
       siteKey: '6LcA4YoUAAAAAL84rMXfcQtktJESJG1Um7Vb7dXT',
     }),
+    SignaturePadModule
     
 
 
