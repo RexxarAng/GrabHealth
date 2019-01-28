@@ -37,6 +37,9 @@ import { PendingApprovalComponent } from './recep/pending-approval/pending-appro
 import { RecaptchaModule } from 'angular-google-recaptcha';
 import { QueueListComponent } from './recep/queue-list/queue-list.component';
 import { AllPatientListComponent } from './recep/all-patient-list/all-patient-list.component';
+import { DoctorChangePasswordComponent } from './doctor/doctor-change-password/doctor-change-password.component';
+import { ManagerChangePasswordComponent } from './manager/manager-change-password/manager-change-password.component';
+import { RecepChangePasswordComponent } from './recep/recep-change-password/recep-change-password.component';
 
 
 export function tokenGetter() {
@@ -61,7 +64,10 @@ export function tokenGetter() {
     GrdFilterPipe,
     PendingApprovalComponent,
     QueueListComponent,
-    AllPatientListComponent
+    AllPatientListComponent,
+    DoctorChangePasswordComponent,
+    ManagerChangePasswordComponent,
+    RecepChangePasswordComponent
 
   ],
   imports: [
